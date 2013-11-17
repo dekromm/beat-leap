@@ -214,6 +214,11 @@ pip-log.txt
 #Mr Developer
 .mr.developer.cfg
 
+
+#############
+## Unity
+#############
+
 [Ll]ibrary/
 [Tt]emp/
 [Oo]bj/
