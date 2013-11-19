@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Beat : Cube {
-
+public class Enemy :Cube {
+	
 	// Use this for initialization
 	void Start () {
 	

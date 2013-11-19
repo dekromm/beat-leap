@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Beat : Cube {
+public abstract class Item : Cube {
 
 	// Use this for initialization
 	void Start () {
