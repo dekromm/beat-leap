@@ -17,7 +17,7 @@ public class Controller : MonoBehaviour {
 			}
 		
 			// Update is called once per frame
-		void Update () {
+	void Update () {
 			
 			}
 		
@@ -28,23 +28,23 @@ public class Controller : MonoBehaviour {
 				if(	Event.current.type.Equals(EventType.KeyDown) ) {
 						if( Event.current.keyCode.CompareTo(UP) == 0 ){
 				
-									//Model.up()
+				//gameMechanics.MoveUp();
 						
 							} else if( Event.current.keyCode.CompareTo(DOWN) == 0 ){
 				
-									//Model.down()
+				//gameMechanics.MoveDown();
 						
 							} else if( Event.current.keyCode.CompareTo(LEFT) == 0 ){
 				
-									//Model.left()
+				//gameMechanics.MoveLeft();
 						
 							} else if( Event.current.keyCode.CompareTo(RIGHT) == 0 ){
 								
-									//Model.right()
+				//gameMechanics.MoveRight();
 										
 							} else if( Event.current.keyCode.CompareTo(PAUSE) == 0 ){
 								
-									//Model.pause()
+				//gameMechanics.SwitchPauseResume();
 										
 							}
 					}
