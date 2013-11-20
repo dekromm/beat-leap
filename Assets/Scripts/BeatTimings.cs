@@ -9,8 +9,10 @@ public class BeatTimings{
 
 	private List<float> timeStamps;
 	private AudioSource audioSrc;
+	private string songName;   //nome della canzone da eseguire (senza estensione)
 
 	public float deltaTime;
+	private float timeToUpdate; //quanto manca al prossimo aggiornamento della view
 	
 	private const string baseUrl = "Assets/Songs/";
 	private const string beatUrl = "_Beats.txt";
@@ -29,8 +31,8 @@ public class BeatTimings{
 		//deltaTime =           inizializzare il valore per l'intervallo di tempo
 
 		audioSrc = gameObject.AddComponent<AudioSource>();
-		audioSrc.clip = Resources.Load(baseUrl+src+extension) as AudioClip;
-
+		songName = baseUrl+src;
+		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;
 	}
 
 	//legge da file i timestamp e li sistema nell'array
@@ -49,35 +51,45 @@ public class BeatTimings{
 			beatTimeValue = float.Parse(beatString);
 			timeStamps.Add(beatTimeValue);
 			beatString = reader.ReadLine();
-
-		}
-	
+		}	
 	}
 
 	//da chiamare quando il deltaTime rispetto al beat corrente è passato
 	private void Step(){
 
 		index++;
-
+		timeToUpdate = timeStamps[index] - deltaTime - audioSrc.time;  // set how much time for the next invocation of this metod
+	
 	}
 
 	//controlliamo (ad ogni frame!) che il beat non sia già passato 
-	public bool hasBeatPassed(){
+	public bool HasBeatPassed(){
 
-		if (audioSrc.time > timeStamps[index] + deltaTime){
+		if (audioSrc.time >= timeStamps[index] + deltaTime){
+
 			Step();
 			return true;
 		}
 
 		return false;
+	}
 
+	public float GetTimeToUpdate(){
+
+		return timeToUpdate;
 	}
 
 	//restituisce un valore pari alla differenza del istante attuale con il beat corrente
 	//GameMechanichs si occuperà di valutare modulo e segno, confrontando con un deltaTime noto
+	//restituisco -1 se sono completamente fuori tempo
 	public float GetAccuracy(){
 
-		return audioSrc.time - timeStamps[index];
+		float accuracy = audioSrc.time - timeStamps[index];
+
+		if(accuracy < deltaTime)
+			return accuracy;
+
+		return -1;
 
 	}
 
@@ -92,6 +104,20 @@ public class BeatTimings{
 		}
 
 		audioSrc.Play();
+		return true;
+	}
+
+	//metodo per mettere in muto la canzone
+	// restituisce true, se l'audio è mute
+	public bool SwitchAudioMuteOnOff(){
+		
+		if(audioSrc.mute){
+			
+			audioSrc.mute = false;
+			return false;
+		}
+		
+		audioSrc.mute = true;
 		return true;
 	}
 
