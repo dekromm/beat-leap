@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameField : MonoBehaviour {
+public class GameField {
 
-	// Use this for initialization
-	void Start () {
+	GameField(){
+
+	}
+
+	public void StepUpdate(){
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
+
+#region ciao
+
+
+#endregion
