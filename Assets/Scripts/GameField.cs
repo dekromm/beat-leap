@@ -1,19 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameField {
+public class GameField : MonoBehaviour
+{
 
-	GameField(){
+		public GameField (string src)
+		{
 
-	}
+		}
 
-	public void StepUpdate(){
+		public void StepUpdate ()
+		{
 	
-	}
+		}
 
 }
-
-#region ciao
-
-
-#endregion
