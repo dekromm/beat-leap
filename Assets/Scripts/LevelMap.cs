@@ -16,9 +16,9 @@ public class LevelMap {
 	private string trackFileName;
 
 
-	LevelMap(string track){
+	public LevelMap(string track){
 		trackFileName = track+"map.txt";
-		position = -1;
+		position = 0;
 		mapLength = 0;
 		try{
 			LoadMap();
@@ -29,8 +29,12 @@ public class LevelMap {
 
 
 	public List<Cube> GetNewLine(){
+
+		if(position >= mapLength)
+			throw new Exception("Reached End of Map");
+
 		List<Cube> cubeList = new List<Cube>(lineSize);
-		string currentLine = map[++position];
+		string currentLine = map[position];
 		Cube cube;
 
 		for(int i=0; i<lineSize; i++){
@@ -38,7 +42,13 @@ public class LevelMap {
 			cubeList.Add(cube);
 		}
 
+		position++;
+
 		return cubeList;
+	}
+
+	public int MapWidth(){
+		return lineSize;
 	}
 
 	#region privateMethods
