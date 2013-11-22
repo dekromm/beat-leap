@@ -4,16 +4,17 @@ using System.Collections;
 public class Enemy : Cube
 {
 	public int hardness;
-	// Use this for initialization
-	void Start ()
-	{
 
+	private static IList<Enemy> EnemyPool;
+	
+	public static Enemy GetEnemy(){
+		//implementare la pool!
+		return null;
 	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-
+	
+	public static Enemy StoreEnemy(){
+		//implementare la pool!
+		return null;		
 	}
 
 }

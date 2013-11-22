@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Item : Cube
 {
+	private static List<Item> ItemPool;
 	
 	// Power Enum
 	public enum Power
@@ -12,17 +13,15 @@ public class Item : Cube
 		Other
 	}
 	public Power power;
-
-	// Use this for initialization
-	void Start ()
-	{
-
+	
+	public static Item GetItem(){
+		//implementare la pool!
+		return null;
 	}
-
-	// Update is called once per frame
-	void Update ()
-	{
-
+	
+	public static Item StoreItem(){
+		//implementare la pool!
+		return null;		
 	}
 
 }
