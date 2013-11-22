@@ -4,8 +4,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1192</x>
-      <y>416</y>
+      <x>1080</x>
+      <y>344</y>
       <w>80</w>
       <h>56</h>
     </coordinates>
@@ -16,8 +16,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>880</x>
-      <y>160</y>
+      <x>800</x>
+      <y>88</y>
       <w>120</w>
       <h>56</h>
     </coordinates>
@@ -28,8 +28,8 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>32</x>
-      <y>232</y>
+      <x>104</x>
+      <y>160</y>
       <w>184</w>
       <h>24</h>
     </coordinates>
@@ -39,21 +39,22 @@
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>8</x>
-      <y>432</y>
+      <x>80</x>
+      <y>360</y>
       <w>184</w>
       <h>64</h>
     </coordinates>
     <panel_attributes>LevelMap
 --
-ArrayList&lt;Cube&gt; GetNewLine();</panel_attributes>
+ArrayList&lt;Cube&gt; GetNewLine();
+Vector2 GetMapDirection();</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>864</x>
-      <y>288</y>
+      <x>784</x>
+      <y>216</y>
       <w>96</w>
       <h>24</h>
     </coordinates>
@@ -64,8 +65,8 @@ fg=gray</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>248</x>
-      <y>216</y>
+      <x>320</x>
+      <y>144</y>
       <w>192</w>
       <h>200</h>
     </coordinates>
@@ -81,8 +82,8 @@ float AccuracyNow();</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>296</x>
-      <y>128</y>
+      <x>368</x>
+      <y>56</y>
       <w>144</w>
       <h>64</h>
     </coordinates>
@@ -96,9 +97,9 @@ float health;
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1128</x>
-      <y>368</y>
-      <w>224</w>
+      <x>1056</x>
+      <y>296</y>
+      <w>120</w>
       <h>240</h>
     </coordinates>
     <panel_attributes>/view/</panel_attributes>
@@ -107,8 +108,8 @@ float health;
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>712</x>
-      <y>376</y>
+      <x>632</x>
+      <y>304</y>
       <w>224</w>
       <h>248</h>
     </coordinates>
@@ -119,6 +120,7 @@ Beat beat;
 BeatTimings timings;
 LevelMap level;
 GameField grid;
+ObjectPool pool;
 --
 GameMechanics(string track);
 void MoveUp();
@@ -135,8 +137,8 @@ void OnTimer();
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>960</x>
-      <y>288</y>
+      <x>880</x>
+      <y>216</y>
       <w>120</w>
       <h>56</h>
     </coordinates>
@@ -150,19 +152,19 @@ void OnTimer();
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>1056</x>
-      <y>304</y>
-      <w>144</w>
+      <x>976</x>
+      <y>232</y>
+      <w>112</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>128;64;128;24;24;24</additional_attributes>
+    <additional_attributes>96;64;96;24;24;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>856</x>
-      <y>304</y>
+      <x>776</x>
+      <y>232</y>
       <w>120</w>
       <h>88</h>
     </coordinates>
@@ -172,8 +174,8 @@ void OnTimer();
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>1168</x>
-      <y>616</y>
+      <x>1056</x>
+      <y>544</y>
       <w>152</w>
       <h>24</h>
     </coordinates>
@@ -183,8 +185,8 @@ void OnTimer();
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>744</x>
-      <y>632</y>
+      <x>664</x>
+      <y>560</y>
       <w>152</w>
       <h>24</h>
     </coordinates>
@@ -194,8 +196,8 @@ void OnTimer();
   <element>
     <type>com.umlet.element.custom.Text</type>
     <coordinates>
-      <x>960</x>
-      <y>360</y>
+      <x>880</x>
+      <y>288</y>
       <w>120</w>
       <h>24</h>
     </coordinates>
@@ -205,8 +207,8 @@ void OnTimer();
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>272</x>
-      <y>432</y>
+      <x>344</x>
+      <y>360</y>
       <w>144</w>
       <h>72</h>
     </coordinates>
@@ -221,31 +223,31 @@ void StepUpdate();</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>416</x>
-      <y>112</y>
-      <w>312</w>
+      <x>488</x>
+      <y>40</y>
+      <w>160</w>
       <h>320</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;
 </panel_attributes>
-    <additional_attributes>296;304;272;304;272;24;24;24</additional_attributes>
+    <additional_attributes>144;304;120;304;120;24;24;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>416</x>
-      <y>216</y>
-      <w>312</w>
+      <x>488</x>
+      <y>144</y>
+      <w>160</w>
       <h>232</h>
     </coordinates>
     <panel_attributes>lt=-&gt;&gt;&gt;&gt;</panel_attributes>
-    <additional_attributes>296;216;240;216;240;24;24;24</additional_attributes>
+    <additional_attributes>144;216;88;216;88;24;24;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>168</x>
-      <y>416</y>
+      <x>240</x>
+      <y>344</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -256,19 +258,19 @@ m2=1..n</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>392</x>
-      <y>424</y>
-      <w>336</w>
+      <x>464</x>
+      <y>352</y>
+      <w>184</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
-    <additional_attributes>24;24;320;24</additional_attributes>
+    <additional_attributes>24;24;168;24</additional_attributes>
   </element>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>192</x>
-      <y>216</y>
+      <x>264</x>
+      <y>144</y>
       <w>72</w>
       <h>40</h>
     </coordinates>
@@ -278,24 +280,28 @@ m2=1..n</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>32</x>
-      <y>600</y>
-      <w>144</w>
+      <x>80</x>
+      <y>528</y>
+      <w>232</w>
       <h>88</h>
     </coordinates>
     <panel_attributes>Cube
 /MonoBehaviour/
 --
-Vector2 position
-static float GridWidth;
-Vector2 Move()</panel_attributes>
+static ObjectPool pool;
+Vector2 position;
+--
+/static Cube getCube(Vector2 direction);/
+/static void recycleCube(Cube cube);/
+Vector2 Move();
+void set</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>272</x>
-      <y>592</y>
+      <x>408</x>
+      <y>520</y>
       <w>144</w>
       <h>24</h>
     </coordinates>
@@ -305,8 +311,8 @@ Vector2 Move()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>152</x>
-      <y>576</y>
+      <x>288</x>
+      <y>504</y>
       <w>136</w>
       <h>56</h>
     </coordinates>
@@ -316,8 +322,8 @@ Vector2 Move()</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>272</x>
-      <y>632</y>
+      <x>408</x>
+      <y>560</y>
       <w>144</w>
       <h>24</h>
     </coordinates>
@@ -327,8 +333,8 @@ Vector2 Move()</panel_attributes>
   <element>
     <type>com.umlet.element.Relation</type>
     <coordinates>
-      <x>152</x>
-      <y>600</y>
+      <x>288</x>
+      <y>528</y>
       <w>136</w>
       <h>56</h>
     </coordinates>
@@ -338,8 +344,8 @@ Vector2 Move()</panel_attributes>
   <element>
     <type>com.umlet.element.Class</type>
     <coordinates>
-      <x>1192</x>
-      <y>488</y>
+      <x>1080</x>
+      <y>416</y>
       <w>80</w>
       <h>72</h>
     </coordinates>
