@@ -7,6 +7,8 @@ public class LevelMap {
 
 	// Contiene le linee di mappa
 	private List<string> map;
+	private Vector2 direction;
+
 	private int mapLength;
 	private int lineSize;
 	private int position;
@@ -49,6 +51,10 @@ public class LevelMap {
 
 	public int MapWidth(){
 		return lineSize;
+	}
+
+	public Vector2 GetMapDirection(){
+		return new Vector2(direction.x, direction.y);
 	}
 
 	#region privateMethods
@@ -108,7 +114,7 @@ public class LevelMap {
 		}
 
 		string [] parameters = parameterString.Split(' ');
-		if(parameters.Length == 2){
+		if(parameters.Length >=2){
 			string lineSizeString = parameters[0];
 			string mapLengthString = parameters[1];
 
@@ -117,6 +123,14 @@ public class LevelMap {
 
 			if(lineSize < 1 || mapLength < 1){
 				throw new Exception("Map Parameters Format Error");
+			}
+			if(parameters.Length == 2){
+				direction = new Vector2(-1,0);
+			}else{
+				int dirX, dirY;
+				dirX = int.Parse(parameters[2]);
+				dirY = int.Parse(parameters[3]);
+				direction = new Vector2(dirX, dirY);
 			}
 			
 			Debug.Log("Line size: "+lineSize+" | Map lenght: "+mapLength);
