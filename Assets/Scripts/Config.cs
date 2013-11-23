@@ -24,14 +24,14 @@ public static class Config
 
 		public static class Logic
 		{		
-				public static float GridLength ()
+				public static int GridLength ()
 				{
-						return 17f;
+						return 17;
 				}
 
-				public static float GridDepth ()
+				public static int GridDepth ()
 				{
-						return 9f;
+						return 9;
 				}
 		}
 }
