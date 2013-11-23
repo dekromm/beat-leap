@@ -12,7 +12,7 @@ public static class Config
 
 				public static float GridLength ()
 				{
-						return Config.View.CubeScale () * Config.Logic.GridLength;
+						return Config.View.CubeScale () * Config.Logic.GridLength ();
 				}
 
 				public static float GridDepth ()

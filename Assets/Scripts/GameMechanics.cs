@@ -32,12 +32,13 @@ public class GameMechanics{
 
 	private static void OnTimedEvent(object source, ElapsedEventArgs e)
 	{
-		if(beatManager.HasBeatPassed()){
+		/* Attenzione: non si può usare un oggetto non statico in un metodo statico
+		if( beatManager.HasBeatPassed () ){
 
 			// gameField.aggiorna_il_piano_di_gioco
 
 			// aggiorno la view
-		}
+		}*/
 	}
 
 	#region userInput

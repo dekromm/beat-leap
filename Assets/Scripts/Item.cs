@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Item : Cube
 {
-	private static List<Item> ItemPool;
 	
 	// Power Enum
 	public enum Power
