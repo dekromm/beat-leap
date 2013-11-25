@@ -6,21 +6,24 @@ public class GameField : MonoBehaviour
 {
 	
 		private LevelMap RtoLmap;
-		private int width = Config.Logic.GridLength ();
-		private int height = Config.Logic.GridDepth ();
+		private int width;
+		private int height;
 		private List<Cube> field;
 		private Beat beat;
 	
 		public GameField (string track)
 		{
-				field = new List<Cube> ();
-				try {
-						// Right to Left map
-						RtoLmap = new LevelMap (track);
-						CheckCompliance ();
-				} catch (Exception) {
-						throw;
-				}
+			width = Config.Logic.GridLength();
+			height = Config.Logic.GridDepth();
+			field = new List<Cube>();
+
+			try {
+					// Right to Left map
+					RtoLmap = new LevelMap (track);
+					CheckCompliance ();
+			} catch (Exception) {
+					throw;
+			}
 		}
 	
 		public void StepUpdate ()
