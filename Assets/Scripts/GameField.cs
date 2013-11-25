@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-public class GameField : MonoBehaviour
+public class GameField
 {
 	
 		private LevelMap RtoLmap;

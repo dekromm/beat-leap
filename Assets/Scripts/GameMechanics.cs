@@ -19,7 +19,7 @@ public class GameMechanics{
 
 		beatManager = new BeatTimings(src);
 
-		beat = new Beat();
+//		beat = new Beat();
 	}
 
 	//metodo chiamato quando parte il livello
@@ -30,15 +30,15 @@ public class GameMechanics{
 		timer.Enabled = true;
 	}
 
-	private static void OnTimedEvent(object source, ElapsedEventArgs e)
+	private void OnTimedEvent(object source, ElapsedEventArgs e)
 	{
-		/* Attenzione: non si può usare un oggetto non statico in un metodo statico
+
 		if( beatManager.HasBeatPassed () ){
 
 			// gameField.aggiorna_il_piano_di_gioco
 
 			// aggiorno la view
-		}*/
+		}
 	}
 
 	#region userInput

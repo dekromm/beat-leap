@@ -16,6 +16,7 @@ public class LevelMap {
 	private const string okChar = "wie";
 
 	private string trackFileName;
+	private const string baseUrl = "Assets/Songs/";
 
 
 	public LevelMap(string track){
@@ -79,7 +80,7 @@ public class LevelMap {
 	}
 
 	private void LoadMap(){
-		StreamReader reader = new StreamReader(trackFileName);
+		StreamReader reader = new StreamReader(baseUrl+trackFileName);
 		if(reader != null){
 			string parameterString = reader.ReadLine();
 			try{

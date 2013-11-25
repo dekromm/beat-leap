@@ -2,11 +2,12 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System;
+using System.Globalization;
 
-public class BeatTimings{
+public class BeatTimings {
 
-	public GameObject gameObject; // non necessariamente l'oggetto al quale è attaccato lo script
-
+	private GameObject audioContainer;
+	
 	private List<float> timeStamps;
 	private AudioSource audioSrc;
 	private string songName;   //nome della canzone da eseguire (senza estensione)
@@ -30,7 +31,8 @@ public class BeatTimings{
 		SetTimestamps(src);
 		//deltaTime =           inizializzare il valore per l'intervallo di tempo
 
-		audioSrc = gameObject.AddComponent<AudioSource>();
+		audioContainer = GameObject.FindGameObjectWithTag("Loudspeaker");
+		audioSrc = audioContainer.AddComponent<AudioSource>();
 		songName = baseUrl+src;
 		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;
 	}
@@ -48,7 +50,7 @@ public class BeatTimings{
 
 		while (beatString != null){
 
-			beatTimeValue = float.Parse(beatString);
+			beatTimeValue = float.Parse(beatString,CultureInfo.InvariantCulture.NumberFormat);
 			timeStamps.Add(beatTimeValue);
 			beatString = reader.ReadLine();
 		}	
