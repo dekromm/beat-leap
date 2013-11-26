@@ -19,6 +19,7 @@ public class GameMechanics{
 
 		beatManager = new BeatTimings(src);
 
+		interval = 1E-2;
 //		beat = new Beat();
 	}
 
@@ -35,7 +36,7 @@ public class GameMechanics{
 
 		if( beatManager.HasBeatPassed () ){
 
-			// gameField.aggiorna_il_piano_di_gioco
+			gameField.StepUpdate();
 
 			// aggiorno la view
 		}

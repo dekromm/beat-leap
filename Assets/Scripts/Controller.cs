@@ -32,7 +32,7 @@ public class Controller : MonoBehaviour {
 			if(Event.current.keyCode.CompareTo(RETURN) == 0 && !isGameStarted){
 
 				isGameStarted = true;
-
+				//gameManager.StartPlaying();
 
 							}else if( Event.current.keyCode.CompareTo(UP) == 0 ){
 				
