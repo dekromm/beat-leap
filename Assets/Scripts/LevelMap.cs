@@ -17,6 +17,8 @@ public class LevelMap {
 
 	private string trackFileName;
 
+	static Enemy enemyPrefab;
+	static Item itemPrefab;
 
 	public LevelMap(string track){
 		trackFileName = track+"map.txt";
@@ -27,6 +29,13 @@ public class LevelMap {
 		}catch(Exception e){
 			Debug.LogError(e.Message);
 		}
+
+		// initialize cube pools
+		Config config = (Config) GameObject.Find("Config").GetComponent("Config");
+		itemPrefab = config.itemPrefab;
+		itemPrefab.CreatePool();
+		enemyPrefab = config.enemyPrefab;
+		enemyPrefab.CreatePool();
 	}
 
 
@@ -61,14 +70,13 @@ public class LevelMap {
 
 	private Cube CubeForChar(char car){
 		Cube cube = null;
-
 		switch(car){
 			case 'i':
 				// Per ora non abbiamo item da istanziare
-				// cube = new Item();
+				cube = itemPrefab.Spawn();
 				break;
 			case 'e':
-				cube = new Enemy();
+				cube = enemyPrefab.Spawn();
 				break;
 			default:
 				cube = null;

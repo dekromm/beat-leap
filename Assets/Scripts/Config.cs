@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Config : MonoBehaviour
 {
-	public GameObject beatPrefab;
-	public GameObject enemyPrefab;
-	public GameObject itemPrefab;
+	public Beat beatPrefab;
+	public Enemy enemyPrefab;
+	public Item itemPrefab;
 
 		public static class View
 		{	
