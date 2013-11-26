@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class Config
+public class Config : MonoBehaviour
 {
+	public GameObject beatPrefab;
+	public GameObject enemyPrefab;
+	public GameObject itemPrefab;
+
 		public static class View
 		{	
 				public static float CubeScale ()
@@ -34,4 +38,5 @@ public static class Config
 						return 9;
 				}
 		}
+		
 }

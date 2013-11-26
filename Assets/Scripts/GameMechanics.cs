@@ -19,7 +19,11 @@ public class GameMechanics
 
 		beatManager = new BeatTimings(src);
 
-		//beat = new Beat();
+		Config config = (Config) GameObject.Find("Config").GetComponent("Config");
+		GameObject beatPrefab = config.beatPrefab;
+		beat = (Beat) ((GameObject) GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
+
+	
 	}
 
 	//metodo chiamato quando parte il livello

@@ -35,7 +35,6 @@ public class BeatTimings
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
 		songName = baseUrl + src;
 		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;
-		SwitchAudioPlayStop();
 	}
 
 	//legge da file i timestamp e li sistema nell'array
