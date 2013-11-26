@@ -1,9 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System;
 
-public class BeatTimings{
+public class BeatTimings
+{
 
 	public GameObject gameObject; // non necessariamente l'oggetto al quale è attaccato lo script
 
@@ -19,53 +21,57 @@ public class BeatTimings{
 	private string extension = ".mp3"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
 
 	private int index;
-
 	private StreamReader reader;
 
 	//costruttore, a cui passare il solo nome della canzone (senza estensione)
-	public BeatTimings(string src){
+	public BeatTimings(string src)
+	{
 
 		index = 0;
 
 		SetTimestamps(src);
 		//deltaTime =           inizializzare il valore per l'intervallo di tempo
-
-		audioSrc = gameObject.AddComponent<AudioSource>();
-		songName = baseUrl+src;
+ 
+		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
+		songName = baseUrl + src;
 		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;
+		SwitchAudioPlayStop();
 	}
 
 	//legge da file i timestamp e li sistema nell'array
-	private void SetTimestamps(string id){
+	private void SetTimestamps(string id)
+	{
 
 		float beatTimeValue;
 		string beatString;
 
-		reader = new StreamReader(baseUrl+id+beatUrl);
+		reader = new StreamReader(baseUrl + id + beatUrl);
 		timeStamps = new List<float>();
 
 		beatString = reader.ReadLine();
 
-		while (beatString != null){
+		while (beatString != null) {
 
-			beatTimeValue = float.Parse(beatString);
+			beatTimeValue = float.Parse(beatString, CultureInfo.InvariantCulture.NumberFormat);
 			timeStamps.Add(beatTimeValue);
 			beatString = reader.ReadLine();
 		}	
 	}
 
 	//da chiamare quando il deltaTime rispetto al beat corrente è passato
-	private void Step(){
+	private void Step()
+	{
 
 		index++;
-		timeToUpdate = timeStamps[index] - deltaTime - audioSrc.time;  // set how much time for the next invocation of this metod
+		timeToUpdate = timeStamps [index] - deltaTime - audioSrc.time;  // set how much time for the next invocation of this metod
 	
 	}
 
 	//controlliamo (ad ogni frame!) che il beat non sia già passato 
-	public bool HasBeatPassed(){
+	public bool HasBeatPassed()
+	{
 
-		if (audioSrc.time >= timeStamps[index] + deltaTime){
+		if (audioSrc.time >= timeStamps [index] + deltaTime) {
 
 			Step();
 			return true;
@@ -74,7 +80,8 @@ public class BeatTimings{
 		return false;
 	}
 
-	public float GetTimeToUpdate(){
+	public float GetTimeToUpdate()
+	{
 
 		return timeToUpdate;
 	}
@@ -82,11 +89,12 @@ public class BeatTimings{
 	//restituisce un valore pari alla differenza del istante attuale con il beat corrente
 	//GameMechanichs si occuperà di valutare modulo e segno, confrontando con un deltaTime noto
 	//restituisco -1 se sono completamente fuori tempo
-	public float GetAccuracy(){
+	public float GetAccuracy()
+	{
 
-		float accuracy = audioSrc.time - timeStamps[index];
+		float accuracy = audioSrc.time - timeStamps [index];
 
-		if(accuracy < deltaTime)
+		if (accuracy < deltaTime)
 			return accuracy;
 
 		return -1;
@@ -95,9 +103,10 @@ public class BeatTimings{
 
 	//metodo per fermare e riprendere la canzone
 	// restituisce true, se l'audio è on
-	public bool SwitchAudioPlayStop(){
+	public bool SwitchAudioPlayStop()
+	{
 
-		if(audioSrc.isPlaying){
+		if (audioSrc.isPlaying) {
 		
 			audioSrc.Stop();
 			return false;
@@ -109,9 +118,10 @@ public class BeatTimings{
 
 	//metodo per mettere in muto la canzone
 	// restituisce true, se l'audio è mute
-	public bool SwitchAudioMuteOnOff(){
+	public bool SwitchAudioMuteOnOff()
+	{
 		
-		if(audioSrc.mute){
+		if (audioSrc.mute) {
 			
 			audioSrc.mute = false;
 			return false;

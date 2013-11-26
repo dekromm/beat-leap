@@ -2,28 +2,29 @@
 using System.Collections;
 using System.Timers;
 
-public class GameMechanics{
+public class GameMechanics
+{
 
 	private Beat beat;
 	private BeatTimings beatManager;
 	private bool isGamePlaying;
-
 	private GameField gameField;
-
 	private Timer timer;
 	private double interval;
 
-	public GameMechanics(string src){
+	public GameMechanics(string src)
+	{
 
-		gameField = new GameField(src);
+		//gameField = new GameField(src);
 
 		beatManager = new BeatTimings(src);
 
-		beat = new Beat();
+		//beat = new Beat();
 	}
 
 	//metodo chiamato quando parte il livello
-	public void StartPlaying(){
+	public void StartPlaying()
+	{
 
 		timer = new Timer(interval);
 		timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
@@ -42,39 +43,43 @@ public class GameMechanics{
 	}
 
 	#region userInput
-	public void MoveUp(){
-
-
-		//Move(vec direzione);
+	public void MoveUp()
+	{
+		Debug.Log("Move UP");
 	}
 
-	public void MoveDown(){
-
-		//Move(vec direzione);
+	public void MoveDown()
+	{
+		Debug.Log("Move DOWN");
 	}
 
-	public void MoveLeft(){
-
-		//Move(vec direzione);
+	public void MoveLeft()
+	{
+		Debug.Log("Move LEFT");
 	}
 
-	public void MoveRight(){
-
-		//Move(vec direzione);
+	public void MoveRight()
+	{
+		Debug.Log("Move RIGHT");
 	}
 
-	public void SwitchPauseResume(){
+	public void SwitchPauseResume()
+	{
 
 		isGamePlaying = beatManager.SwitchAudioPlayStop();
 
-		if(isGamePlaying)
+		if (isGamePlaying) {
 			timer.Stop();
-		else
+			Debug.Log("PAUSE");
+		} else {
 			timer.Start();
+			Debug.Log("RESUME");
+		}
 	}
 	#endregion
 
-	private void Move(Vector2 direction){
+	private void Move(Vector2 direction)
+	{
 
 		//controlli sul movimento del beat
 
