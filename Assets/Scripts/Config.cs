@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Config : MonoBehaviour
 {
-	public Beat beatPrefab;
+	public GameObject beatPrefab;
 	public Enemy enemyPrefab;
 	public Item itemPrefab;
 

@@ -20,7 +20,7 @@ public class GameMechanics
 		beatManager = new BeatTimings(src);
 
 		Config config = (Config) GameObject.Find("Config").GetComponent("Config");
-		Beat beatPrefab = config.beatPrefab;
+		GameObject beatPrefab = config.beatPrefab;
 		beat = (Beat) ((GameObject) GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
 
 	

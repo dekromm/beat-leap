@@ -16,9 +16,9 @@ public class BeatTimings
 	public float deltaTime;
 	private float timeToUpdate; //quanto manca al prossimo aggiornamento della view
 	
-	private const string baseUrl = "Assets/Songs/";
+	private const string baseUrl = "Assets/Resources/Songs/";
 	private const string beatUrl = "_Beats.txt";
-	private string extension = ".mp3"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
+	private string extension = ".ogg"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
 
 	private int index;
 	private StreamReader reader;
@@ -33,8 +33,15 @@ public class BeatTimings
 		//deltaTime =           inizializzare il valore per l'intervallo di tempo
  
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
+
 		songName = baseUrl + src;
-		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;
+
+		WWW www = new WWW("file://" + Application.dataPath + "/Resources/Songs/" + src + extension);
+		audioSrc.clip = www.audioClip;
+
+		/*
+		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;*/
+		audioSrc.Play();
 	}
 
 	//legge da file i timestamp e li sistema nell'array
