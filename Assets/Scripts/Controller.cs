@@ -14,7 +14,7 @@ public class Controller : MonoBehaviour
 	void Start()
 	{
 		gameMechanics = new GameMechanics("test");
-		gameMechanics.StartPlaying();
+
 	}
         
 	// Update is called once per frame
@@ -45,11 +45,35 @@ public class Controller : MonoBehaviour
 				gameMechanics.MoveRight();
                                         
 			} else if (Event.current.keyCode.CompareTo(PAUSE) == 0) {
-                                
+                
+				if(!gameMechanics.isGamePlaying){
+					startTimer();
+				}else
+					stopTimer();
+
+//				GameMechanics.StartPlaying();
+
 				gameMechanics.SwitchPauseResume();
                                         
 			}
 		}
+	}
+
+	private void startTimer(){
+
+		InvokeRepeating("CheckBeat",0 ,0.001f);
+
+	}
+
+	private void stopTimer(){
+
+		CancelInvoke("CheckBeat");
+	}
+
+	private void CheckBeat(){
+		
+		gameMechanics.CheckBeat();
+			
 	}
     
 }
