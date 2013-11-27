@@ -14,7 +14,7 @@ public class Controller : MonoBehaviour
 	void Start()
 	{
 		gameMechanics = new GameMechanics("test");
-		//gameMechanics.StartPlaying();
+		gameMechanics.StartPlaying();
 	}
         
 	// Update is called once per frame

@@ -19,6 +19,8 @@ public class GameMechanics
 
 		beatManager = new BeatTimings(src);
 
+		interval = 10;
+
 		Config config = (Config) GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
 		beat = (Beat) ((GameObject) GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
@@ -37,6 +39,7 @@ public class GameMechanics
 
 	private static void OnTimedEvent(object source, ElapsedEventArgs e)
 	{
+		Debug.Log("check");
 		/* Attenzione: non si può usare un oggetto non statico in un metodo statico
 		if( beatManager.HasBeatPassed () ){
 
