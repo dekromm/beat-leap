@@ -6,15 +6,11 @@ public class GameMechanics
 {
 
 	private Beat beat;
-	private Vector2 direction = new Vector2 (0,0);
-
+	private Vector2 direction = new Vector2(0, 0);
 	private BeatTimings beatManager;
-
 	private GameField gameField;
-
 	private Timer timer;
 	private double interval;
-
 	public bool isGamePlaying;
 	private bool isBeatAlreadyMoved = false;
 
@@ -27,11 +23,11 @@ public class GameMechanics
 
 		interval = 10;
 
-		Config config = (Config) GameObject.Find("Config").GetComponent("Config");
+		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
-		beat = (Beat) ((GameObject) GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
+		beat = (Beat)((GameObject)GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
 
-//		beat.SetPosition(2,3);
+		beat.SetPosition(2, 3);
 
 	}
 
@@ -58,14 +54,15 @@ public class GameMechanics
                 }*/
 	}
 	
-	public void CheckBeat(){
+	public void CheckBeat()
+	{
 		
-		if( beatManager.HasBeatPassed () ){
+		if (beatManager.HasBeatPassed()) {
 			
 			Debug.Log("BEAT");
 
-			if(isBeatAlreadyMoved)
-				//beat.Move(direction);
+			if (isBeatAlreadyMoved)
+				beat.Move(direction);
 
 			isBeatAlreadyMoved = false;
 			gameField.StepUpdate();
@@ -75,28 +72,28 @@ public class GameMechanics
 	#region userInput
 	public void MoveUp()
 	{
-		Vector2 direction = new Vector2(0,-1);
+		Vector2 direction = new Vector2(0, -1);
 		Move(direction);
 //		Debug.Log("Move UP");
 	}
 
 	public void MoveDown()
 	{
-		Vector2 direction = new Vector2(0,1);
+		Vector2 direction = new Vector2(0, 1);
 		Move(direction);
 //		Debug.Log("Move DOWN");
 	}
 
 	public void MoveLeft()
 	{
-		Vector2 direction = new Vector2(-1,0);
+		Vector2 direction = new Vector2(-1, 0);
 		Move(direction);
 //		Debug.Log("Move LEFT");
 	}
 
 	public void MoveRight()
 	{
-		Vector2 direction = new Vector2(1,0);
+		Vector2 direction = new Vector2(1, 0);
 		Move(direction);
 //		Debug.Log("Move RIGHT");
 	}
@@ -125,14 +122,14 @@ public class GameMechanics
 	private void Move(Vector2 direction)
 	{
 
-		if(!isBeatAlreadyMoved){
+		if (!isBeatAlreadyMoved) {
 
-			isBeatAlreadyMoved=true;
+			isBeatAlreadyMoved = true;
 			this.direction = direction; //imposto la direzione del movimento
-										// N.B. il movimento avviene solo in concomitanza con
-										// 		beatManager.hasBeatPassed()... però si crea un 
+			// N.B. il movimento avviene solo in concomitanza con
+			// 		beatManager.hasBeatPassed()... però si crea un 
 		
-		}else{
+		} else {
 
 			//più di un movimento per beat è un errore e
 			//bisogna decrementare il punteggio o la salute

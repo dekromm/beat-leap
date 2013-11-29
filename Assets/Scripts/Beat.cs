@@ -4,5 +4,5 @@ using System.Collections;
 public class Beat : Cube
 {
 
-		int health;
+	int health;
 }

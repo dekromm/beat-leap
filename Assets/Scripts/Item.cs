@@ -13,12 +13,14 @@ public class Item : Cube
 	}
 	public Power power;
 	
-	public static Item GetItem(){
+	public static Item GetItem()
+	{
 		//implementare la pool!
 		return null;
 	}
 	
-	public static Item StoreItem(){
+	public static Item StoreItem()
+	{
 		//implementare la pool!
 		return null;		
 	}

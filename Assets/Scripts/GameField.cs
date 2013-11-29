@@ -51,7 +51,7 @@ public class GameField
 			}
 		}
 
-		foreach (Cube c in deleteList){
+		foreach (Cube c in deleteList) {
 			field.Remove(c);
 		}
 

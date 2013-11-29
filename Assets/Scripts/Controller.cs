@@ -46,9 +46,9 @@ public class Controller : MonoBehaviour
                                         
 			} else if (Event.current.keyCode.CompareTo(PAUSE) == 0) {
                 
-				if(!gameMechanics.isGamePlaying){
+				if (!gameMechanics.isGamePlaying) {
 					startTimer();
-				}else
+				} else
 					stopTimer();
 
 //				GameMechanics.StartPlaying();
@@ -59,18 +59,21 @@ public class Controller : MonoBehaviour
 		}
 	}
 
-	private void startTimer(){
+	private void startTimer()
+	{
 
-		InvokeRepeating("CheckBeat",0 ,0.001f);
+		InvokeRepeating("CheckBeat", 0, 0.001f);
 
 	}
 
-	private void stopTimer(){
+	private void stopTimer()
+	{
 
 		CancelInvoke("CheckBeat");
 	}
 
-	private void CheckBeat(){
+	private void CheckBeat()
+	{
 		
 		gameMechanics.CheckBeat();
 			

@@ -14,6 +14,12 @@ public class Cube : MonoBehaviour
 		UpdatePosition();
 		return new Vector2(logicPosition.x, logicPosition.y);
 	}
+
+	public Vector2 Move(Vector2 direction)
+	{
+		SetDirection(direction);
+		return Move();
+	}
 	
 	public void SetPosition(float x, float y)
 	{
@@ -25,9 +31,9 @@ public class Cube : MonoBehaviour
 	public void SetDirection(float x, float y)
 	{
 		// Controllo che possa permettere solo spostamenti interi
-		if((x%1 == 0) && (y%1 == 0)){
+		if ((x % 1 == 0) && (y % 1 == 0)) {
 			direction = new Vector2(x, y);
-		}else{
+		} else {
 			Debug.LogError("Direction Update FAILED");
 		}
 		return;
@@ -46,14 +52,18 @@ public class Cube : MonoBehaviour
 	{
 		// Optimization vars
 		scale = Config.View.CubeScale();
-		halvedLength = Config.View.GridLength()/2;
-		halvedDepth = Config.View.GridDepth()/2;
+		halvedLength = Config.View.GridLength() / 2;
+		halvedDepth = Config.View.GridDepth() / 2;
 			
 	}
 
 	void UpdatePosition()
 	{
-		transform.position = new Vector3(logicPosition.x * scale - halvedLength+scale/2, scale/2, logicPosition.y * scale - halvedDepth+scale/2);
+		float x, y, z;
+		x = logicPosition.x * scale - halvedLength + scale / 2;
+		y = scale / 2;
+		z = logicPosition.y * scale - halvedDepth + scale / 2;
+		transform.position = new Vector3(x, y, z);
 	}
 	#endregion
 }

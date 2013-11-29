@@ -30,7 +30,7 @@ public class BeatTimings
 		index = 0;
 
 		SetTimestamps(src);
-		deltaTime =0.05f;
+		deltaTime = 0.05f;
  
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
 

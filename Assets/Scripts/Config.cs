@@ -7,55 +7,59 @@ public class Config : MonoBehaviour
 	public Enemy enemyPrefab;
 	public Item itemPrefab;
 
-		public static class View
-		{	
-				public static float CubeScale ()
-				{
-						return 10;
-				}
-
-				public static float GridLength ()
-				{
-						return Config.View.CubeScale () * Config.Logic.GridLength ();
-				}
-
-				public static float GridDepth ()
-				{
-						return Config.View.CubeScale () * Config.Logic.GridDepth ();
-				}
-		
-		}
-
-		public static class Logic
-		{		
-				public static int GridLength ()
-				{
-						return 16;
-				}
-
-				public static int GridDepth ()
-				{
-						return 8;
-				}
-		}
-
-		public static class Direction
+	public static class View
+	{	
+		public static float CubeScale()
 		{
-				public static Vector2 Up(){
-						return new Vector2(0,-1);
-				}
-				
-				public static Vector2 Down(){
-					return new Vector2(0,1);
-				}
-
-				public static Vector2 Left(){
-					return new Vector2(-1,0);
-				}
-			
-				public static Vector2 Right(){
-					return new Vector2(1,0);
-				}
+			return 10;
 		}
+
+		public static float GridLength()
+		{
+			return Config.View.CubeScale() * Config.Logic.GridLength();
+		}
+
+		public static float GridDepth()
+		{
+			return Config.View.CubeScale() * Config.Logic.GridDepth();
+		}
+		
+	}
+
+	public static class Logic
+	{		
+		public static int GridLength()
+		{
+			return 16;
+		}
+
+		public static int GridDepth()
+		{
+			return 8;
+		}
+	}
+
+	public static class Direction
+	{
+		public static Vector2 Up()
+		{
+			return new Vector2(0, -1);
+		}
+				
+		public static Vector2 Down()
+		{
+			return new Vector2(0, 1);
+		}
+
+		public static Vector2 Left()
+		{
+			return new Vector2(-1, 0);
+		}
+			
+		public static Vector2 Right()
+		{
+			return new Vector2(1, 0);
+		}
+	}
 		
 }
