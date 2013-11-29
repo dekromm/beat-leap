@@ -13,7 +13,12 @@ public class LevelMap {
 	private int lineSize;
 	private int position;
 
-	private const string okChar = "wie";
+	private const string UpCode = "UP";
+	private const string DownCode = "DOWN";
+	private const string LeftCode = "LEFT";
+	private const string RightCode = "RIGHT";
+
+	private const string okChar = "_ie";
 
 	private string trackFileName;
 
@@ -21,7 +26,7 @@ public class LevelMap {
 	static Item itemPrefab;
 
 	public LevelMap(string track){
-		trackFileName = track+"map.txt";
+		trackFileName = track+"_Map.txt";
 		position = 0;
 		mapLength = 0;
 		try{
@@ -50,6 +55,8 @@ public class LevelMap {
 
 		for(int i=0; i<lineSize; i++){
 			cube = CubeForChar(currentLine[i]);
+			if(cube != null)
+				cube.SetDirection(direction.x,direction.y);
 			cubeList.Add(cube);
 		}
 
@@ -87,7 +94,8 @@ public class LevelMap {
 	}
 
 	private void LoadMap(){
-		StreamReader reader = new StreamReader(trackFileName);
+		string basePath = "Assets/Resources/Songs/";
+		StreamReader reader = new StreamReader(basePath+trackFileName);
 		if(reader != null){
 			string parameterString = reader.ReadLine();
 			try{
@@ -135,13 +143,21 @@ public class LevelMap {
 			if(parameters.Length == 2){
 				direction = new Vector2(-1,0);
 			}else{
-				int dirX, dirY;
-				dirX = int.Parse(parameters[2]);
-				dirY = int.Parse(parameters[3]);
-				direction = new Vector2(dirX, dirY);
+				string dirString = parameters[2];
+				if( dirString.Equals(UpCode)){
+					direction = Config.Direction.Up();
+				}else if(dirString.Equals(DownCode)){
+					direction = Config.Direction.Down();
+				}else if(dirString.Equals(LeftCode)){
+					direction = Config.Direction.Left();
+				}else if(dirString.Equals(RightCode)){
+					direction = Config.Direction.Right();
+				}else{
+					throw new Exception("Unknow Direction");
+				}
 			}
 			
-			Debug.Log("Line size: "+lineSize+" | Map lenght: "+mapLength);
+			Debug.Log("Line size: "+lineSize+" | Map lenght: "+mapLength+" | Direction: "+direction);
 		}else{
 			throw new Exception("Map Parameters Format Error");
 		}

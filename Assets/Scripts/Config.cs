@@ -30,12 +30,31 @@ public class Config : MonoBehaviour
 		{		
 				public static int GridLength ()
 				{
-						return 17;
+						return 16;
 				}
 
 				public static int GridDepth ()
 				{
-						return 9;
+						return 8;
+				}
+		}
+
+		public static class Direction
+		{
+				public static Vector2 Up(){
+						return new Vector2(0,-1);
+				}
+				
+				public static Vector2 Down(){
+					return new Vector2(0,1);
+				}
+
+				public static Vector2 Left(){
+					return new Vector2(-1,0);
+				}
+			
+				public static Vector2 Right(){
+					return new Vector2(1,0);
 				}
 		}
 		
