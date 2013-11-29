@@ -21,7 +21,7 @@ public class GameMechanics
 	public GameMechanics(string src)
 	{
 
-		//gameField = new GameField(src);
+		gameField = new GameField(src);
 
 		beatManager = new BeatTimings(src);
 
@@ -65,10 +65,10 @@ public class GameMechanics
 			Debug.Log("BEAT");
 
 			if(isBeatAlreadyMoved)
-				beat.Move(direction);
+				//beat.Move(direction);
 
 			isBeatAlreadyMoved = false;
-			
+			gameField.StepUpdate();
 		}
 	}
 
