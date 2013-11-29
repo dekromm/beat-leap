@@ -30,7 +30,7 @@ public class BeatTimings
 		index = 0;
 
 		SetTimestamps(src);
-		deltaTime = 0.05f;
+		deltaTime = 0.08f;
  
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
 
@@ -99,9 +99,10 @@ public class BeatTimings
 	{
 
 		float accuracy = audioSrc.time - timeStamps [index];
+		accuracy = Math.Abs(accuracy);
 
 		if (accuracy < deltaTime)
-			return Math.Abs(accuracy);
+			return accuracy;
 
 		return -1;
 

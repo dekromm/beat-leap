@@ -12,8 +12,11 @@ public class GameMechanics
 	private Timer timer;
 	private double interval;
 
+	GameObject accuracyCube;
+
 	public GameMechanics(string src)
 	{
+		accuracyCube = GameObject.Find("AccuracyCube");
 
 		gameField = new GameField(src);
 		beatManager = new BeatTimings(src);
@@ -45,7 +48,7 @@ public class GameMechanics
 	
 	public void CheckBeat()
 	{
-		
+		accuracyCube.gameObject.transform.position = new Vector3(-75+75*2*beatManager.GetAccuracy(),0,45);
 		if (beatManager.HasBeatPassed()) {
 			
 			Debug.Log("BEAT");

@@ -4,11 +4,11 @@ using System.Collections;
 public class Controller : MonoBehaviour
 {
 	private GameMechanics gameMechanics;
-	const KeyCode UP = KeyCode.UpArrow;
-	const KeyCode DOWN = KeyCode.DownArrow;
-	const KeyCode RIGHT = KeyCode.RightArrow;
-	const KeyCode LEFT = KeyCode.LeftArrow;
-	const KeyCode PAUSE = KeyCode.Escape;
+	const KeyCode UP = KeyCode.W;
+	const KeyCode DOWN = KeyCode.S;
+	const KeyCode RIGHT = KeyCode.D;
+	const KeyCode LEFT = KeyCode.A;
+	const KeyCode PAUSE = KeyCode.Space;
 	
 	// Use this for initialization
 	void Start()
@@ -62,7 +62,7 @@ public class Controller : MonoBehaviour
 	private void startTimer()
 	{
 
-		InvokeRepeating("CheckBeat", 0, 0.001f);
+		InvokeRepeating("CheckBeat", 0, 0.0002f);
 
 	}
 

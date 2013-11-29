@@ -39,6 +39,7 @@ public class GameField
 		List<Cube> deleteList = new List<Cube>();
 
 		beat.CommitCommand();
+	//	beat.PauseInput();
 
 		foreach (Cube c in field) {
 			nextPosition = c.Move();
@@ -64,6 +65,8 @@ public class GameField
 		}
 
 		AddRows();
+
+//		beat.UnPauseInput();
 
 	}
 

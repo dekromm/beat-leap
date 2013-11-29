@@ -7,6 +7,13 @@ public class Beat : Cube
 	int health;
 	Config.Command currentCommand = Config.Command.NULL;
 
+	public Beat(){
+		health = 100;
+	
+	}
+
+
+
 	public void PushCommand(Config.Command command){
 		if(command == Config.Command.HIT){
 			// E' arrivato un PICCHIATI
@@ -19,6 +26,7 @@ public class Beat : Cube
 				health--;
 			}
 		}
+		Debug.Log(command);
 	}
 
 	public void CommitCommand(){
