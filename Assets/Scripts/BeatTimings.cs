@@ -47,7 +47,7 @@ public class BeatTimings
 	//legge da file i timestamp e li sistema nell'array
 	private void SetTimestamps(string id)
 	{
-
+		songName += ""; // Si fottano i WARNING!
 		float beatTimeValue;
 		string beatString;
 
@@ -101,7 +101,7 @@ public class BeatTimings
 		float accuracy = audioSrc.time - timeStamps [index];
 
 		if (accuracy < deltaTime)
-			return accuracy;
+			return Math.Abs(accuracy);
 
 		return -1;
 

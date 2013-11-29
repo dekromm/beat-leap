@@ -43,12 +43,12 @@ public class Config : MonoBehaviour
 	{
 		public static Vector2 Up()
 		{
-			return new Vector2(0, -1);
+			return new Vector2(0, 1);
 		}
 				
 		public static Vector2 Down()
 		{
-			return new Vector2(0, 1);
+			return new Vector2(0, -1);
 		}
 
 		public static Vector2 Left()
@@ -61,5 +61,7 @@ public class Config : MonoBehaviour
 			return new Vector2(1, 0);
 		}
 	}
+
+	public enum Command{ UP, DOWN, LEFT, RIGHT, HIT, NULL};
 		
 }

@@ -17,6 +17,11 @@ public class GameField
 		height = Config.Logic.GridDepth();
 		field = new List<Cube>();
 
+		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
+		GameObject beatPrefab = config.beatPrefab;
+		beat = (Beat)((GameObject)GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
+		beat.SetPosition(width/2 ,height/2);
+
 		try {
 			// Right to Left map
 			RtoLmap = new LevelMap(track);
@@ -33,6 +38,8 @@ public class GameField
 
 		List<Cube> deleteList = new List<Cube>();
 
+		beat.CommitCommand();
+
 		foreach (Cube c in field) {
 			nextPosition = c.Move();
 
@@ -45,6 +52,7 @@ public class GameField
 
 			if (Collided(c)) {
 				// TO-DO collisione!
+				Debug.Log("COLLISIONE BOOM!");
 			} else if (IsOutOfExternalField(nextPosition)) {
 				deleteList.Add(c);
 				c.Recycle();
@@ -59,6 +67,11 @@ public class GameField
 
 	}
 
+	public void CommandToBeat(Config.Command command){
+		// beat.Move(direction);
+		beat.PushCommand(command);
+	}
+
 
 	#region private methods
 	private void AddRows()
@@ -66,18 +79,21 @@ public class GameField
 		List<Cube> tmpLine;
 		Cube cube;
 				
-		tmpLine = RtoLmap.GetNewLine();
-				
-		int x = width;
-		int y;
-		for (y=0; y< tmpLine.Count; y++) {
-			cube = tmpLine [y];
-			if (cube != null) {
-				cube.SetPosition(x, y);
-				cube.gameObject.SetActive(false);
-				field.Add(cube);
-						
+		try{
+			tmpLine = RtoLmap.GetNewLine();
+
+			int x = width;
+			int y;
+			for (y=0; y< tmpLine.Count; y++) {
+				cube = tmpLine [y];
+				if (cube != null) {
+					cube.SetPosition(x, y);
+					cube.gameObject.SetActive(false);
+					field.Add(cube);
+							
+				}
 			}
+		}catch(Exception){
 		}
 
 	}
