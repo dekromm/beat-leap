@@ -229,5 +229,4 @@ pip-log.txt
 /*.sln
 /*.suo
 /*.user
-
-beat-leap.userprefs
+/*.userprefs
