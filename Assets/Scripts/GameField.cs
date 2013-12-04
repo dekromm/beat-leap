@@ -14,6 +14,7 @@ public class GameField
 	
 	public GameField(string track)
 	{
+		currentRule = new Rule();
 		width = Config.Logic.GridLength();
 		height = Config.Logic.GridDepth();
 		field = new List<Cube>();
@@ -21,7 +22,7 @@ public class GameField
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
 		beat = (Beat)((GameObject)GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
-		beat.SetPosition(width/2 ,height/2);
+		beat.SetPosition(width / 2, height / 2);
 
 		try {
 			// Right to Left map
@@ -35,10 +36,30 @@ public class GameField
 	
 	public void StepUpdate()
 	{
-		currentRule = beat.powerup.InStep(field, RtoLmap, beat);
+		currentRule = currentRule.Step(field, RtoLmap, beat);
+		beat.newPowerUp(currentRule);
+
+		//Controllo se i cubi sono usciti dai margini
+		List<Cube> deleteList = new List<Cube>();
+
+		foreach (Cube c in field) {
+			if (c.gameObject.activeSelf && IsOutOfVisibleField(c.logicPosition)) {
+				c.gameObject.SetActive(false);
+			} else if (!c.gameObject.activeSelf && !IsOutOfVisibleField(c.logicPosition)) {
+				c.gameObject.SetActive(true);
+			} else if (IsOutOfExternalField(c.logicPosition)) {
+				deleteList.Add(c);
+				c.Recycle();
+			}
+		}
+		//Elimino i cubi usciti troppo
+		foreach (Cube c in deleteList) {
+			field.Remove(c);
+		}
 	}
 
-	public void CommandToBeat(Config.Command command){
+	public void CommandToBeat(Config.Command command)
+	{
 		// beat.Move(direction);
 		beat.PushCommand(command);
 	}
@@ -94,18 +115,6 @@ public class GameField
 //			StepUpdate();
 //		}
 
-	}
-
-	private bool Collided(Cube c)
-	{
-		if (beat != null) {
-			if (c.logicPosition.Equals(beat.logicPosition)) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-		return false;
 	}
 	#endregion
 

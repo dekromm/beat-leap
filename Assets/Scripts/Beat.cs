@@ -8,7 +8,7 @@ public class Beat : Cube
 	Config.Command currentCommand = Config.Command.NULL;
 
 	public Rule  powerup;
-	int moveMagnitude:
+	int moveMagnitude;
 	int damage;
 
 	public Beat(){
@@ -18,7 +18,7 @@ public class Beat : Cube
 
 	public void newPowerUp(Rule r){
 		
-		moveMagnitude = r.getBeatMagnitude();
+		moveMagnitude = r.getMagnitude();
 		damage = r.getDamage();
 
 	}
@@ -57,5 +57,15 @@ public class Beat : Cube
 
 		// gestisci comando
 		currentCommand = Config.Command.NULL;
+	}
+	
+	public bool Collided(Cube c)
+	{
+		if (c.logicPosition.Equals(logicPosition)) {
+			return true;
+		} else {
+			return false;
+		}
+		return false;
 	}
 }

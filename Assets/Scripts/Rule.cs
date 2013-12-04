@@ -1,18 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Rule {
 
-	private int duration;
-
-	protected void UpdateDuration(){
-		duration--;
-	}
-
 	#region Beat aimed Methods
 
-	public float getDamage(){
+	public int getDamage(){
 		return 1;
 	}
 
@@ -23,53 +18,32 @@ public class Rule {
 
 	#region GameField aimed Methods
 
-	public Rule InStep(List<Cube> field, LevelMap map, Beat beat){
+	public Rule Step(List<Cube> field, LevelMap map, Beat beat){
 
-		Vector2 nextPosition;
-		
-		List<Cube> deleteList = new List<Cube>();
-		
 		beat.CommitCommand();
 		//	beat.PauseInput();
 		foreach (Cube c in field) {
-			nextPosition = c.Move();
+			c.Move();
 			
-			if (c.gameObject.activeSelf && IsOutOfVisibleField(nextPosition)) {
-				c.gameObject.SetActive(false);
-			} else if (!c.gameObject.activeSelf && !IsOutOfVisibleField(nextPosition)) {
-				c.gameObject.SetActive(true);
-				
-			}
-			
-			if (Collided(c)) {
+			if (beat.Collided(c)) {
 				// TO-DO collisione!
 				Debug.Log("COLLISIONE BOOM!");
 			} else if(PowerUp(c)){
 				// beat.newPowerUp(c.rule)
-			}else if (IsOutOfExternalField(nextPosition)) {
-				deleteList.Add(c);
-				c.Recycle();
 			}
 		}
-		
-		
-		
-		foreach (Cube c in deleteList) {
-			field.Remove(c);
-		}
-		
-		AddRows();
 
-		UpdateDuration();
+		
+		AddRows(map, field);
 		//		beat.UnPauseInput();
-
+		return this;
 	}
 
 	protected bool PowerUp(Cube c){
 		return false;
 	}
 
-	protected void AddRows(LevelMap map)
+	protected void AddRows(LevelMap map, List<Cube> field)
 	{
 		List<Cube> tmpLine;
 		Cube cube;
@@ -77,7 +51,7 @@ public class Rule {
 		try{
 			tmpLine = map.GetNewLine();
 			
-			int x = width;
+			int x = Config.Logic.GridLength();
 			int y;
 			for (y=0; y< tmpLine.Count; y++) {
 				cube = tmpLine [y];
