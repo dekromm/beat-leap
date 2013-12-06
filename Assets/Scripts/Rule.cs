@@ -26,10 +26,14 @@ public class Rule {
 			c.Move();
 			
 			if (beat.Collided(c)) {
-				// TO-DO collisione!
-				Debug.Log("COLLISIONE BOOM!");
-			} else if(PowerUp(c)){
-				// beat.newPowerUp(c.rule)
+				if(IsEnemy(c)){
+					// TO-DO collisione!
+					Debug.Log("COLLISIONE BOOM!");
+				} else if (IsItem(c)) {
+					// ((Item) c ).rule.immediate()
+					beat.newPowerUp( ((Item) c ).rule);
+					Debug.Log("COLLISIONE POWERUP!");
+				} 
 			}
 		}
 
@@ -39,7 +43,17 @@ public class Rule {
 		return this;
 	}
 
-	protected bool PowerUp(Cube c){
+	public void immediate(){
+		// metodo chiamato alla collisione col powerup
+	}
+	
+	private bool IsItem(Cube c){
+		//controlla se il cubo passato è un powerup
+		return false;
+	}
+	
+	private bool IsEnemy(Cube c){
+		//controlla se il cubo passato è un powerup
 		return false;
 	}
 
@@ -65,14 +79,6 @@ public class Rule {
 		}catch(Exception){
 		}
 		
-	}
-
-	protected void PreStep(){
-		
-	}
-
-	protected void PostStep(){
-	
 	}
 
 #endregion

@@ -16,13 +16,6 @@ public class Beat : Cube
 	
 	}
 
-	public void newPowerUp(Rule r){
-		
-		moveMagnitude = r.getMagnitude();
-		damage = r.getDamage();
-
-	}
-
 	public void PushCommand(Config.Command command){
 		if(command == Config.Command.HIT){
 			// E' arrivato un PICCHIATI
@@ -68,4 +61,15 @@ public class Beat : Cube
 		}
 		return false;
 	}
+	#region beat modifiers
+	
+	
+	public void SetDamage(int d){
+		damage = d;
+	}
+	
+	public void SetMagnitude(int m){
+		moveMagnitude = m;
+	}
+	#endregion
 }

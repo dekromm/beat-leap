@@ -37,7 +37,6 @@ public class GameField
 	public void StepUpdate()
 	{
 		currentRule = currentRule.Step(field, RtoLmap, beat);
-		beat.newPowerUp(currentRule);
 
 		//Controllo se i cubi sono usciti dai margini
 		List<Cube> deleteList = new List<Cube>();
