@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Item : Cube
 {
+	public Rule rule;
 	
 	// Power Enum
 	public enum Power
@@ -12,17 +13,5 @@ public class Item : Cube
 		Other
 	}
 	public Power power;
-	
-	public static Item GetItem()
-	{
-		//implementare la pool!
-		return null;
-	}
-	
-	public static Item StoreItem()
-	{
-		//implementare la pool!
-		return null;		
-	}
 
 }
