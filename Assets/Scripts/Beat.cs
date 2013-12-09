@@ -4,32 +4,60 @@ using System.Collections;
 public class Beat : Cube
 {
 
-	int health;
+	int score = 1000;
+	int multiplier = 1;
+	int rightSequences = 0;
+
 	Config.Command currentCommand = Config.Command.NULL;
 
-	public Rule  powerup;
+	public const int thresholdMultiplier = 4;
+
+	public Rule powerup = new Rule();
 	int moveMagnitude;
 	int damage;
 
-	public Beat(){
-		health = 100;
-	
-	}
-
-	public void PushCommand(Config.Command command){
+	public void PushCommand(Config.Command command, int score){
 		if(command == Config.Command.HIT){
-			// E' arrivato un PICCHIATI
-			health--;
+
+			currentCommand = command;
+			ResetStat ();
+			//this.score -= score*multiplier*powerup.getBaseMultiplier();
+
 		}else{
-			if(currentCommand == Config.Command.NULL){
-				currentCommand = command;
-			}else{
-				// Qui invece mi picchio da solo perche' stanno arrivando troppi spostamenti
-				health--;
+			    currentCommand = command;
+				UpgradeStat();
+				int baseMultiplier = powerup.getBaseMultiplier ();
+				this.score += score * multiplier * baseMultiplier;
 			}
-		}
+
 		Debug.Log(command);
 	}
+
+	#region score
+	void ResetStat (){
+
+		multiplier = 1;
+
+		if(rightSequences>1)
+			rightSequences = 0;
+		else
+			rightSequences--;
+
+	}
+
+	void UpgradeStat (){
+
+		rightSequences++;
+
+		multiplier = rightSequences / thresholdMultiplier + 1;
+
+	}
+
+	public string GetScore(){
+
+		return score.ToString();
+	}
+	#endregion
 
 	public void CommitCommand(){
 
@@ -46,9 +74,15 @@ public class Beat : Cube
 			case Config.Command.LEFT:{
 				Move(Config.Direction.Left()*moveMagnitude);
 			}break;
+			case Config.Command.HIT:{
+				this.score -= 50;
+			}break;
+			case Config.Command.NULL:{
+				ResetStat ();		
+				this.score -= 10;
+			}break;
 		}
 
-		// gestisci comando
 		currentCommand = Config.Command.NULL;
 	}
 	
@@ -62,7 +96,11 @@ public class Beat : Cube
 		return false;
 	}
 	#region beat modifiers
-	
+
+	public void NewPowerUp(Rule rule){
+
+		powerup = rule;
+	}
 	
 	public void SetDamage(int d){
 		damage = d;

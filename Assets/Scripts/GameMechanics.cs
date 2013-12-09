@@ -12,6 +12,9 @@ public class GameMechanics
 	private Timer timer;
 	private double interval;
 
+	private const int scoreLow = 10;
+	private const int scoreHigh = 50;
+
 	GameObject accuracyCube;
 
 	public GameMechanics(string src)
@@ -96,9 +99,12 @@ public class GameMechanics
 	{
 		float accuracy = beatManager.GetAccuracy();
 		if( accuracy >=0 ){
-			gameField.CommandToBeat(command);
+			if (accuracy < beatManager.deltaTime/2)
+				gameField.CommandToBeat(command, scoreHigh);
+			else 
+				gameField.CommandToBeat(command, scoreLow);
 		}else{
-			gameField.CommandToBeat(Config.Command.HIT);
+			gameField.CommandToBeat(Config.Command.HIT, 0); // passo 0, in quanto l'argomento è irrilevante
 		}
 
 	}
