@@ -9,6 +9,13 @@ public class Controller : MonoBehaviour
 	const KeyCode RIGHT = KeyCode.D;
 	const KeyCode LEFT = KeyCode.A;
 	const KeyCode PAUSE = KeyCode.Space;
+
+//	const KeyCode UP = KeyCode.UpArrow;
+//	const KeyCode DOWN = KeyCode.DownArrow;
+//	const KeyCode RIGHT = KeyCode.RightArrow;
+//	const KeyCode LEFT = KeyCode.LeftArrow;
+//	const KeyCode PAUSE = KeyCode.Space;
+
 	
 	// Use this for initialization
 	void Start()
