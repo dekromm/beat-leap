@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Controller : MonoBehaviour
 {
-	private GameMechanics gameMechanics;
+	public static GameMechanics gameMechanics;
 	const KeyCode UP = KeyCode.W;
 	const KeyCode DOWN = KeyCode.S;
 	const KeyCode RIGHT = KeyCode.D;
