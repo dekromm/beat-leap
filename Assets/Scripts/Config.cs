@@ -6,11 +6,11 @@ public class Config : MonoBehaviour
 	public GameObject beatPrefab;
 	public Enemy enemyPrefab;
 	public Item itemPrefab;
-
 	public GameObject timeLine;
 	public TimeStick timeStickPrefab;
 
-	public static float TimeLineDelta(){
+	public static float TimeLineDelta()
+	{
 		return 1.0f; // 2 seconds length
 	}
 
@@ -69,6 +69,38 @@ public class Config : MonoBehaviour
 		}
 	}
 
-	public enum Command{ UP, DOWN, LEFT, RIGHT, HIT, NULL};
-		
+	public static class Messages
+	{
+
+		public static string Miss()
+		{
+			return "MISS";
+		}
+
+		public static string Async()
+		{
+			return "ASYNC";
+		}
+
+		public static string Good()
+		{	
+			return "GOOD";
+		}
+
+		public static string LikeAGod()
+		{
+			return "LIKE A GOD";
+		}
+
+	}
+
+	public enum Command
+	{
+		UP,
+		DOWN,
+		LEFT,
+		RIGHT,
+		HIT,
+		NULL}
+	;
 }

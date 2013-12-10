@@ -105,11 +105,11 @@ public class GameMechanics
 		float accuracy = beatManager.GetAccuracy();
 		if( accuracy >=0 ){
 			if (accuracy < beatManager.deltaTime/2)
-				gameField.CommandToBeat(command, scoreHigh);
+				gameField.CommandToBeat(command, scoreHigh, true);
 			else 
-				gameField.CommandToBeat(command, scoreLow);
+				gameField.CommandToBeat(command, scoreLow, false);
 		}else{
-			gameField.CommandToBeat(Config.Command.HIT, 0); // passo 0, in quanto l'argomento è irrilevante
+			gameField.CommandToBeat(Config.Command.HIT, 0, false); // passo 0, in quanto l'argomento è irrilevante
 		}
 
 	}
