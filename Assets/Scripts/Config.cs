@@ -7,6 +7,13 @@ public class Config : MonoBehaviour
 	public Enemy enemyPrefab;
 	public Item itemPrefab;
 
+	public GameObject timeLine;
+	public TimeStick timeStickPrefab;
+
+	public static float TimeLineDelta(){
+		return 1.0f; // 2 seconds length
+	}
+
 	public static class View
 	{	
 		public static float CubeScale()

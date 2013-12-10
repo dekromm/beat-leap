@@ -22,7 +22,7 @@ public class BeatTimings
 
 	private int index;
 	private StreamReader reader;
-
+	
 	//costruttore, a cui passare il solo nome della canzone (senza estensione)
 	public BeatTimings(string src)
 	{
@@ -30,7 +30,7 @@ public class BeatTimings
 		index = 0;
 
 		SetTimestamps(src);
-		deltaTime = 0.08f;
+		deltaTime = 0.12f;
  
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
 
@@ -115,7 +115,7 @@ public class BeatTimings
 
 		if (audioSrc.isPlaying) {
 		
-			audioSrc.Stop();
+			audioSrc.Pause();
 			return false;
 		}
 
@@ -137,5 +137,14 @@ public class BeatTimings
 		audioSrc.mute = true;
 		return true;
 	}
+
+	public List<float> GetTimings(){
+		return timeStamps; // sbagliato dovrei restituire una copia
+	}
+
+	public float GetTime(){
+		return audioSrc.time;
+	}
+
 
 }

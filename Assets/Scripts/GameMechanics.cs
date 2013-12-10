@@ -14,12 +14,16 @@ public class GameMechanics
 
 	GameObject accuracyCube;
 
+	TimeLine timeLine;
+
 	public GameMechanics(string src)
 	{
 		accuracyCube = GameObject.Find("AccuracyCube");
 
 		gameField = new GameField(src);
 		beatManager = new BeatTimings(src);
+		timeLine = new TimeLine(beatManager.GetTimings());
+		TimeLine.isActive = false;
 
 	}
 
@@ -50,10 +54,10 @@ public class GameMechanics
 	{
 		accuracyCube.gameObject.transform.position = new Vector3(-75+75*2*beatManager.GetAccuracy(),0,45);
 		if (beatManager.HasBeatPassed()) {
-			
 			Debug.Log("BEAT");
 			gameField.StepUpdate();
 		}
+		timeLine.FireSticks(beatManager.GetTime());
 	}
 
 	#region userInput
@@ -81,6 +85,7 @@ public class GameMechanics
 	{
 
 		isGamePlaying = beatManager.SwitchAudioPlayStop();
+		TimeLine.isActive = isGamePlaying;
 
 		if (isGamePlaying) {
 
