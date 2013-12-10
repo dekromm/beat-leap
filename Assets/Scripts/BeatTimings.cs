@@ -18,7 +18,7 @@ public class BeatTimings
 	
 	private const string baseUrl = "Assets/Resources/Songs/";
 	private const string beatUrl = "_Beats.txt";
-	private string extension = ".ogg"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
+	private string extension = ".wav"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
 
 	private int index;
 	private StreamReader reader;

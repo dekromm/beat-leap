@@ -20,7 +20,7 @@ public class Controller : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		gameMechanics = new GameMechanics("test");
+		gameMechanics = new GameMechanics("zarro");
 
 	}
         
