@@ -14,6 +14,11 @@ public class Rule {
 	public int getMagnitude(){
 		return 1;
 	}
+
+	public int getBaseMultiplier(){
+
+		return 1;
+	}
 	#endregion
 
 	#region GameField aimed Methods
@@ -29,14 +34,14 @@ public class Rule {
 				if(IsEnemy(c)){
 					// TO-DO collisione!
 					Debug.Log("COLLISIONE BOOM!");
+					// beat.score - 100 ???
 				} else if (IsItem(c)) {
 					// ((Item) c ).rule.immediate()
-					beat.newPowerUp( ((Item) c ).rule);
+					beat.NewPowerUp( ((Item) c ).rule);
 					Debug.Log("COLLISIONE POWERUP!");
 				} 
 			}
 		}
-
 		
 		AddRows(map, field);
 		//		beat.UnPauseInput();
