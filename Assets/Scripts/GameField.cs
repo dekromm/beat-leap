@@ -12,7 +12,8 @@ public class GameField
 	private Beat beat;
 	private Rule currentRule;
 	private TextMesh score;
-	
+	private TextMesh message;
+
 	public GameField(string track)
 	{
 		currentRule = new Rule();
@@ -21,6 +22,8 @@ public class GameField
 		field = new List<Cube>();
 
 		score = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMesh>();
+		message = GameObject.FindGameObjectWithTag("Message").GetComponent<TextMesh>();
+
 
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
@@ -42,6 +45,7 @@ public class GameField
 		currentRule = currentRule.Step(field, RtoLmap, beat);
 
 		score.text = beat.GetScore();
+		message.text = beat.GetMessage();
 
 		//Controllo se i cubi sono usciti dai margini
 		List<Cube> deleteList = new List<Cube>();
@@ -68,12 +72,12 @@ public class GameField
 //		beat.PushCommand(command);
 //	}
 
-	public void CommandToBeat(Config.Command command, int score)
+	public void CommandToBeat(Config.Command command, int score, bool maxPrecision)
 	{
 		// beat.Move(direction);
 
 
-		beat.PushCommand(command, score);
+		beat.PushCommand(command, score, maxPrecision);
 	}
 
 

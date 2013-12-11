@@ -3,19 +3,23 @@ using System.Collections;
 
 public class TouchInput : MonoBehaviour {
 
+	Controller controller;
+
 	void Start () {
-	
+		controller = GameObject.Find("Board").GetComponent<Controller>();
 	}
 
 	void OnMouseDown(){
 		if(gameObject.name == "TouchLeft"){
-			Controller.gameMechanics.MoveLeft();
+			controller.gameMechanics.MoveLeft();
 		}else if(gameObject.name == "TouchRight"){
-			Controller.gameMechanics.MoveRight();
+			controller.gameMechanics.MoveRight();
 		}else if(gameObject.name == "TouchUp"){
-			Controller.gameMechanics.MoveUp();
+			controller.gameMechanics.MoveUp();
 		}else if(gameObject.name == "TouchDown"){
-			Controller.gameMechanics.MoveDown();
+			controller.gameMechanics.MoveDown();
+		}else if(gameObject.name == "Center"){
+			controller.SwitchPauseResume();
 		}
 	}
 }

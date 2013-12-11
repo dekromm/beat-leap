@@ -5,6 +5,7 @@ public class Beat : Cube
 {
 
 	int score = 1000;
+	string message;
 	int multiplier = 1;
 	int rightSequences = 0;
 
@@ -16,7 +17,7 @@ public class Beat : Cube
 	int moveMagnitude = 1;
 	int damage;
 
-	public void PushCommand(Config.Command command, int score){
+	public void PushCommand(Config.Command command, int score, bool maxPrecision){
 		if(command == Config.Command.HIT){
 
 			currentCommand = command;
@@ -28,7 +29,11 @@ public class Beat : Cube
 				UpgradeStat();
 				int baseMultiplier = powerup.getBaseMultiplier ();
 				this.score += score * multiplier * baseMultiplier;
-			}
+				if(maxPrecision)
+					message = Config.Messages.LikeAGod();
+				else
+					message = Config.Messages.Good();
+		}
 
 		Debug.Log(command);
 	}
@@ -57,6 +62,11 @@ public class Beat : Cube
 
 		return score.ToString();
 	}
+
+	public string GetMessage(){
+		
+		return message;
+	}
 	#endregion
 
 	public void CommitCommand(){
@@ -76,10 +86,12 @@ public class Beat : Cube
 			}break;
 			case Config.Command.HIT:{
 				this.score -= 50;
+				message = Config.Messages.Async();
 			}break;
 			case Config.Command.NULL:{
 				ResetStat ();		
 				this.score -= 10;
+				message = Config.Messages.Miss();
 			}break;
 		}
 

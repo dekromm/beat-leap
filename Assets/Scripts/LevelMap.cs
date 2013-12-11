@@ -96,8 +96,8 @@ public class LevelMap
 
 	private void LoadMap()
 	{
-		string basePath = "Assets/Resources/Songs/";
-		StreamReader reader = new StreamReader(basePath + trackFileName);
+		string basePath = "/Resources/Songs/";
+		StreamReader reader = new StreamReader(Application.dataPath + basePath + trackFileName);
 		if (reader != null) {
 			string parameterString = reader.ReadLine();
 			try {

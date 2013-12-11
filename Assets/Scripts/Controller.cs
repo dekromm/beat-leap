@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Controller : MonoBehaviour
 {
-	public static GameMechanics gameMechanics;
+	public GameMechanics gameMechanics;
 	const KeyCode UP = KeyCode.W;
 	const KeyCode DOWN = KeyCode.S;
 	const KeyCode RIGHT = KeyCode.D;
@@ -20,8 +20,7 @@ public class Controller : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		gameMechanics = new GameMechanics("test");
-
+		gameMechanics = new GameMechanics("zarro");
 	}
         
 	// Update is called once per frame
@@ -53,17 +52,23 @@ public class Controller : MonoBehaviour
                                         
 			} else if (Event.current.keyCode.CompareTo(PAUSE) == 0) {
                 
-				if (!gameMechanics.isGamePlaying) {
-					startTimer();
-				} else
-					stopTimer();
-
-//				GameMechanics.StartPlaying();
-
-				gameMechanics.SwitchPauseResume();
+				SwitchPauseResume();
                                         
 			}
 		}
+	}
+
+	public void SwitchPauseResume(){
+
+		if (!gameMechanics.isGamePlaying) {
+			startTimer();
+		} else
+			stopTimer();
+		
+		//GameMechanics.StartPlaying();
+		
+		gameMechanics.SwitchPauseResume();
+
 	}
 
 	private void startTimer()
@@ -77,11 +82,12 @@ public class Controller : MonoBehaviour
 	{
 
 		CancelInvoke("CheckBeat");
+
 	}
 
 	private void CheckBeat()
 	{
-		
+
 		gameMechanics.CheckBeat();
 			
 	}

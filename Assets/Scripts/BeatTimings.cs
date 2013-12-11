@@ -16,9 +16,9 @@ public class BeatTimings
 	public float deltaTime;
 	private float timeToUpdate; //quanto manca al prossimo aggiornamento della view
 	
-	private const string baseUrl = "Assets/Resources/Songs/";
+	private const string baseUrl = "/Resources/Songs/";
 	private const string beatUrl = "_Beats.txt";
-	private string extension = ".ogg"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
+	private string extension = ".mp3"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
 
 	private int index;
 	private StreamReader reader;
@@ -51,7 +51,7 @@ public class BeatTimings
 		float beatTimeValue;
 		string beatString;
 
-		reader = new StreamReader(baseUrl + id + beatUrl);
+		reader = new StreamReader(Application.dataPath + baseUrl + id + beatUrl);
 		timeStamps = new List<float>();
 
 		beatString = reader.ReadLine();
@@ -76,7 +76,6 @@ public class BeatTimings
 	//controlliamo (ad ogni frame!) che il beat non sia già passato 
 	public bool HasBeatPassed()
 	{
-
 		if (audioSrc.time >= timeStamps [index] + deltaTime) {
 
 			Step();
