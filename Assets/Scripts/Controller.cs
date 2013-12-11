@@ -21,6 +21,7 @@ public class Controller : MonoBehaviour
 	void Start()
 	{
 		gameMechanics = new GameMechanics("zarro");
+
 	}
         
 	// Update is called once per frame
