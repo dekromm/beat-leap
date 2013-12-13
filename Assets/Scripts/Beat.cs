@@ -17,6 +17,18 @@ public class Beat : Cube
 	int moveMagnitude = 1;
 	int damage;
 
+	public Vector2 Move(Vector2 direction)
+	{
+		Vector2 next = logicPosition + direction;
+
+		if(!isOutOfRange(next)){
+			SetDirection(direction.x, direction.y);
+			return Move();
+		}
+
+		return logicPosition;
+	}
+
 	public void PushCommand(Config.Command command, int score, bool maxPrecision){
 		if(command == Config.Command.HIT){
 
@@ -52,7 +64,10 @@ public class Beat : Cube
 
 	void UpgradeStat (){
 
-		rightSequences++;
+		if(rightSequences>=0)
+			rightSequences++;
+		else
+			rightSequences=1;
 
 		multiplier = rightSequences / thresholdMultiplier + 1;
 
@@ -96,6 +111,16 @@ public class Beat : Cube
 		}
 
 		currentCommand = Config.Command.NULL;
+	}
+
+	bool isOutOfRange(Vector2 next)
+	{
+		float x = next.x;
+		float y = next.y;
+
+		if( x<0 || x>=Config.Logic.GridLength() || y<0 || y>=Config.Logic.GridDepth() )
+			return true;
+		return false;
 	}
 	
 	public bool Collided(Cube c)

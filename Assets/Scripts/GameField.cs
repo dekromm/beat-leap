@@ -74,8 +74,6 @@ public class GameField
 
 	public void CommandToBeat(Config.Command command, int score, bool maxPrecision)
 	{
-		// beat.Move(direction);
-
 
 		beat.PushCommand(command, score, maxPrecision);
 	}
