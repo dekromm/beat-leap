@@ -11,7 +11,7 @@ public class Config : MonoBehaviour
 
 	public static float TimeLineDelta()
 	{
-		return 1.0f; // 2 seconds length
+		return 5.0f; // 2 seconds length
 	}
 
 	public static class View
