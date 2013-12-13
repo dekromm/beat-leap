@@ -3,15 +3,15 @@ using System.Collections;
 
 public class Beat : Cube
 {
-
-	int score = 1000;
-	string message;
 	int multiplier = 1;
 	int rightSequences = 0;
 
 	Config.Command currentCommand = Config.Command.NULL;
 
-	public const int thresholdMultiplier = 4;
+	private int score;
+	private string message;
+
+	public const int thresholdMultiplier = 8;
 
 	public Rule powerup = new Rule();
 	int moveMagnitude = 1;
@@ -30,24 +30,30 @@ public class Beat : Cube
 	}
 
 	public void PushCommand(Config.Command command, int score, bool maxPrecision){
+
+		int baseMultiplier = powerup.getBaseMultiplier();
+
+		int nextScore;
 		if(command == Config.Command.HIT){
 
 			currentCommand = command;
 			ResetStat ();
-			//this.score -= score*multiplier*powerup.getBaseMultiplier();
+
+			this.score -= 50* multiplier * baseMultiplier;
+			message = Config.Messages.Async();
 
 		}else{
 			    currentCommand = command;
 				UpgradeStat();
-				int baseMultiplier = powerup.getBaseMultiplier ();
+				
 				this.score += score * multiplier * baseMultiplier;
-				if(maxPrecision)
+				if(maxPrecision){
 					message = Config.Messages.LikeAGod();
-				else
+				}else{
 					message = Config.Messages.Good();
+				}
 		}
 
-		Debug.Log(command);
 	}
 
 	#region score
@@ -72,16 +78,7 @@ public class Beat : Cube
 		multiplier = rightSequences / thresholdMultiplier + 1;
 
 	}
-
-	public string GetScore(){
-
-		return score.ToString();
-	}
-
-	public string GetMessage(){
-		
-		return message;
-	}
+	
 	#endregion
 
 	public void CommitCommand(){
@@ -99,13 +96,9 @@ public class Beat : Cube
 			case Config.Command.LEFT:{
 				Move(Config.Direction.Left()*moveMagnitude);
 			}break;
-			case Config.Command.HIT:{
-				this.score -= 50;
-				message = Config.Messages.Async();
-			}break;
 			case Config.Command.NULL:{
 				ResetStat ();		
-				this.score -= 10;
+				score -= 10;
 				message = Config.Messages.Miss();
 			}break;
 		}
@@ -122,7 +115,7 @@ public class Beat : Cube
 			return true;
 		return false;
 	}
-	
+
 	public bool Collided(Cube c)
 	{
 		if (c.logicPosition.Equals(logicPosition)) {
@@ -132,6 +125,24 @@ public class Beat : Cube
 		}
 		return false;
 	}
+
+	#region getters
+	public int getScore(){
+
+		return score;
+	}
+
+	public string getMessage(){
+
+		return message;
+	}
+
+	public int getMultiplier(){
+
+		return multiplier*powerup.getBaseMultiplier();
+	}
+	#endregion
+
 	#region beat modifiers
 
 	public void NewPowerUp(Rule rule){

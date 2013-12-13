@@ -11,12 +11,9 @@ public class GameMechanics
 	// Giusto per stare col culo nel burro
 	private Timer timer;
 	private double interval;
-
 	private const int scoreLow = 10;
 	private const int scoreHigh = 50;
-
 	GameObject accuracyCube;
-
 	TimeLine timeLine;
 
 	public GameMechanics(string src)
@@ -55,7 +52,7 @@ public class GameMechanics
 	
 	public void CheckBeat()
 	{
-		accuracyCube.gameObject.transform.position = new Vector3(-75+75*2*beatManager.GetAccuracy(),0,45);
+		accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
 		if (beatManager.HasBeatPassed()) {
 			Debug.Log("BEAT");
 			gameField.StepUpdate();
@@ -103,12 +100,17 @@ public class GameMechanics
 	private void Move(Config.Command command)
 	{
 		float accuracy = beatManager.GetAccuracy();
-		if( accuracy >=0 ){
-			if (accuracy < beatManager.deltaTime/2)
-				gameField.CommandToBeat(command, scoreHigh, true);
-			else 
-				gameField.CommandToBeat(command, scoreLow, false);
-		}else{
+		if (accuracy >= 0) {
+			if (!gameField.alreadyGetIt) {
+
+				gameField.alreadyGetIt = true; 
+
+				if (accuracy < beatManager.deltaTime / 2)
+					gameField.CommandToBeat(command, scoreHigh, true);
+				else 
+					gameField.CommandToBeat(command, scoreLow, false);
+			}
+		} else {
 			gameField.CommandToBeat(Config.Command.HIT, 0, false); // passo 0, in quanto l'argomento è irrilevante
 		}
 

@@ -11,8 +11,8 @@ public class GameField
 	private List<Cube> field;
 	private Beat beat;
 	private Rule currentRule;
-	private TextMesh score;
-	private TextMesh message;
+	public bool alreadyGetIt = false;
+
 
 	public GameField(string track)
 	{
@@ -21,14 +21,19 @@ public class GameField
 		height = Config.Logic.GridDepth();
 		field = new List<Cube>();
 
-		score = GameObject.FindGameObjectWithTag("Score").GetComponent<TextMesh>();
-		message = GameObject.FindGameObjectWithTag("Message").GetComponent<TextMesh>();
-
+		Score score = (Score) GameObject.FindGameObjectWithTag("Score").GetComponent("Score");
+		Message message = (Message) GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
+		Multiplier multiplier = (Multiplier) GameObject.FindGameObjectWithTag("Multiplier").GetComponent("Multiplier");
 
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
 		beat = (Beat)((GameObject)GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
+		beat.gameObject.name = "Beat";
 		beat.SetPosition(width / 2, height / 2);
+
+		message.setBeatReference(beat);
+		score.setBeatReference(beat);
+		multiplier.setBeatReference(beat);
 
 		try {
 			// Right to Left map
@@ -43,10 +48,7 @@ public class GameField
 	public void StepUpdate()
 	{
 		currentRule = currentRule.Step(field, RtoLmap, beat);
-
-		score.text = beat.GetScore();
-		message.text = beat.GetMessage();
-
+		alreadyGetIt = false;
 		//Controllo se i cubi sono usciti dai margini
 		List<Cube> deleteList = new List<Cube>();
 
@@ -64,6 +66,7 @@ public class GameField
 		foreach (Cube c in deleteList) {
 			field.Remove(c);
 		}
+
 	}
 
 //	public void CommandToBeat(Config.Command command)
@@ -80,7 +83,6 @@ public class GameField
 
 
 	#region private methods
-
 
 	private void CheckCompliance()
 	{
