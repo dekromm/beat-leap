@@ -10,6 +10,7 @@ public class Score : MonoBehaviour {
 	void Start () {
 	
 		score = (TextMesh) gameObject.GetComponent<TextMesh>();
+		score.text = Config.Logic.InitialScore().ToString();
 	}
 	
 	// Update is called once per frame

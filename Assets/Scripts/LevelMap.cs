@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System;
@@ -17,7 +17,7 @@ public class LevelMap
 	private const string DownCode = "DOWN";
 	private const string LeftCode = "LEFT";
 	private const string RightCode = "RIGHT";
-	private const string okChar = "_ie";
+	private const string okChar = "_eicds";
 	private string trackFileName;
 	// Prefabs
 	static Enemy enemyPrefab;
@@ -80,11 +80,29 @@ public class LevelMap
 	{
 		Cube cube = null;
 		switch (car) {
-			case 'i':
-				cube = itemPrefab.Spawn();
-				break;
+
 			case 'e':
 				cube = enemyPrefab.Spawn();
+				break;
+			case 'c':								//COMBO BOOST
+				cube = itemPrefab.Spawn();
+				Item itemC = (Item) cube;
+				itemC.rule = new ComboBoost();
+				break;
+			case 'd':								//DOUBLE MOVEMENT
+				cube = itemPrefab.Spawn();
+				Item itemD = (Item) cube;
+				itemD.rule = new DoubleMovement();
+				break;
+			case 's':								//SHIELD  - protezione contro gli ostacoli
+				cube = itemPrefab.Spawn();
+				Item itemS = (Item) cube;
+				itemS.rule = new Shield();
+				break;
+			case 'i':								//INVINCIBILITY - protezione sul beat (tempo)
+				cube = itemPrefab.Spawn();
+				Item itemI = (Item) cube;
+				itemI.rule = new Invincibility();
 				break;
 			default:
 				cube = null;

@@ -44,6 +44,11 @@ public class Config : MonoBehaviour
 		{
 			return 8;
 		}
+
+		public static int InitialScore(){
+
+			return 1000;
+		}
 	}
 
 	public static class Direction
