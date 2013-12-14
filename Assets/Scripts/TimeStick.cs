@@ -9,34 +9,38 @@ public class TimeStick : MonoBehaviour
 	public static float distanceToRun;
 	private static float scaleIncrement;
 
+	private float speed;
+
 	void Start()
 	{
-		SetUpStick();
+		//SetUpStick(distanceToRun/deltaTime);
 	}
 
-	public void SetUpStick(){
+	public void SetUpStick(float speed){
+		this.speed = speed;
 		transform.parent = parent;
-		transform.position = new Vector3(80.0f, 58.0f, 4.0f);
-		transform.localScale = new Vector3(0.00625f, 1.1f, 0.1f);
-		scaleIncrement = 4.0f;
+		transform.rotation = parent.rotation;
+		transform.localPosition = new Vector3(TimeStick.distanceToRun/2, 0, 0);
+		transform.localScale = new Vector3(1.0f, 3.5f, 0.1f);
+		scaleIncrement = 0.5f;
 	}
 
 	void Update()
 	{
 		if (TimeLine.isActive) {
-			float delta_x = distanceToRun * Time.deltaTime / deltaTime;
+			float delta_x = speed * Time.deltaTime;
 
-			transform.position = new Vector3(transform.position.x - delta_x, transform.position.y, transform.position.z);
+			transform.localPosition = new Vector3(transform.localPosition.x - delta_x, transform.localPosition.y, transform.localPosition.z);
 
-			if (Mathf.Abs(transform.position.x) < distanceToRun / 10.0f) {
-				float increasingRate = 0.5f - Mathf.Abs(transform.position.x / (distanceToRun / 10.0f));
-				float increment = scaleIncrement * Mathf.Pow(2 * increasingRate, 6);
-				transform.localScale = new Vector3(transform.localScale.x, 1.1f + increment, transform.localScale.z);
+			if (Mathf.Abs(transform.localPosition.x) < distanceToRun / 10.0f) {
+				float increasingRate = Mathf.Abs(transform.localPosition.x / distanceToRun/10.0f);
+				float increment = scaleIncrement * Mathf.Pow(increasingRate-1, 6);
+				transform.localScale = new Vector3(transform.localScale.x, 3.5f + increment, transform.localScale.z);
 			} else {
-				transform.localScale = new Vector3(0.00625f, 1.1f, 0.1f);
+				transform.localScale = new Vector3(1.0f, 3.5f, 0.1f);
 			}
 
-			if (transform.position.x < -distanceToRun / 2) {
+			if (transform.localPosition.x < -distanceToRun / 2.0f) {
 				this.Recycle();
 			}
 		}

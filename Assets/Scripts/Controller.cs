@@ -20,7 +20,8 @@ public class Controller : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		gameMechanics = new GameMechanics("zarro");
+		string levelName = Game.Current().Level();
+		gameMechanics = new GameMechanics(levelName);
 
 	}
         

@@ -23,11 +23,14 @@ public class TimeLine{
 	}
 
 	public void FireSticks(float time){
-		while(beats[position] < time+Config.TimeLineDelta()/2){
+		float stickSpeed;
+		while(beats[position] < time+Config.TimeLineDelta()/2.0f){
 			TimeStick stick = timeStickPrefab.Spawn();
-			stick.SetUpStick();
-			// qui magari sarebbe intelligente posizionare lo stick per maggiore precisione
-			position++;
+			stickSpeed = TimeStick.distanceToRun/(2.0f*Mathf.Abs(beats[position] - time));
+			stick.SetUpStick(stickSpeed);
+			if(position < beats.Count -1){
+				position++;
+			}
 		}
 	}
 }

@@ -1,0 +1,27 @@
+<html>
+    <head>
+    <title>Timings Marker</title>
+    </head>
+</html>
+<body onkeydown="placeTimestamp()">
+    <h1>Welcome to the timings marker!</h1>
+    <h2>How to begin</h2>
+    <ul>
+        <li>Select the track (still not implemented)</li>
+        <li><a href="javascript:asd.play()">Play the music</a></li>
+        <li>Click anywhere to add a timestamp to the list</li>
+    </ul>
+    <h2>Music</h2>
+        <audio controls id="asd" >
+            <source src="zarro.ogg" type="audio/ogg">
+        </audio>
+    <h2>Timestamps</h2>
+    <pre id="timestamps"></pre>
+</body>
+<script>
+    var asd = document.getElementById("asd");
+    var list = document.getElementById("timestamps");
+    function placeTimestamp(){
+        list.textContent += "\n" + asd.played.end(0);
+    }
+</script>
