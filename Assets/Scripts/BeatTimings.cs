@@ -18,6 +18,7 @@ public class BeatTimings
 	
 	private const string baseUrl = "/Resources/Songs/";
 	private const string beatUrl = "_Beats.txt";
+
 	private string extension = ".wav"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
 
 	private int index;
@@ -28,6 +29,10 @@ public class BeatTimings
 	{
 
 		index = 0;
+
+#if UNITY_IPHONE
+		extension = ".mp3";
+#endif
 
 		SetTimestamps(src);
 		deltaTime = 0.12f;
