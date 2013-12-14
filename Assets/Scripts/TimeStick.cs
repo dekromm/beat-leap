@@ -13,7 +13,7 @@ public class TimeStick : MonoBehaviour
 
 	void Start()
 	{
-		SetUpStick(distanceToRun/deltaTime);
+		//SetUpStick(distanceToRun/deltaTime);
 	}
 
 	public void SetUpStick(float speed){
