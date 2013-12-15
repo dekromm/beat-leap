@@ -54,7 +54,7 @@ public class GameMechanics
 	{
 		accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
 		if (beatManager.HasBeatPassed()) {
-			Debug.Log("BEAT");
+			//Debug.Log("BEAT");
 			gameField.StepUpdate();
 		}
 		timeLine.FireSticks(beatManager.GetTime());

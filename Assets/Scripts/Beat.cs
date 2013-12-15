@@ -13,7 +13,7 @@ public class Beat : Cube
 
 	public const int thresholdMultiplier = 8;
 
-	public Rule powerup = new Rule();
+	public Rule powerup = new DefaultRule();
 	int moveMagnitude = 1;
 	int damage;
 

@@ -1,29 +1,15 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System;
+using UnityEngine;
 
-public class Rule {
+public class DefaultRule: Rule {
 
-	#region Beat aimed Methods
-
-	public int getDamage(){
-		return 1;
-	}
-
-	public int getMagnitude(){
-		return 1;
-	}
-
-	public int getBaseMultiplier(){
-
-		return 1;
-	}
-	#endregion
 
 	#region GameField aimed Methods
 
-	public Rule Step(List<Cube> field, LevelMap map, Beat beat){
+	public override Rule Step(List<Cube> field, LevelMap map, Beat beat){
+		Rule nextRule = this;
 
 		beat.CommitCommand();
 		//	beat.PauseInput();
@@ -37,15 +23,16 @@ public class Rule {
 					// beat.score - 100 ???
 				} else if (IsItem(c)) {
 					// ((Item) c ).rule.immediate()
-					beat.NewPowerUp( ((Item) c ).rule);
-					Debug.Log("COLLISIONE POWERUP!");
+					beat.NewPowerUp(nextRule);
+					nextRule = ( (Item) c ).rule;
+					Debug.Log("Preso Powerup!!");
 				} 
 			}
 		}
 		
 		AddRows(map, field);
-		//		beat.UnPauseInput();
-		return this;
+		//beat.UnPauseInput();
+		return nextRule;
 	}
 
 	public void immediate(){
@@ -54,12 +41,12 @@ public class Rule {
 	
 	private bool IsItem(Cube c){
 		//controlla se il cubo passato è un powerup
-		return false;
+		return  c is Item;
 	}
 	
 	private bool IsEnemy(Cube c){
 		//controlla se il cubo passato è un powerup
-		return false;
+		return c is Enemy;
 	}
 
 	protected void AddRows(LevelMap map, List<Cube> field)

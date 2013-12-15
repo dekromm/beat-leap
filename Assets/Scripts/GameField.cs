@@ -16,7 +16,7 @@ public class GameField
 
 	public GameField(string track)
 	{
-		currentRule = new Rule();
+		currentRule = new DefaultRule();
 		width = Config.Logic.GridLength();
 		height = Config.Logic.GridDepth();
 		field = new List<Cube>();
