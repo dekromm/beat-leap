@@ -112,13 +112,13 @@ public class GameField
 	{
 		// Debug.LogError("x: "+position.x+" | y: "+position.y);
 
-		if (position.x == this.width)
+		if (position.x >= this.width)
 			return true;
-		if (position.y == this.height)
+		if (position.y >= this.height)
 			return true;
-		if (position.x == -1)
+		if (position.x <= -1)
 			return true;
-		if (position.y == -1)
+		if (position.y <= -1)
 			return true;
 
 		return false;
