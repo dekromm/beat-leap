@@ -33,6 +33,7 @@ public class BeatTimings
 #if UNITY_IPHONE
 		extension = ".mp3";
 #endif
+		Debug.Log(extension);
 
 		SetTimestamps(src);
 		deltaTime = 0.12f;

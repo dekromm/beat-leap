@@ -17,13 +17,22 @@ public class Beat : Cube
 	int moveMagnitude = 1;
 	int damage;
 
+	private Emitter emitter;
+
+	void Start(){
+		emitter = GameObject.Find("BeatEmitter").GetComponent("Emitter") as Emitter;
+		emitter.FollowBeat(gameObject.transform.position);
+	}
+
 	public Vector2 Move(Vector2 direction)
 	{
 		Vector2 next = logicPosition + direction;
 
 		if(!isOutOfRange(next)){
 			SetDirection(direction.x, direction.y);
-			return Move();
+			next = Move();
+			emitter.FollowBeat(gameObject.transform.position);
+			return next;
 		}
 
 		return logicPosition;
@@ -42,6 +51,7 @@ public class Beat : Cube
 			this.score -= 50* multiplier * baseMultiplier;
 			message = Config.Messages.Async();
 
+			emitter.PlayBad();
 		}else{
 			    currentCommand = command;
 				UpgradeStat();
@@ -49,8 +59,10 @@ public class Beat : Cube
 				this.score += score * multiplier * baseMultiplier;
 				if(maxPrecision){
 					message = Config.Messages.LikeAGod();
+					emitter.PlayGod();
 				}else{
 					message = Config.Messages.Good();
+					emitter.PlayGood();
 				}
 		}
 
@@ -100,6 +112,7 @@ public class Beat : Cube
 				ResetStat ();		
 				score -= 10;
 				message = Config.Messages.Miss();
+				emitter.PlayBad();
 			}break;
 		}
 
