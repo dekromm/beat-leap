@@ -39,7 +39,7 @@ public class Config : MonoBehaviour
 		{
 			return 16;
 		}
-
+		
 		public static int GridDepth()
 		{
 			return 8;
@@ -49,6 +49,12 @@ public class Config : MonoBehaviour
 
 			return 1000;
 		}
+
+		public static int Life()
+		{
+			return 8;
+		}
+
 	}
 
 	public static class Direction

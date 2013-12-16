@@ -19,6 +19,7 @@ public class DefaultRule: Rule {
 			if (beat.Collided(c)) {
 				if(IsEnemy(c)){
 					// beat.score - 100 ???
+					beat.Damage();
 				} else if (IsItem(c)) {
 					// ((Item) c ).rule.immediate()
 					nextRule = ( (Item) c ).rule;	

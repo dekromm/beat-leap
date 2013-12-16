@@ -13,9 +13,12 @@ public class Beat : Cube
 	int moveMagnitude = 1;
 	int damage;
 	private Emitter emitter;
+	private int life;
 
 	void Start()
 	{
+		life = 8;
+
 		emitter = GameObject.Find("BeatEmitter").GetComponent("Emitter") as Emitter;
 		emitter.FollowBeat(gameObject.transform.position);
 	}
@@ -170,6 +173,12 @@ public class Beat : Cube
 		return score;
 	}
 
+	public int getLife()
+	{
+		
+		return life;
+	}
+
 	public string getMessage()
 	{
 
@@ -185,9 +194,13 @@ public class Beat : Cube
 
 	#region beat modifiers
 	
-	public void SetDamage(int d)
+	public void Damage()
 	{
-		damage = d;
+		if(life>1)
+			life--;
+		else{
+			//call GAMEOVER
+		}
 	}
 	
 	public void SetMagnitude(int m)

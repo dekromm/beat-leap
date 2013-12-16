@@ -20,19 +20,13 @@ public class GameField
 		height = Config.Logic.GridDepth();
 		field = new List<Cube>();
 
-		Score score = (Score)GameObject.FindGameObjectWithTag("Score").GetComponent("Score");
-		Message message = (Message)GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
-		Multiplier multiplier = (Multiplier)GameObject.FindGameObjectWithTag("Multiplier").GetComponent("Multiplier");
-
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
 		beat = (Beat)((GameObject)GameObject.Instantiate(beatPrefab)).GetComponent("Beat");
 		beat.gameObject.name = "Beat";
 		beat.SetPosition(width / 2, height / 2);
 
-		message.setBeatReference(beat);
-		score.setBeatReference(beat);
-		multiplier.setBeatReference(beat);
+		setLabelReferences();
 
 		try {
 			// Right to Left map
@@ -131,6 +125,19 @@ public class GameField
 //			StepUpdate();
 //		}
 
+	}
+
+	void setLabelReferences()
+	{
+		Score score = (Score)GameObject.FindGameObjectWithTag("Score").GetComponent("Score");
+		Message message = (Message)GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
+		Multiplier multiplier = (Multiplier)GameObject.FindGameObjectWithTag("Multiplier").GetComponent("Multiplier");
+		Life life = (Life)GameObject.Find("Life").GetComponent("Life");
+
+		message.setBeatReference(beat);
+		score.setBeatReference(beat);
+		multiplier.setBeatReference(beat);
+		life.setBeatReference(beat);
 	}
 	#endregion
 
