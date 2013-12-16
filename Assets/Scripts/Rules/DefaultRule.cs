@@ -18,14 +18,10 @@ public class DefaultRule: Rule {
 			
 			if (beat.Collided(c)) {
 				if(IsEnemy(c)){
-					// TO-DO collisione!
-					Debug.Log("COLLISIONE BOOM!");
 					// beat.score - 100 ???
 				} else if (IsItem(c)) {
 					// ((Item) c ).rule.immediate()
-					beat.NewPowerUp(nextRule);
-					nextRule = ( (Item) c ).rule;
-					Debug.Log("Preso Powerup!!");
+					nextRule = ( (Item) c ).rule;	
 				} 
 			}
 		}

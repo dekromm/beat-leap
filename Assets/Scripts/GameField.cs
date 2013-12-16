@@ -13,7 +13,6 @@ public class GameField
 	private Rule currentRule;
 	public bool alreadyGetIt = false;
 
-
 	public GameField(string track)
 	{
 		currentRule = new DefaultRule();
@@ -21,9 +20,9 @@ public class GameField
 		height = Config.Logic.GridDepth();
 		field = new List<Cube>();
 
-		Score score = (Score) GameObject.FindGameObjectWithTag("Score").GetComponent("Score");
-		Message message = (Message) GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
-		Multiplier multiplier = (Multiplier) GameObject.FindGameObjectWithTag("Multiplier").GetComponent("Multiplier");
+		Score score = (Score)GameObject.FindGameObjectWithTag("Score").GetComponent("Score");
+		Message message = (Message)GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
+		Multiplier multiplier = (Multiplier)GameObject.FindGameObjectWithTag("Multiplier").GetComponent("Multiplier");
 
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 		GameObject beatPrefab = config.beatPrefab;
@@ -47,6 +46,7 @@ public class GameField
 	
 	public void StepUpdate()
 	{
+		Debug.Log(currentRule.GetType().ToString());
 		currentRule = currentRule.Step(field, RtoLmap, beat);
 		alreadyGetIt = false;
 		//Controllo se i cubi sono usciti dai margini

@@ -5,21 +5,17 @@ public class Beat : Cube
 {
 	int multiplier = 1;
 	int rightSequences = 0;
-
-	Config.Command currentCommand = Config.Command.NULL;
-
+	public const int thresholdMultiplier = 8;
 	private int score;
 	private string message;
-
-	public const int thresholdMultiplier = 8;
-
-	public Rule powerup = new DefaultRule();
+	private int baseMultiplier = 1;
+	Config.Command currentCommand = Config.Command.NULL;
 	int moveMagnitude = 1;
 	int damage;
-
 	private Emitter emitter;
 
-	void Start(){
+	void Start()
+	{
 		emitter = GameObject.Find("BeatEmitter").GetComponent("Emitter") as Emitter;
 		emitter.FollowBeat(gameObject.transform.position);
 	}
@@ -28,7 +24,7 @@ public class Beat : Cube
 	{
 		Vector2 next = logicPosition + direction;
 
-		if(!isOutOfRange(next)){
+		if (!isOutOfRange(next)) {
 			SetDirection(direction.x, direction.y);
 			next = Move();
 			emitter.FollowBeat(gameObject.transform.position);
@@ -38,54 +34,63 @@ public class Beat : Cube
 		return logicPosition;
 	}
 
-	public void PushCommand(Config.Command command, int score, bool maxPrecision){
+	public void PushCommand(Config.Command command, int score, bool maxPrecision)
+	{
 
-		int baseMultiplier = powerup.getBaseMultiplier();
 
 		int nextScore;
-		if(command == Config.Command.HIT){
-
-			currentCommand = command;
-			ResetStat ();
-
-			this.score -= 50* multiplier * baseMultiplier;
+		if (command == Config.Command.MISS) {
+			
+			ResetStat();
+			
+			this.score -= 50 * multiplier * baseMultiplier;
 			message = Config.Messages.Async();
-
+			
 			emitter.PlayBad();
-		}else{
-			    currentCommand = command;
-				UpgradeStat();
+		} else if (command == Config.Command.DAMAGE) {
+			
+			ResetStat();
+			
+			this.score -= 300 * multiplier * baseMultiplier;
+			message = Config.Messages.Bad();
+			
+			emitter.PlayBad();
+		} else {
+			currentCommand = command;
+			UpgradeStat();
 				
-				this.score += score * multiplier * baseMultiplier;
-				if(maxPrecision){
-					message = Config.Messages.LikeAGod();
-					emitter.PlayGod();
-				}else{
-					message = Config.Messages.Good();
-					emitter.PlayGood();
-				}
+			this.score += score * multiplier * baseMultiplier;
+			if (maxPrecision) {
+				message = Config.Messages.LikeAGod();
+				emitter.PlayGod();
+			} else {
+				message = Config.Messages.Good();
+				emitter.PlayGood();
+			}
 		}
 
 	}
 
 	#region score
-	void ResetStat (){
+	void ResetStat()
+	{
 
 		multiplier = 1;
 
-		if(rightSequences>1)
+		if (rightSequences > 1)
 			rightSequences = 0;
 		else
 			rightSequences--;
 
 	}
 
-	void UpgradeStat (){
+	void UpgradeStat()
+	{
 
-		if(rightSequences>=0)
+		if (rightSequences >= 0)
 			rightSequences++;
 		else
-			rightSequences=1;
+			rightSequences = 1;
 
 		multiplier = rightSequences / thresholdMultiplier + 1;
 
@@ -93,27 +98,46 @@ public class Beat : Cube
 	
 	#endregion
 
-	public void CommitCommand(){
+	public void CommitCommand()
+	{
 
-		switch(currentCommand){
-			case Config.Command.DOWN:{
-				Move(Config.Direction.Down()*moveMagnitude);
-			}break;
-			case Config.Command.UP:{
-				Move(Config.Direction.Up()*moveMagnitude);
-			}break;
-			case Config.Command.RIGHT:{
-				Move(Config.Direction.Right()*moveMagnitude);
-			}break;
-			case Config.Command.LEFT:{
-				Move(Config.Direction.Left()*moveMagnitude);
-			}break;
-			case Config.Command.NULL:{
-				ResetStat ();		
-				score -= 10;
-				message = Config.Messages.Miss();
-				emitter.PlayBad();
-			}break;
+		switch (currentCommand) {
+			case Config.Command.DOWN:
+				{
+					for (int i=0; i< moveMagnitude; i++) {
+						Move(Config.Direction.Down());
+					}
+				}
+				break;
+			case Config.Command.UP:
+				{
+					for (int i=0; i< moveMagnitude; i++) {
+						Move(Config.Direction.Up());
+					}
+				}
+				break;
+			case Config.Command.RIGHT:
+				{
+					for (int i=0; i< moveMagnitude; i++) {
+						Move(Config.Direction.Right());
+					}
+				}
+				break;
+			case Config.Command.LEFT:
+				{
+					for (int i=0; i< moveMagnitude; i++) {
+						Move(Config.Direction.Left());
+					}
+				}
+				break;
+			case Config.Command.NULL:
+				{
+					ResetStat();		
+					score -= 10;
+					message = Config.Messages.Miss();
+					emitter.PlayBad();
+				}
+				break;
 		}
 
 		currentCommand = Config.Command.NULL;
@@ -124,7 +148,7 @@ public class Beat : Cube
 		float x = next.x;
 		float y = next.y;
 
-		if( x<0 || x>=Config.Logic.GridLength() || y<0 || y>=Config.Logic.GridDepth() )
+		if (x < 0 || x >= Config.Logic.GridLength() || y < 0 || y >= Config.Logic.GridDepth())
 			return true;
 		return false;
 	}
@@ -140,35 +164,40 @@ public class Beat : Cube
 	}
 
 	#region getters
-	public int getScore(){
+	public int getScore()
+	{
 
 		return score;
 	}
 
-	public string getMessage(){
+	public string getMessage()
+	{
 
 		return message;
 	}
 
-	public int getMultiplier(){
+	public int getMultiplier()
+	{
 
-		return multiplier*powerup.getBaseMultiplier();
+		return multiplier * baseMultiplier;
 	}
 	#endregion
 
 	#region beat modifiers
-
-	public void NewPowerUp(Rule rule){
-
-		powerup = rule;
-	}
 	
-	public void SetDamage(int d){
+	public void SetDamage(int d)
+	{
 		damage = d;
 	}
 	
-	public void SetMagnitude(int m){
+	public void SetMagnitude(int m)
+	{
 		moveMagnitude = m;
+	}
+	
+	public void SetBaseMultiplier(int m)
+	{
+		baseMultiplier = m;
 	}
 	#endregion
 }

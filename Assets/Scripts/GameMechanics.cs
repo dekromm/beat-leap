@@ -111,7 +111,7 @@ public class GameMechanics
 					gameField.CommandToBeat(command, scoreLow, false);
 			}
 		} else {
-			gameField.CommandToBeat(Config.Command.HIT, 0, false); // passo 0, in quanto l'argomento è irrilevante
+			gameField.CommandToBeat(Config.Command.MISS, 0, false); // passo 0, in quanto l'argomento è irrilevante
 		}
 
 	}

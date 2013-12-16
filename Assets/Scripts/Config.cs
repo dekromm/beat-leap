@@ -81,10 +81,15 @@ public class Config : MonoBehaviour
 		{
 			return "MISS";
 		}
-
+		
 		public static string Async()
 		{
 			return "ASYNC";
+		}
+		
+		public static string Bad()
+		{
+			return "NOT GOOD AT ALL";
 		}
 
 		public static string Good()
@@ -105,7 +110,8 @@ public class Config : MonoBehaviour
 		DOWN,
 		LEFT,
 		RIGHT,
-		HIT,
+		DAMAGE,
+		MISS,
 		NULL}
 	;
 }
