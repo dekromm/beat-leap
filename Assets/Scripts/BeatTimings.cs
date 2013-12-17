@@ -76,7 +76,8 @@ public class BeatTimings
 
 		index++;
 		if(index>=timeStamps.Count ){
-
+			Controller controller = GameObject.Find("Board").GetComponent<Controller>();
+			controller.Stop();
 			return false;
 		}
 		else{

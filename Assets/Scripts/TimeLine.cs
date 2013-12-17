@@ -8,6 +8,7 @@ public class TimeLine{
 	public static bool isActive;
 	private int position;
 	private TimeStick timeStickPrefab;
+	private bool stop;
 
 	public TimeLine(List<float> timings) {
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
@@ -20,16 +21,20 @@ public class TimeLine{
 
 		timeStickPrefab = config.timeStickPrefab; 
 		timeStickPrefab.CreatePool();
+		stop = false;
 	}
 
 	public void FireSticks(float time){
 		float stickSpeed;
-		while(beats[position] < time+Config.TimeLineDelta()/2.0f){
-			TimeStick stick = timeStickPrefab.Spawn();
-			stickSpeed = TimeStick.distanceToRun/(2.0f*Mathf.Abs(beats[position] - time));
-			stick.SetUpStick(stickSpeed);
-			if(position < beats.Count -1){
-				position++;
+		if(!stop){
+			while(beats[position] < time+Config.TimeLineDelta()/2.0f){
+				TimeStick stick = timeStickPrefab.Spawn();
+				stickSpeed = TimeStick.distanceToRun/(2.0f*Mathf.Abs(beats[position] - time));
+				stick.SetUpStick(stickSpeed);
+				if(position < beats.Count -1){
+					position++;
+					stop = true;
+				}
 			}
 		}
 	}

@@ -16,13 +16,14 @@ public class Controller : MonoBehaviour
 //	const KeyCode LEFT = KeyCode.LeftArrow;
 //	const KeyCode PAUSE = KeyCode.Space;
 
-	
+	bool gameOver;
+
 	// Use this for initialization
 	void Start()
 	{
 		string levelName = Game.Current().Level();
 		gameMechanics = new GameMechanics(levelName);
-
+		gameOver = false;
 	}
         
 	// Update is called once per frame
@@ -52,7 +53,7 @@ public class Controller : MonoBehaviour
                                 
 				gameMechanics.MoveRight();
                                         
-			} else if (Event.current.keyCode.CompareTo(PAUSE) == 0) {
+			} else if (Event.current.keyCode.CompareTo(PAUSE) == 0 && !gameOver) {
                 
 				SwitchPauseResume();
                                         
@@ -71,6 +72,13 @@ public class Controller : MonoBehaviour
 		
 		gameMechanics.SwitchPauseResume();
 
+	}
+
+	public void Stop(){
+		gameOver = true;
+		this.SwitchPauseResume();
+
+	
 	}
 
 	private void startTimer()
