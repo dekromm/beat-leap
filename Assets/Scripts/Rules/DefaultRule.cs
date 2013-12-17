@@ -10,7 +10,7 @@ public class DefaultRule: Rule {
 
 	public override Rule Step(List<Cube> field, LevelMap map, Beat beat){
 		Rule nextRule = this;
-
+		Cube toDestroy = null;
 		beat.CommitCommand();
 		//	beat.PauseInput();
 		foreach (Cube c in field) {
@@ -21,11 +21,16 @@ public class DefaultRule: Rule {
 					// beat.score - 100 ???
 				} else if (IsItem(c)) {
 					// ((Item) c ).rule.immediate()
-					nextRule = ( (Item) c ).rule;	
+					nextRule = ( (Item) c ).rule;
+					toDestroy = c;
+					c.Recycle();
 				} 
 			}
 		}
 		
+		if (toDestroy != null) {
+			field.Remove(toDestroy);
+		}
 		AddRows(map, field);
 		//beat.UnPauseInput();
 		return nextRule;

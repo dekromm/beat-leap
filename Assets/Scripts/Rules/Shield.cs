@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Shield : Rule
 {
 
-	private int duration;
+	private int duration=3;
 	private Rule nextRule;
 	
 	public override Rule Step(List<Cube> field, LevelMap map, Beat beat)
@@ -18,6 +18,7 @@ public class Shield : Rule
 		}
 		
 		beat.CommitCommand();
+		Cube toDestroy = null;;
 		//	beat.PauseInput();
 		foreach (Cube c in field) {
 			c.Move();
@@ -27,8 +28,13 @@ public class Shield : Rule
 					duration--;
 				} else if (IsItem(c)) {
 					nextRule = ((Item)c).rule;
+					c.Recycle();
+					toDestroy = c;
 				} 
 			}
+		}
+		if (toDestroy != null) {
+			field.Remove(toDestroy);
 		}
 		
 		AddRows(map, field);

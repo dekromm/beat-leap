@@ -28,21 +28,21 @@ public class DoubleMovement : Rule
 		
 		beat.CommitCommand();
 		//	beat.PauseInput();
-		Cube enemyToDestroy = null;
+		Cube toDestroy = null;
 		foreach (Cube c in field) {
 			c.Move();
 			
 			if (beat.Collided(c)) {
 				if (IsEnemy(c)) {
-					c.Recycle();
-					enemyToDestroy = c;
 				} else if (IsItem(c)) {
 					nextRule = ((Item)c).rule;
+					toDestroy = c;
+					c.Recycle();
 				} 
 			}
 		}
-		if (enemyToDestroy != null) {
-			field.Remove(enemyToDestroy);
+		if (toDestroy != null) {
+			field.Remove(toDestroy);
 		}
 		
 		AddRows(map, field);
