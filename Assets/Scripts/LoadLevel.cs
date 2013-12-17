@@ -13,8 +13,12 @@ public class LoadLevel : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-		Game.Current().SetLevel(gameObject.name);
-		Application.LoadLevel(level);
+		if(gameObject.name == "Menu"){
+			Application.LoadLevel("Title");
+		}else{
+			Game.Current().SetLevel(gameObject.name);
+			Application.LoadLevel(level);
+		}
 	}
 
 }
