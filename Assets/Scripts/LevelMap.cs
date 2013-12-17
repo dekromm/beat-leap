@@ -89,6 +89,9 @@ public class LevelMap
 				Item itemC = (Item) cube;
 				itemC.LoadRule( new ComboBoost());
 				break;
+			case 'l':
+				cube = enemyPrefab.Spawn();
+				break;
 			case 'd':								//DOUBLE MOVEMENT
 				cube = itemPrefab.Spawn();
 				Item itemD = (Item) cube;

@@ -28,16 +28,11 @@ public class GameField
 		beat.gameObject.name = "Beat";
 		beat.SetPosition(width / 2, height / 2);
 
-<<<<<<< HEAD
+
 		setLabelReferences();
-=======
+
 		powerUp = GameObject.Find("PowerUp").GetComponent("Item") as Item;
 		powerUp.rule = new DefaultRule();
-
-		message.setBeatReference(beat);
-		score.setBeatReference(beat);
-		multiplier.setBeatReference(beat);
->>>>>>> origin/master
 
 		try {
 			// Right to Left map
@@ -139,6 +134,11 @@ public class GameField
 //			StepUpdate();
 //		}
 
+	}
+
+	public bool isBeatAlive()
+	{
+		return beat.isLiving();
 	}
 
 	void setLabelReferences()

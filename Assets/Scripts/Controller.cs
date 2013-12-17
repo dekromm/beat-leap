@@ -76,11 +76,11 @@ public class Controller : MonoBehaviour
 	private void startTimer()
 	{
 
-		InvokeRepeating("CheckBeat", 0, 0.0002f);
+		InvokeRepeating("CheckBeat", 0, 0.001f);
 
 	}
 
-	private void stopTimer()
+	public void stopTimer()
 	{
 
 		CancelInvoke("CheckBeat");

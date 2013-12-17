@@ -14,6 +14,7 @@ public class Beat : Cube
 	int damage;
 	private Emitter emitter;
 	private int life;
+	private bool isAlive = true;
 
 	void Start()
 	{
@@ -167,6 +168,11 @@ public class Beat : Cube
 	}
 
 	#region getters
+	public bool isLiving(){
+
+		return isAlive;
+	}
+
 	public int getScore()
 	{
 
@@ -199,7 +205,7 @@ public class Beat : Cube
 		if(life>1)
 			life--;
 		else{
-			//call GAMEOVER
+			isAlive = false;
 		}
 	}
 	
