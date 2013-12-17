@@ -71,11 +71,18 @@ public class BeatTimings
 	}
 
 	//da chiamare quando il deltaTime rispetto al beat corrente è passato
-	private void Step()
+	private bool Step()
 	{
 
 		index++;
-		timeToUpdate = timeStamps [index] - deltaTime - audioSrc.time;  // set how much time for the next invocation of this metod
+		if(index>=timeStamps.Count ){
+
+			return false;
+		}
+		else{
+			timeToUpdate = timeStamps [index] - deltaTime - audioSrc.time;  // set how much time for the next invocation of this metod
+			return true;
+		}
 	
 	}
 
@@ -84,8 +91,9 @@ public class BeatTimings
 	{
 		if (audioSrc.time >= timeStamps [index] + deltaTime) {
 
-			Step();
-			return true;
+			if(Step()){
+				return true;}
+			else {return false;}
 		}
 
 		return false;
@@ -146,9 +154,13 @@ public class BeatTimings
 	public List<float> GetTimings(){
 		return timeStamps; // sbagliato dovrei restituire una copia
 	}
-
+	
 	public float GetTime(){
 		return audioSrc.time;
+	}
+
+	public bool IsOver(){
+		return index >= timeStamps.Count;
 	}
 
 
