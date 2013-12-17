@@ -87,22 +87,22 @@ public class LevelMap
 			case 'c':								//COMBO BOOST
 				cube = itemPrefab.Spawn();
 				Item itemC = (Item) cube;
-				itemC.rule = new ComboBoost();
+				itemC.LoadRule( new ComboBoost());
 				break;
 			case 'd':								//DOUBLE MOVEMENT
 				cube = itemPrefab.Spawn();
 				Item itemD = (Item) cube;
-				itemD.rule = new DoubleMovement();
+				itemD.LoadRule( new DoubleMovement());
 				break;
 			case 's':								//SHIELD  - protezione contro gli ostacoli
 				cube = itemPrefab.Spawn();
 				Item itemS = (Item) cube;
-				itemS.rule = new Shield();
+				itemS.LoadRule( new Shield());
 				break;
 			case 'i':								//INVINCIBILITY - protezione sul beat (tempo)
 				cube = itemPrefab.Spawn();
 				Item itemI = (Item) cube;
-				itemI.rule = new Invincibility();
+				itemI.LoadRule( new Invincibility());
 				break;
 			default:
 				cube = null;

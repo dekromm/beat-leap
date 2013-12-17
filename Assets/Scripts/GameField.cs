@@ -13,6 +13,8 @@ public class GameField
 	private Rule currentRule;
 	public bool alreadyGetIt = false;
 
+	public Item powerUp;
+
 	public GameField(string track)
 	{
 		currentRule = new DefaultRule();
@@ -30,6 +32,9 @@ public class GameField
 		beat.gameObject.name = "Beat";
 		beat.SetPosition(width / 2, height / 2);
 
+		powerUp = GameObject.Find("PowerUp").GetComponent("Item") as Item;
+		powerUp.rule = new DefaultRule();
+
 		message.setBeatReference(beat);
 		score.setBeatReference(beat);
 		multiplier.setBeatReference(beat);
@@ -42,12 +47,15 @@ public class GameField
 			throw;
 		}
 		InitBoard();
+
+		Item.config = config;
 	}
 	
 	public void StepUpdate()
 	{
 		Debug.Log(currentRule.GetType().ToString());
 		currentRule = currentRule.Step(field, RtoLmap, beat);
+		powerUp.LoadRule(currentRule);
 		alreadyGetIt = false;
 		//Controllo se i cubi sono usciti dai margini
 		List<Cube> deleteList = new List<Cube>();
