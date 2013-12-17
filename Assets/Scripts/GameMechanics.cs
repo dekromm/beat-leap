@@ -15,6 +15,9 @@ public class GameMechanics
 	private const int scoreHigh = 50;
 	GameObject accuracyCube;
 	TimeLine timeLine;
+	
+	private GameObject mainCamera;
+	private TextMesh state;
 
 	public GameMechanics(string src)
 	{
@@ -24,6 +27,9 @@ public class GameMechanics
 		beatManager = new BeatTimings(src);
 		timeLine = new TimeLine(beatManager.GetTimings());
 		TimeLine.isActive = false;
+		
+		mainCamera = GameObject.Find("Main Camera");
+		state = (TextMesh) GameObject.Find("State").GetComponent<TextMesh>();
 
 	}
 
@@ -52,10 +58,16 @@ public class GameMechanics
 	
 	public void CheckBeat()
 	{
-		accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
+		//accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
 		if (beatManager.HasBeatPassed()) {
 			//Debug.Log("BEAT");
-			gameField.StepUpdate();
+			if(!beatManager.IsOver()){
+				
+				gameField.StepUpdate();
+			}
+			else{
+				GameOver();
+			}
 		}
 		timeLine.FireSticks(beatManager.GetTime());
 	}
@@ -87,12 +99,12 @@ public class GameMechanics
 		isGamePlaying = beatManager.SwitchAudioPlayStop();
 		TimeLine.isActive = isGamePlaying;
 
-		if (isGamePlaying) {
-
-			Debug.Log("PAUSE");
+		if (!isGamePlaying) {
+			SetState("Paused");
+			WatchScoreboard();
 		} else {
-
-			Debug.Log("RESUME");
+			SetState("Playing");
+			WatchGame();
 		}
 	}
 	#endregion
@@ -114,6 +126,23 @@ public class GameMechanics
 			gameField.CommandToBeat(Config.Command.MISS, 0, false); // passo 0, in quanto l'argomento è irrilevante
 		}
 
+	}
+
+	private void GameOver(){
+		SetState("Game Over");
+		WatchScoreboard();
+	}
+
+	private void SetState(string state){
+		this.state.text = state;
+	}
+
+	private void WatchScoreboard(){
+		mainCamera.transform.localEulerAngles = new Vector3(-3.0f,0,0);
+	}
+
+	private void WatchGame(){
+		mainCamera.transform.localEulerAngles = new Vector3(55.0f,0,0);
 	}
 
 }

@@ -9,6 +9,12 @@ public class Config : MonoBehaviour
 	public GameObject timeLine;
 	public TimeStick timeStickPrefab;
 
+	public Material combo;
+	public Material empty;
+	public Material invincibility;
+	public Material shield;
+	public Material doubleJump;
+
 	public static float TimeLineDelta()
 	{
 		return 7.0f; // 2 seconds length
