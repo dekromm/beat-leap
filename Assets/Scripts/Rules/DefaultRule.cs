@@ -35,45 +35,7 @@ public class DefaultRule: Rule {
 		//beat.UnPauseInput();
 		return nextRule;
 	}
-
-	public void immediate(){
-		// metodo chiamato alla collisione col powerup
-	}
-	
-	private bool IsItem(Cube c){
-		//controlla se il cubo passato è un powerup
-		return  c is Item;
-	}
-	
-	private bool IsEnemy(Cube c){
-		//controlla se il cubo passato è un powerup
-		return c is Enemy;
-	}
-
-	protected void AddRows(LevelMap map, List<Cube> field)
-	{
-		List<Cube> tmpLine;
-		Cube cube;
 		
-		try{
-			tmpLine = map.GetNewLine();
-			
-			int x = Config.Logic.GridLength();
-			int y;
-			for (y=0; y< tmpLine.Count; y++) {
-				cube = tmpLine [y];
-				if (cube != null) {
-					cube.SetPosition(x, y);
-					cube.gameObject.SetActive(false);
-					field.Add(cube);
-					
-				}
-			}
-		}catch(Exception){
-		}
-		
-	}
-
 #endregion
 
 }

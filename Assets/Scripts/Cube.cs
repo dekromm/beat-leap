@@ -17,8 +17,11 @@ public class Cube : MonoBehaviour
 
 	public Vector2 Move(Vector2 direction)
 	{
-		SetDirection(direction.x, direction.y);
-		return Move();
+		logicPosition += direction;
+		UpdatePosition();
+		return new Vector2(logicPosition.x, logicPosition.y);
+		/*SetDirection(direction.x, direction.y);
+		return Move();*/
 	}
 	
 	public void SetPosition(float x, float y)

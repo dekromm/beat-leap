@@ -65,7 +65,7 @@ public class GameMechanics
 		}
 
 		if(beatManager.IsOver())
-			Application.LoadLevel("GameOver");
+			GameOver();
 
 		timeLine.FireSticks(beatManager.GetTime());
 	}
