@@ -14,8 +14,7 @@ public class BeatTimings
 	private string songName;   //nome della canzone da eseguire (senza estensione)
 
 	public float deltaTime;
-	private float timeToUpdate; //quanto manca al prossimo aggiornamento della view
-	
+		
 	private const string baseUrl = "/Resources/Songs/";
 	private const string beatUrl = "_Beats.txt";
 
@@ -73,37 +72,23 @@ public class BeatTimings
 	//da chiamare quando il deltaTime rispetto al beat corrente è passato
 	private bool Step()
 	{
-
 		index++;
-		if(index>=timeStamps.Count ){
-			Controller controller = GameObject.Find("Board").GetComponent<Controller>();
-			controller.Stop();
-			return false;
-		}
-		else{
-			timeToUpdate = timeStamps [index] - deltaTime - audioSrc.time;  // set how much time for the next invocation of this metod
-			return true;
-		}
-	
+		return true;
 	}
 
 	//controlliamo (ad ogni frame!) che il beat non sia già passato 
 	public bool HasBeatPassed()
 	{
-		if (audioSrc.time >= timeStamps [index] + deltaTime) {
-
-			if(Step()){
-				return true;}
-			else {return false;}
+		if (!IsOver()){
+			if (audioSrc.time >= timeStamps [index] + deltaTime) 
+				return Step();
+			else
+				return false;
 		}
+		Controller c = (Controller) GameObject.Find("Board").GetComponent("Controller");
+		c.stopTimer();
 
 		return false;
-	}
-
-	public float GetTimeToUpdate()
-	{
-
-		return timeToUpdate;
 	}
 
 	//restituisce un valore pari alla differenza del istante attuale con il beat corrente
@@ -161,7 +146,9 @@ public class BeatTimings
 	}
 
 	public bool IsOver(){
-		return index >= timeStamps.Count;
+		if (index >= timeStamps.Count)
+			return true;
+		return false;
 	}
 
 

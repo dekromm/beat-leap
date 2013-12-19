@@ -59,16 +59,14 @@ public class GameMechanics
 	public void CheckBeat()
 	{
 		//accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
-		if (beatManager.HasBeatPassed()) {
-			//Debug.Log("BEAT");
-			if(!beatManager.IsOver()){
-				
+
+		if (beatManager.HasBeatPassed()) {							
 				gameField.StepUpdate();
-			}
-			else{
-				GameOver();
-			}
 		}
+
+		if(beatManager.IsOver())
+			Application.LoadLevel("GameOver");
+
 		timeLine.FireSticks(beatManager.GetTime());
 	}
 

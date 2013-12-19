@@ -2,18 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class TimeLine{
+public class TimeLine
+{
 
 	private List<float> beats;
 	public static bool isActive;
 	private int position;
 	private TimeStick timeStickPrefab;
-	private bool stop;
+	private bool stop = false;
 
-	public TimeLine(List<float> timings) {
+	public TimeLine(List<float> timings)
+	{
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
 
-		TimeStick.deltaTime =  Config.TimeLineDelta();
+		TimeStick.deltaTime = Config.TimeLineDelta();
 		TimeStick.parent = config.timeLine.transform;
 		TimeStick.distanceToRun = Config.View.GridLength();
 		beats = timings;
@@ -21,19 +23,21 @@ public class TimeLine{
 
 		timeStickPrefab = config.timeStickPrefab; 
 		timeStickPrefab.CreatePool();
-		stop = false;
 	}
 
-	public void FireSticks(float time){
-		float stickSpeed;
-		if(!stop){
-			while(beats[position] < time+Config.TimeLineDelta()/2.0f){
+	public void FireSticks(float time)
+	{
+		if (!stop) {
+			float stickSpeed;
+			while (beats[position] < time+Config.TimeLineDelta()/2.0f) {
 				TimeStick stick = timeStickPrefab.Spawn();
-				stickSpeed = TimeStick.distanceToRun/(2.0f*Mathf.Abs(beats[position] - time));
+				stickSpeed = TimeStick.distanceToRun / (2.0f * Mathf.Abs(beats [position] - time));
 				stick.SetUpStick(stickSpeed);
-				if(position < beats.Count -1){
+				if (position < beats.Count - 1)
 					position++;
+				else{
 					stop = true;
+					break;
 				}
 			}
 		}
