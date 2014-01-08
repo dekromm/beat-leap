@@ -16,12 +16,12 @@ public class BeatTimings
 	public float deltaTime;
 		
 	private const string baseUrl = "/Resources/Songs/";
-	private const string beatUrl = "_Beats.txt";
+	private const string beatUrl = "_Beats";
 
 	private string extension = ".wav"; //al momento proviamo solo mp3, gestiremo in seguito altre estensioni
 
 	private int index;
-	private StreamReader reader;
+	private TextReader reader;
 	
 	//costruttore, a cui passare il solo nome della canzone (senza estensione)
 	public BeatTimings(string src)
@@ -39,13 +39,11 @@ public class BeatTimings
  
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();
 
-		songName = baseUrl + src;
+//		WWW www = new WWW("file://" + Application.dataPath + "/Resources/Songs/" + src + extension);
+//		audioSrc.clip = www.audioClip;
 
-		WWW www = new WWW("file://" + Application.dataPath + "/Resources/Songs/" + src + extension);
-		audioSrc.clip = www.audioClip;
 
-		/*
-		audioSrc.clip = Resources.Load(songName + extension) as AudioClip;*/
+		audioSrc.clip = Resources.Load("Songs/" + src, typeof(AudioClip)) as AudioClip;
 		//audioSrc.Play();
 	}
 
@@ -56,7 +54,12 @@ public class BeatTimings
 		float beatTimeValue;
 		string beatString;
 
-		reader = new StreamReader(Application.dataPath + baseUrl + id + beatUrl);
+		TextAsset txt = (TextAsset)Resources.Load("Songs/"+id+beatUrl , typeof(TextAsset));		
+		string content = txt.text;
+		
+		reader = new StringReader (content);
+
+		//reader = new StreamReader(Application.dataPath + baseUrl + id + beatUrl);
 		timeStamps = new List<float>();
 
 		beatString = reader.ReadLine();

@@ -25,7 +25,7 @@ public class LevelMap
 
 	public LevelMap(string track)
 	{
-		trackFileName = track + "_Map.txt";
+		trackFileName = track + "_Map";
 		position = 0;
 		mapLength = 0;
 		try {
@@ -114,10 +114,18 @@ public class LevelMap
 
 	private void LoadMap()
 	{
-		string basePath = "/Resources/Songs/";
-		StreamReader reader = new StreamReader(Application.dataPath + basePath + trackFileName);
-		if (reader != null) {
-			string parameterString = reader.ReadLine();
+		//string basePath = "/Resources/Songs/";
+		//StreamReader reader = new StreamReader(Application.dataPath + basePath + trackFileName);
+
+		TextAsset txt = (TextAsset)Resources.Load("Songs/"+trackFileName , typeof(TextAsset));		
+		string content = txt.text;
+
+		TextReader txr = new StringReader (content);
+
+	//	if (reader != null) {
+		if(txr != null){
+			//string parameterString = reader.ReadLine();
+			string parameterString = txr.ReadLine();
 			try {
 				readParameters(parameterString);
 			} catch (Exception) {
@@ -125,7 +133,8 @@ public class LevelMap
 			}
 
 			map = new List<string>(mapLength);
-			string line = reader.ReadLine();
+			//string line = reader.ReadLine();
+			string line = txr.ReadLine();
 
 			while (line != null) {
 				line = line.ToLower();
@@ -134,7 +143,7 @@ public class LevelMap
 				} else {
 					Debug.LogError("Discarded Line: \"" + line + "\"");
 				}
-				line = reader.ReadLine();
+				line = txr.ReadLine();
 			}
 
 			mapLength = map.Count;
