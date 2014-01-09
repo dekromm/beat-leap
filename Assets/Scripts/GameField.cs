@@ -89,6 +89,9 @@ public class GameField
 		beat.PushCommand(command, score, maxPrecision);
 	}
 
+	public int currentScore(){
+		return beat.getScore ();	
+	}
 
 	#region private methods
 

@@ -135,7 +135,8 @@ public class GameMechanics
 		private void GameOver ()
 		{
 				SetState ("Game Over");
-				WatchScoreboard ();
+				Game.Current().setScore (gameField.currentScore ());
+				Application.LoadLevel("GameOver");
 		}
 
 		private void SetState (string state)

@@ -4,6 +4,7 @@ using System.Collections;
 public class Game : MonoBehaviour {
 	private static Game current;
 
+	private int score;
 	private string level;
 
 	void Start(){
@@ -11,6 +12,8 @@ public class Game : MonoBehaviour {
 			current = this;
 			DontDestroyOnLoad(current);
 		}
+
+		score = 0;
 	}
 
 	public static Game Current(){
@@ -23,6 +26,14 @@ public class Game : MonoBehaviour {
 
 	public string Level(){
 		return level;
+	}
+
+	public void setScore(int score){
+		current.score = score;		
+	}
+
+	public int Score(){
+		return score;
 	}
 
 }
