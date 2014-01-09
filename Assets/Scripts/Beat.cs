@@ -133,7 +133,7 @@ public class Beat : Cube
 			case Config.Command.NULL:
 				{
 					ResetStat();		
-					score -= 10;
+					//score -= 10;
 					message = Config.Messages.Miss();
 					emitter.PlayBad();
 				}
