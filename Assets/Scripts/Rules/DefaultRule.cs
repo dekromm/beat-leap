@@ -18,6 +18,7 @@ public class DefaultRule: Rule {
 			
 			if (beat.Collided(c)) {
 				if(IsEnemy(c)){
+					SoundEffectManager.main.PlayHit();
 					// beat.score - 100 ???
 				} else if (IsItem(c)) {
 					// ((Item) c ).rule.immediate()

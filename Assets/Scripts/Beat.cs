@@ -13,7 +13,7 @@ public class Beat : Cube
 	int moveMagnitude = 1;
 	int damage;
 	private Emitter emitter;
-
+	
 	void Start()
 	{
 		emitter = GameObject.Find("BeatEmitter").GetComponent("Emitter") as Emitter;
@@ -136,6 +136,7 @@ public class Beat : Cube
 					//score -= 10;
 					message = Config.Messages.Miss();
 					emitter.PlayBad();
+					SoundEffectManager.main.PlayError();
 				}
 				break;
 		}

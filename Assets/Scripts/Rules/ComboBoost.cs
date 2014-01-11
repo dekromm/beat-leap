@@ -33,6 +33,7 @@ public class ComboBoost : Rule
 			
 			if (beat.Collided(c)) {
 				if (IsEnemy(c)) {
+					SoundEffectManager.main.PlayHit();
 				} else if (IsItem(c)) {
 					nextRule = ( (Item) c ).rule;
 					toDestroy = c;

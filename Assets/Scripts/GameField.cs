@@ -53,9 +53,23 @@ public class GameField
 	
 	public void StepUpdate()
 	{
+		Rule oldRule = currentRule;
 		Debug.Log(currentRule.GetType().ToString());
 		currentRule = currentRule.Step(field, RtoLmap, beat);
 		powerUp.LoadRule(currentRule);
+
+		bool ruleChangedType = oldRule.GetType() != currentRule.GetType();
+		bool currentIsDefault = (currentRule is DefaultRule);
+		bool oldIsDefault = (oldRule is DefaultRule);
+
+		if( !currentIsDefault && ruleChangedType ){ // attivato il powerup
+			SoundEffectManager.main.PlayPoweupON(); 
+		}else if( !oldIsDefault && !ruleChangedType && (currentRule != oldRule)){ //attivato powerup dello stesso tipo
+			SoundEffectManager.main.PlayPoweupON(); 
+		}else if(!oldIsDefault && currentIsDefault){ // è scaduto il powerup
+			SoundEffectManager.main.PlayPoweupOFF(); 
+		}
+
 		alreadyGetIt = false;
 		//Controllo se i cubi sono usciti dai margini
 		List<Cube> deleteList = new List<Cube>();

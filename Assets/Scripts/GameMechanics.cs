@@ -36,7 +36,6 @@ public class GameMechanics
 				isGamePlaying = false;
 
 				state = (TextMesh)GameObject.Find ("State").GetComponent<TextMesh> ();
-
 		}
 
 		public void StartPlaying ()
