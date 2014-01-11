@@ -13,11 +13,15 @@ public class Beat : Cube
 	int moveMagnitude = 1;
 	int damage;
 	private Emitter emitter;
+
+	private FlyingPoint pointPrefab;
 	
 	void Start()
 	{
 		emitter = GameObject.Find("BeatEmitter").GetComponent("Emitter") as Emitter;
 		emitter.FollowBeat(gameObject.transform.position);
+		Config config = GameObject.Find("Config").GetComponent("Config") as Config;
+		pointPrefab = config.pointPrefab;
 	}
 
 	public Vector2 Move(Vector2 direction)
@@ -39,10 +43,11 @@ public class Beat : Cube
 
 
 		int nextScore;
+		int deltaScore = 0;
 		if (command == Config.Command.MISS) {
 			
 			ResetStat();
-			
+			deltaScore = - 50 * multiplier * baseMultiplier;
 			this.score -= 50 * multiplier * baseMultiplier;
 			message = Config.Messages.Async();
 			
@@ -50,7 +55,7 @@ public class Beat : Cube
 		} else if (command == Config.Command.DAMAGE) {
 			
 			ResetStat();
-			
+			deltaScore = -300 * multiplier * baseMultiplier; 
 			this.score -= 300 * multiplier * baseMultiplier;
 			message = Config.Messages.Bad();
 			
@@ -58,7 +63,8 @@ public class Beat : Cube
 		} else {
 			currentCommand = command;
 			UpgradeStat();
-				
+
+			deltaScore = score * multiplier * baseMultiplier;
 			this.score += score * multiplier * baseMultiplier;
 			if (maxPrecision) {
 				message = Config.Messages.LikeAGod();
@@ -67,6 +73,12 @@ public class Beat : Cube
 				message = Config.Messages.Good();
 				emitter.PlayGood();
 			}
+		}
+
+		if(deltaScore !=0){
+			FlyingPoint fp = pointPrefab.Spawn();
+			fp.SetStartingPoint(gameObject.transform.position);
+			fp.SetScore(deltaScore);
 		}
 
 	}

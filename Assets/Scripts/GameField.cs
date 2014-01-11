@@ -54,7 +54,7 @@ public class GameField
 	public void StepUpdate()
 	{
 		Rule oldRule = currentRule;
-		Debug.Log(currentRule.GetType().ToString());
+		// Debug.Log(currentRule.GetType().ToString());
 		currentRule = currentRule.Step(field, RtoLmap, beat);
 		powerUp.LoadRule(currentRule);
 

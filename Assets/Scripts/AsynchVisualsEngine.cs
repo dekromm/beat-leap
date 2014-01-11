@@ -12,6 +12,7 @@ public class AsynchVisualsEngine : MonoBehaviour {
 	private AudioSource reference;
 
 	private Lampeggiante lampeggiante;
+	private HelpText helpText;
 
 	void Start () {
 		blinks = new List<float>();
@@ -21,6 +22,7 @@ public class AsynchVisualsEngine : MonoBehaviour {
 
 		reference = GameObject.Find("Speaker").GetComponent("AudioSource") as AudioSource;
 		lampeggiante = GameObject.Find("Lampeggiante").GetComponent("Lampeggiante") as Lampeggiante;
+		helpText = GameObject.Find("HelpText").GetComponent("HelpText") as HelpText;
 
 		LoadData();
 	}
@@ -50,7 +52,8 @@ public class AsynchVisualsEngine : MonoBehaviour {
 	private void CheckWarnings(float time){
 		if(warnings != null && warnings.Count > 0){
 			while(warningsCount < warnings.Count-1 && warnings[warningsCount].time < time){
-				// mostra il testo
+				string help = warnings[warningsCount].text;
+				helpText.ShowHelpText(help);
 				SoundEffectManager.main.PlayWarn();
 				warningsCount++;
 			}

@@ -4,20 +4,29 @@ using System.Collections;
 public class HelpText : MonoBehaviour {
 
 	private TextMesh text;
-	//private OggettoIvanGestoreMessaggiVideo oigmv;
+	private float duration;
+	private float time;
 
-	// Use this for initialization
 	void Start () {
-	
-		text = (TextMesh) gameObject.GetComponent<TextMesh>();
-		//oigmv = (OggettoIvanGestoreMessaggiVideo) GameObject.FindGameObjectWithTag("OggettoIvanGestoreMessaggiVideo").GetComponent("OggettoIvanGestoreMessaggiVideo");
 
+		text = (TextMesh) gameObject.GetComponent<TextMesh>();
+		text.text = " ";
+		duration = 3.5f;
 	}
 	
-	// Update is called once per frame
 	void Update () {
-	
-		//text = oigmv.getText();
+		if(time < duration){
+			time +=Time.deltaTime;
+		}else{
+			if(gameObject.activeInHierarchy){
+				gameObject.SetActive(false);
+			}
+		}
+	}
 
+	public void ShowHelpText(string txt){
+		text.text = txt;
+		time = 0;
+		gameObject.SetActive(true);
 	}
 }

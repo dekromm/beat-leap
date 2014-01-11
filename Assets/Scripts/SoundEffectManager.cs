@@ -16,9 +16,6 @@ public class SoundEffectManager : MonoBehaviour {
 	void Start(){
 		main = this;
 		//error.audio.volume = 0.5f;
-//		error = GameObject.Find("ErrorSound").GetComponent<AudioSource>();
-//		powerup = GameObject.Find("PowerupSound").GetComponent<AudioSource>();
-//		warn = GameObject.Find("WarnSound").GetComponent<AudioSource>();
 	}
 
 	public void PlayError(){

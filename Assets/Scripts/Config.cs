@@ -8,6 +8,7 @@ public class Config : MonoBehaviour
 	public Item itemPrefab;
 	public GameObject timeLine;
 	public TimeStick timeStickPrefab;
+	public FlyingPoint pointPrefab; 
 
 	public Material combo;
 	public Material empty;
