@@ -136,6 +136,7 @@ public class GameMechanics
 		{
 				SetState ("Game Over");
 				Game.Current().setScore (gameField.currentScore ());
+				System.Threading.Thread.Sleep(2000);
 				Application.LoadLevel("GameOver");
 		}
 
