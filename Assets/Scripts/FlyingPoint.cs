@@ -2,8 +2,17 @@
 using System.Collections;
 
 public class FlyingPoint : MonoBehaviour {
-	
+
+	private static Transform parent;
+
+	public float alphaDrift = 1.0f;
+	public float yDrift = 40.0f;
+	public float scalingSpeed = 0.5f;
+
 	void Start () {
+		if(parent==null){
+			parent = GameObject.Find("PointsParent").transform;
+		}
 	}
 	
 	void Update () {
@@ -11,15 +20,15 @@ public class FlyingPoint : MonoBehaviour {
 		float dt = Time.deltaTime;
 
 		Color tmpColor = mat.color;
-		tmpColor.a -= 1.0f * dt;
+		tmpColor.a -= alphaDrift * dt;
 		mat.color = tmpColor;
 
 		Vector3 tmpPos = transform.position;
-		tmpPos.y +=  dt * 40.0f;
+		tmpPos.y +=  dt * yDrift;
 		transform.position = tmpPos;
 
 		Vector3 tmpScale = transform.localScale;
-		float scale = tmpScale.x- 0.5f* dt;
+		float scale = tmpScale.x- scalingSpeed* dt;
 		tmpScale = new Vector3(scale, scale, scale);
 		transform.localScale = tmpScale;
 		//Debug.Log(scale);
@@ -31,6 +40,7 @@ public class FlyingPoint : MonoBehaviour {
 
 	public void SetStartingPoint(Vector3 pos){
 		gameObject.transform.position = new Vector3(pos.x, pos.y + 25, pos.z);
+		gameObject.transform.parent = parent;
 	}
 
 	public void SetScore(int score){
@@ -42,7 +52,7 @@ public class FlyingPoint : MonoBehaviour {
 			txtScore = "+"+score.ToString();
 			txtColor = Color.green;
 		}else{
-			txtScore = "-"+score.ToString();
+			txtScore = score.ToString();
 			txtColor = Color.red;
 		}
 	

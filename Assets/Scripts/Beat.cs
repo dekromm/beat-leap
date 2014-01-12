@@ -79,6 +79,7 @@ public class Beat : Cube
 			FlyingPoint fp = pointPrefab.Spawn();
 			fp.SetStartingPoint(gameObject.transform.position);
 			fp.SetScore(deltaScore);
+			fp.transform.rotation = pointPrefab.transform.rotation;
 		}
 
 	}
