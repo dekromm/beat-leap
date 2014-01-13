@@ -21,8 +21,14 @@ public class DefaultRule: Rule {
 					SoundEffectManager.main.PlayHit();
 					// beat.score - 100 ???
 				} else if (IsItem(c)) {
-					// ((Item) c ).rule.immediate()
+
 					nextRule = ( (Item) c ).rule;
+					toDestroy = c;
+					c.Recycle();
+				} else if (IsMoney(c)) {
+					int num = ((Money) c).amount;
+					beat.setScore(num);
+					beat.FlyPoints(num);
 					toDestroy = c;
 					c.Recycle();
 				} 

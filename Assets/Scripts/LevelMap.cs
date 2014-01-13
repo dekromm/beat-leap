@@ -17,11 +17,12 @@ public class LevelMap
 	private const string DownCode = "DOWN";
 	private const string LeftCode = "LEFT";
 	private const string RightCode = "RIGHT";
-	private const string okChar = "_eicds";
+	private const string okChar = "_eicdsm";
 	private string trackFileName;
 	// Prefabs
 	static Enemy enemyPrefab;
 	static Item itemPrefab;
+	static Money moneyPrefab;
 
 	public LevelMap(string track)
 	{
@@ -40,6 +41,8 @@ public class LevelMap
 		itemPrefab.CreatePool();
 		enemyPrefab = config.enemyPrefab;
 		enemyPrefab.CreatePool();
+		moneyPrefab = config.moneyPrefab;
+		moneyPrefab.CreatePool();
 	}
 
 	public List<Cube> GetNewLine()
@@ -83,6 +86,9 @@ public class LevelMap
 
 			case 'e':
 				cube = enemyPrefab.Spawn();
+				break;
+			case 'm':
+				cube = moneyPrefab.Spawn();
 				break;
 			case 'c':								//COMBO BOOST
 				cube = itemPrefab.Spawn();
