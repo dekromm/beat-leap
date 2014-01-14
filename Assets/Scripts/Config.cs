@@ -6,6 +6,7 @@ public class Config : MonoBehaviour
 	public GameObject beatPrefab;
 	public Enemy enemyPrefab;
 	public Item itemPrefab;
+	public Money moneyPrefab;
 	public GameObject timeLine;
 	public TimeStick timeStickPrefab;
 	public FlyingPoint pointPrefab; 

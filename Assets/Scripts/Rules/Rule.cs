@@ -12,6 +12,12 @@ public abstract class Rule
 		//controlla se il cubo passato è un powerup
 		return  c is Item;
 	}
+
+	public static bool IsMoney(Cube c)
+	{
+		//controlla se il cubo passato è un powerup
+		return  c is Money;
+	}
 			
 	public static bool IsEnemy(Cube c)
 	{

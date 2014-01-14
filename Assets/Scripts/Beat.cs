@@ -79,15 +79,20 @@ public class Beat : Cube
 			if(score < 0){
 				SoundEffectManager.main.PlayError();
 			}
-			FlyingPoint fp = pointPrefab.Spawn();
-			fp.SetStartingPoint(gameObject.transform.position);
-			fp.SetScore(deltaScore);
-			fp.transform.rotation = pointPrefab.transform.rotation;
+			FlyPoints (deltaScore);
 		}
 
 	}
 
 	#region score
+
+	public void FlyPoints (int deltascore)
+	{
+		FlyingPoint fp = pointPrefab.Spawn ();
+		fp.SetStartingPoint (gameObject.transform.position);
+		fp.SetScore (deltascore);
+		fp.transform.rotation = pointPrefab.transform.rotation;
+	}
 	void ResetStat()
 	{
 
@@ -184,6 +189,10 @@ public class Beat : Cube
 	{
 
 		return score;
+	}
+	public void setScore(int num){
+
+		score += num;
 	}
 
 	public string getMessage()

@@ -23,7 +23,7 @@ public class GameField
 		field = new List<Cube>();
 
 		Score score = (Score)GameObject.FindGameObjectWithTag("Score").GetComponent("Score");
-		Message message = (Message)GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
+		//Message message = (Message)GameObject.FindGameObjectWithTag("Message").GetComponent("Message");
 		Multiplier multiplier = (Multiplier)GameObject.FindGameObjectWithTag("Multiplier").GetComponent("Multiplier");
 
 		Config config = (Config)GameObject.Find("Config").GetComponent("Config");
@@ -35,7 +35,7 @@ public class GameField
 		powerUp = GameObject.Find("PowerUp").GetComponent("Item") as Item;
 		powerUp.rule = new DefaultRule();
 
-		message.setBeatReference(beat);
+		//message.setBeatReference(beat);
 		score.setBeatReference(beat);
 		multiplier.setBeatReference(beat);
 
