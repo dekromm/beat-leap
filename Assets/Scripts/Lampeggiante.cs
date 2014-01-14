@@ -20,11 +20,23 @@ public class Lampeggiante : MonoBehaviour
 		if (hasToBlink) {
 			this.renderer.enabled = true;
 			blinkCount -= Time.deltaTime;
+			Color newColor = gameObject.renderer.material.color;
+			if(blinkCount > blinkTime/2){
+				newColor.a = 2-2*blinkCount/blinkCount;
+			}else{
+				newColor.a = 2*blinkCount/blinkCount;
+			}
+
+			gameObject.renderer.material.color = newColor;
+
 		} 
 		if (hasToBlink && blinkCount < 0) {
 			hasToBlink = false;
 			renderer.enabled = false;
-			Debug.Log(Time.deltaTime);
+			Color newColor = gameObject.renderer.material.color;
+			newColor.a = 0;
+			gameObject.renderer.material.color = newColor;
+			//Debug.Log(Time.deltaTime);
 		}
 	}
 

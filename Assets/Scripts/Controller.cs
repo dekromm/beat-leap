@@ -22,7 +22,7 @@ public class Controller : MonoBehaviour
 		{
 				string levelName = Game.Current ().Level ();
 				gameMechanics = new GameMechanics (levelName);
-
+				this.SwitchPauseResume();
 		}
         
 		// Update is called once per frame

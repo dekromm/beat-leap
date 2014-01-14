@@ -76,6 +76,9 @@ public class Beat : Cube
 		}
 
 		if(deltaScore !=0){
+			if(score < 0){
+				SoundEffectManager.main.PlayError();
+			}
 			FlyingPoint fp = pointPrefab.Spawn();
 			fp.SetStartingPoint(gameObject.transform.position);
 			fp.SetScore(deltaScore);
@@ -149,7 +152,6 @@ public class Beat : Cube
 					//score -= 10;
 					message = Config.Messages.Miss();
 					emitter.PlayBad();
-					SoundEffectManager.main.PlayError();
 				}
 				break;
 		}

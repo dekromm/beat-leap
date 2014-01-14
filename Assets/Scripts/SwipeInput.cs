@@ -6,6 +6,7 @@ public class SwipeInput : MonoBehaviour
 	public float comfortZone = 70.0f;
 	public float minSwipeDist = 14.0f;
 	public float maxSwipeTime = 0.5f;
+	public float angle = 30; // degrees
 	private float startTime;
 	private Vector2 startPos;
 	private bool couldBeSwipe;
@@ -60,25 +61,41 @@ public class SwipeInput : MonoBehaviour
 								
 						if ((swipeTime < maxSwipeTime) && (swipeDist > minSwipeDist)) {
 
-							if(Mathf.Abs(deltaPos.x/deltaPos.y) < 0.176f){
+							float tanAngle = Mathf.Tan(angle*Mathf.Deg2Rad);
+
+							if(Mathf.Abs(deltaPos.x/deltaPos.y) < tanAngle){
 								if(deltaPos.y > 0){
 									lastSwipe = SwipeDirection.Up;
-									controller.gameMechanics.MoveUp();
 								}else{
 									lastSwipe = SwipeDirection.Down;
-									controller.gameMechanics.MoveDown();
 								}
-							}else if(Mathf.Abs(deltaPos.y/deltaPos.x) < 0.176f){
+							}else if(Mathf.Abs(deltaPos.y/deltaPos.x) < tanAngle){
 								if(deltaPos.x > 0){
 									lastSwipe = SwipeDirection.Right;
-									controller.gameMechanics.MoveRight();
 								}else{
 									lastSwipe = SwipeDirection.Left;
-									controller.gameMechanics.MoveLeft();
 								}
 							}
 			
 							lastSwipeTime = Time.time;
+							if(controller.gameMechanics.isGamePlaying){
+								switch(lastSwipe){
+									case SwipeDirection.Down:{
+										controller.gameMechanics.MoveDown();
+									}break;
+									case SwipeDirection.Left:{
+										controller.gameMechanics.MoveLeft();
+									}break;
+									case SwipeDirection.Right:{
+										controller.gameMechanics.MoveRight();
+									}break;
+									case SwipeDirection.Up:{
+										controller.gameMechanics.MoveUp();
+									}break;
+								
+								}
+							}
+						
 						}
 					}
 					break;

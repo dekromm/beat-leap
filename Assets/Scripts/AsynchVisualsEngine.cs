@@ -54,7 +54,7 @@ public class AsynchVisualsEngine : MonoBehaviour {
 			while(warningsCount < warnings.Count-1 && warnings[warningsCount].time < time){
 				string help = warnings[warningsCount].text;
 				helpText.ShowHelpText(help);
-				SoundEffectManager.main.PlayWarn();
+				//SoundEffectManager.main.PlayWarn();
 				warningsCount++;
 			}
 		}

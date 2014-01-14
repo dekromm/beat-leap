@@ -8,7 +8,7 @@ public class LoadLevel : MonoBehaviour {
 	void Start(){
 		level = "Game";
 		#if UNITY_IPHONE
-		level = "Game_iPadx2";
+		level = "Game_4_3";
 		#endif
 	}
 
