@@ -1,0 +1,33 @@
+0.0@Alice Francis - Gangsterlove (Alle Farben Remix)
+6.0@You can Move around by pressing the usual WASD
+10.0@Those are the only commands you need.
+14.0@You can always press the spacebar to pause.
+19.0@I don't remember saying you could move...
+24.0@In fact, you can only move on the marked beats:
+29.0@The marker are those you see coming at a regular pace
+32.0#
+33.0#
+34.0#
+52.0@Did you notice that the display flashed before ?
+57.0@It will flash whenever something is gonna change in the beat
+60.0#
+61.0#
+62.0@Just kidding,
+63.5@You will lose the combo by staying still,
+69.0@You will lose score by going off-beat
+70.0#
+71.0#
+72.0#
+90.0#
+91.0#
+92.0#
+97.0#
+98.0#
+100.0#
+103.0@Ok, the last part was hard
+107.0@Since you're sooooooo good let's introduce obstacles
+111.0@Hitting them will result in heavy score loss
+115.0@Good Luck
+115.0#
+116.0#
+117.0#
