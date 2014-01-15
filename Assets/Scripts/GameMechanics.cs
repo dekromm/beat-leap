@@ -19,6 +19,7 @@ public class GameMechanics
 		private GameObject pauseScreen;
 		//private GameObject mainCamera;
 		private TextMesh state;
+		private BeatLight beatLight;
 
 		public GameMechanics (string src)
 		{
@@ -36,6 +37,7 @@ public class GameMechanics
 				isGamePlaying = false;
 
 				state = (TextMesh)GameObject.Find ("State").GetComponent<TextMesh> ();
+				beatLight = GameObject.Find("BeatLight").GetComponent<BeatLight>()as BeatLight;
 		}
 
 		public void StartPlaying ()
@@ -67,6 +69,7 @@ public class GameMechanics
 
 				if (beatManager.HasBeatPassed ()) {							
 						gameField.StepUpdate ();
+						beatLight.Flash();
 				}
 
 				if (beatManager.IsOver ())
@@ -101,7 +104,9 @@ public class GameMechanics
 
 				isGamePlaying = beatManager.SwitchAudioPlayStop ();
 				TimeLine.isActive = isGamePlaying;
-				SoundEffectManager.main.PauseResume(isGamePlaying);
+				if(isGameStarted){
+					SoundEffectManager.main.PauseResume(isGamePlaying);
+				}
 
 				if (!isGamePlaying) {
 						SetState ("Paused");

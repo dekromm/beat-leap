@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public abstract class Rule
 {
 			
-	public abstract Rule Step(List<Cube> field, LevelMap map, Beat beat);
+	public abstract Rule Step(List<Cube> field, ref LevelMap map, Beat beat);
 			
 	public static bool IsItem(Cube c)
 	{

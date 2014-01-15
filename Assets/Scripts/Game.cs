@@ -6,11 +6,18 @@ public class Game : MonoBehaviour {
 
 	private int score;
 	private string level;
+	public bool isMobile;
+	public bool swipeInput;
 
 	void Start(){
+		isMobile = false;
+		#if UNITY_IOS
+		isMobile = true;
+		#endif
+		swipeInput = false;
 		if(current == null){
-			current = this;
-			DontDestroyOnLoad(current);
+		current = this;
+		DontDestroyOnLoad(current);
 		}
 
 		score = 0;

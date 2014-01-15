@@ -13,7 +13,7 @@ public class DoubleMovement : Rule
 	private int duration = 7;
 	private Rule nextRule;
 	
-	public override Rule Step(List<Cube> field, LevelMap map, Beat beat)
+	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
 	{
 		if (duration > 0) {
 			if(duration == 7){

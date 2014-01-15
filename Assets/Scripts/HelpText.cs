@@ -25,7 +25,7 @@ public class HelpText : MonoBehaviour {
 	}
 
 	public void ShowHelpText(string txt){
-		text.text = txt;
+		text.text = txt.Replace('&','\n');
 		time = 0;
 		gameObject.SetActive(true);
 	}

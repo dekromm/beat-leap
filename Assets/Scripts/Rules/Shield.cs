@@ -8,7 +8,7 @@ public class Shield : Rule
 	private int duration=3;
 	private Rule nextRule;
 	
-	public override Rule Step(List<Cube> field, LevelMap map, Beat beat)
+	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
 	{
 		Debug.Log("Shielded!");
 		if (duration > 0) {

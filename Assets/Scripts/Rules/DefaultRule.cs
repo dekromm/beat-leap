@@ -8,7 +8,7 @@ public class DefaultRule: Rule {
 
 	#region GameField aimed Methods
 
-	public override Rule Step(List<Cube> field, LevelMap map, Beat beat){
+	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat){
 		Rule nextRule = this;
 		Cube toDestroy = null;
 		beat.CommitCommand();

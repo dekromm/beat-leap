@@ -14,6 +14,8 @@ public class SoundEffectManager : MonoBehaviour {
 	public AudioSource hitEnemy;
 	public AudioSource snap;
 	public AudioSource clap;
+	public AudioSource explosion;
+	public AudioSource shield;
 
 	private bool powerupWasPlaying;
 	
@@ -54,6 +56,14 @@ public class SoundEffectManager : MonoBehaviour {
 
 	public void PlaySnap(){
 		snap.Play();
+	}
+
+	public void PlayShield(){
+		shield.Play();
+	}
+
+	public void PlayExplosion(){
+		explosion.Play();
 	}
 
 	public void PauseResume(bool isGamePlaying){

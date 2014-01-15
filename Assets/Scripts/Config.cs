@@ -17,6 +17,20 @@ public class Config : MonoBehaviour
 	public Material shield;
 	public Material doubleJump;
 
+	public string gameScene;
+
+	public static Config config;
+
+	void Start(){
+		if(config==null){
+			config = this;
+		}
+		gameScene = "Game";
+#if UNITY_IOS
+		gameScene = "Game_4_3";
+#endif
+	}
+
 	public static float TimeLineDelta()
 	{
 		return 7.0f; // 2 seconds length
