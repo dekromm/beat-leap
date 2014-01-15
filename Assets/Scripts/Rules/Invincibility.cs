@@ -18,7 +18,7 @@ public class Invincibility : Rule{
 		} else {
 			nextRule = new DefaultRule();
 		}
-		
+		bool haveToDestroyAll=false;
 		beat.CommitCommand();
 		//	beat.PauseInput();
 		Cube toDestroy = null;
@@ -31,12 +31,25 @@ public class Invincibility : Rule{
 					SoundEffectManager.main.PlayDestrucion();
 					toDestroy = c;
 				} else if (IsItem(c)) {
+					if(IsDetonation(( (Item) c ).rule)){
+						haveToDestroyAll=true;
+						//put a sound for the explosion!!!!
+					}
 					nextRule = ((Item)c).rule;
 					c.Recycle();
 					toDestroy = c;
+				} else if (IsMoney(c)) {
+					GetPointsFromMoney(c,beat);
+					toDestroy = c;
+					c.Recycle();
 				} 
 			}
 		}
+
+		if (haveToDestroyAll) {
+			field = DestroyThemAll(field);
+		}
+
 		if (toDestroy != null) {
 			field.Remove(toDestroy);
 		}
@@ -45,4 +58,12 @@ public class Invincibility : Rule{
 		//beat.UnPauseInput();
 		return nextRule;
 	}
+
+	public override void GetPointsFromMoney (Cube c, Beat beat)
+	{
+		int num = ((Money)c).amount;
+		beat.setScore (num);
+		beat.FlyPoints (num);
+	}
+
 }

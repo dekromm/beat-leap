@@ -15,7 +15,7 @@ public class ComboBoost : Rule
 	public override Rule Step(List<Cube> field, LevelMap map, Beat beat)
 	{
 		if (duration > 0) {
-			if (duration == 7) {
+			if (duration == 15) {
 				//è la prima step
 				beat.SetBaseMultiplier(2);
 			}
@@ -24,7 +24,7 @@ public class ComboBoost : Rule
 		} else {
 			nextRule = new DefaultRule();
 		}
-		
+		bool haveToDestroyAll=false;
 		beat.CommitCommand();
 		//	beat.PauseInput();
 		Cube toDestroy = null;
@@ -35,12 +35,25 @@ public class ComboBoost : Rule
 				if (IsEnemy(c)) {
 					SoundEffectManager.main.PlayHit();
 				} else if (IsItem(c)) {
+					if(IsDetonation(( (Item) c ).rule)){
+						haveToDestroyAll=true;
+						//put a sound for the explosion!!!!
+					}
 					nextRule = ( (Item) c ).rule;
+					toDestroy = c;
+					c.Recycle();
+				} else if (IsMoney(c)) {
+					GetPointsFromMoney(c,beat);
 					toDestroy = c;
 					c.Recycle();
 				} 
 			}
 		}
+		
+		if (haveToDestroyAll) {
+			field = DestroyThemAll(field);
+		}
+
 		if (toDestroy != null) {
 			field.Remove(toDestroy);
 		}
@@ -52,5 +65,12 @@ public class ComboBoost : Rule
 			beat.SetBaseMultiplier(1);
 		}
 		return nextRule;
+	}
+
+	public override void GetPointsFromMoney (Cube c, Beat beat)
+	{
+		int num = ((Money)c).amount;
+		beat.setScore (num);
+		beat.FlyPoints (num);
 	}
 }

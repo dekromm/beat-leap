@@ -6,7 +6,8 @@ public abstract class Rule
 {
 			
 	public abstract Rule Step(List<Cube> field, LevelMap map, Beat beat);
-			
+	public abstract void GetPointsFromMoney (Cube c, Beat beat);
+
 	public static bool IsItem(Cube c)
 	{
 		//controlla se il cubo passato è un powerup
@@ -23,6 +24,12 @@ public abstract class Rule
 	{
 		//controlla se il cubo passato è un powerup
 		return c is Enemy;
+	}
+
+	public static bool IsDetonation(Rule r)
+	{
+		//controlla se il cubo passato è un powerup
+		return r is Detonation;
 	}
 			
 	protected void AddRows(LevelMap map, List<Cube> field)
@@ -46,6 +53,24 @@ public abstract class Rule
 			}
 		} catch (Exception) {
 		}
+	}
+
+	protected List<Cube> DestroyThemAll (List<Cube> field)
+	{
+		List<Cube> deleteList = new List<Cube>();
+		
+		foreach (Cube c in field) {
+			if (IsEnemy(c)) {
+				deleteList.Add(c);
+				c.Recycle();
+			}
+		}
+		
+		foreach (Cube c in deleteList) {
+			field.Remove(c);
+		}
+
+		return field;
 	}
 }
 
