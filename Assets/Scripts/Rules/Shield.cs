@@ -26,7 +26,7 @@ public class Shield : Rule
 			if (beat.Collided(c)) {
 				if (IsEnemy(c)) {
 					duration--;
-					SoundEffectManager.main.PlayHit();
+					//SoundEffectManager.main.PlaySnap();
 				} else if (IsItem(c)) {
 					nextRule = ((Item)c).rule;
 					c.Recycle();

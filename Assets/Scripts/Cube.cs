@@ -5,9 +5,30 @@ public class Cube : MonoBehaviour
 {
 	public Vector2 logicPosition;
 	public Vector2 direction;
+	private bool jumping;
+	private float jumpTime;
+	private float jumpSpeedFactor = 20f;
 
 	// Makes the cube advance according to its policy
 	// Returns its new position
+
+	void Update(){
+		if (jumping) {
+			jumpTime += Time.deltaTime;
+			transform.position = new Vector3(transform.position.x,
+			                                 Config.View.CubeScale()*Mathf.Sin(jumpTime*jumpSpeedFactor)/2f + Config.View.CubeScale()/2,
+			                                 transform.position.z);
+			if(jumpTime>Mathf.PI/jumpSpeedFactor){
+				jumping = false;
+				transform.position = new Vector3(transform.position.x,Config.View.CubeScale()/2,transform.position.z);
+			}
+		}
+	}
+	public void Jump(){
+		Debug.Log("miss jump starting!");
+		jumpTime = 0;
+		jumping = true;
+	}
 	public Vector2 Move()
 	{
 		logicPosition += direction;

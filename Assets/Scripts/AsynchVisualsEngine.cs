@@ -43,7 +43,6 @@ public class AsynchVisualsEngine : MonoBehaviour {
 		if(blinks != null && blinks.Count > 0){
 			while(blinksCount < blinks.Count-1 && blinks[blinksCount] < time){
 				lampeggiante.Blink();
-				SoundEffectManager.main.PlayWarn();
 				blinksCount++;
 			}
 		}
@@ -54,7 +53,6 @@ public class AsynchVisualsEngine : MonoBehaviour {
 			while(warningsCount < warnings.Count-1 && warnings[warningsCount].time < time){
 				string help = warnings[warningsCount].text;
 				helpText.ShowHelpText(help);
-				//SoundEffectManager.main.PlayWarn();
 				warningsCount++;
 			}
 		}

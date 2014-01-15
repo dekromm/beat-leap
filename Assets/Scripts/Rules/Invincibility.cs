@@ -27,9 +27,10 @@ public class Invincibility : Rule{
 			
 			if (beat.Collided(c)) {
 				if (IsEnemy(c)) {
-					c.Recycle();
 					SoundEffectManager.main.PlayDestrucion();
+					c.Recycle();
 					toDestroy = c;
+					beat.PushCommand(Config.Command.ATTACK,0,false);
 				} else if (IsItem(c)) {
 					nextRule = ((Item)c).rule;
 					c.Recycle();

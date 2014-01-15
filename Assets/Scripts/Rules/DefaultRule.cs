@@ -19,9 +19,10 @@ public class DefaultRule: Rule {
 			if (beat.Collided(c)) {
 				if(IsEnemy(c)){
 					SoundEffectManager.main.PlayHit();
-					// beat.score - 100 ???
+					beat.PushCommand(Config.Command.DAMAGE, 0, false);
+					c.Recycle();
+					toDestroy = c;
 				} else if (IsItem(c)) {
-
 					nextRule = ( (Item) c ).rule;
 					toDestroy = c;
 					c.Recycle();
@@ -31,7 +32,7 @@ public class DefaultRule: Rule {
 					beat.FlyPoints(num);
 					toDestroy = c;
 					c.Recycle();
-				} 
+				}
 			}
 		}
 		
