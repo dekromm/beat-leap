@@ -17,14 +17,14 @@ public class FadingUI : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(!doneFading){
-		Color color = gameObject.renderer.material.color;
-		color.a -= deltaAlfa*Time.deltaTime;
-		if(color.a < 0){
-				//gameObject.SetActive(false);
-				gameObject.renderer.enabled = false;
-				doneFading = true;
-		}
-		gameObject.renderer.material.color = color;
+			Color color = gameObject.renderer.material.color;
+			color.a -= deltaAlfa*Time.deltaTime;
+			if(color.a < 0){
+					//gameObject.SetActive(false);
+					gameObject.renderer.enabled = false;
+					doneFading = true;
+			}
+			gameObject.renderer.material.color = color;
 		}
 	}
 }

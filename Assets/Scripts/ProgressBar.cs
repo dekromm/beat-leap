@@ -9,13 +9,14 @@ public class ProgressBar : MonoBehaviour {
 	private float currentTime;
 
 	private const float sizeX = 40;
-	private const float startOffset = 35;
+	private float startOffset = 35;
 	
 	void Start () {
 	
 		song = GameObject.Find("Speaker").GetComponent ("AudioSource") as AudioSource;
 		audio = Resources.Load("Songs/" + Game.Current().Level(), typeof(AudioClip)) as AudioClip;
 		length = audio.length;
+		startOffset = transform.position.x;
 	}
 
 	void Update () {

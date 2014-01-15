@@ -12,9 +12,14 @@ public class SoundEffectManager : MonoBehaviour {
 	public AudioSource powerupOFF;
 	public AudioSource destruction;
 	public AudioSource hitEnemy;
+	public AudioSource snap;
+	public AudioSource clap;
+
+	private bool powerupWasPlaying;
 	
 	void Start(){
 		main = this;
+		powerupWasPlaying = false;
 		//error.audio.volume = 0.5f;
 	}
 
@@ -41,6 +46,24 @@ public class SoundEffectManager : MonoBehaviour {
 
 	public void PlayHit(){
 		hitEnemy.Play();
+	}
+
+	public void PlayClap(){
+		clap.Play();
+	}
+
+	public void PlaySnap(){
+		snap.Play();
+	}
+
+	public void PauseResume(bool isGamePlaying){
+		if(powerup.isPlaying && !isGamePlaying){
+			powerupWasPlaying = true;
+			powerup.Pause();
+		}else if(isGamePlaying && powerupWasPlaying){
+			powerupWasPlaying = false;
+			powerup.Play();
+		}
 	}
 
 

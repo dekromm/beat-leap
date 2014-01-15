@@ -101,6 +101,7 @@ public class GameMechanics
 
 				isGamePlaying = beatManager.SwitchAudioPlayStop ();
 				TimeLine.isActive = isGamePlaying;
+				SoundEffectManager.main.PauseResume(isGamePlaying);
 
 				if (!isGamePlaying) {
 						SetState ("Paused");

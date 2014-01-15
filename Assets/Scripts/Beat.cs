@@ -73,6 +73,8 @@ public class Beat : Cube
 				message = Config.Messages.Good();
 				emitter.PlayGood();
 			}
+			SoundEffectManager.main.PlayClap();
+
 		}
 
 		if(deltaScore !=0){
@@ -157,6 +159,8 @@ public class Beat : Cube
 					//score -= 10;
 					message = Config.Messages.Miss();
 					emitter.PlayBad();
+
+					SoundEffectManager.main.PlaySnap();
 				}
 				break;
 		}
