@@ -1,33 +1,75 @@
 0.0@Alice Francis - Gangsterlove (Alle Farben Remix)
-6.0@You can Move around by pressing the usual WASD
-10.0@Those are the only commands you need.
-14.0@You can always press the spacebar to pause.
+6.0@Move the beat around by pressing the usual WASD
+10.0@You can always press the spacebar to pause.
+14.0@Those are the only commands you need.
 19.0@I don't remember saying you could move...
 24.0@In fact, you can only move on the marked beats:
-29.0@The marker are those you see coming at a regular pace
-32.0#
-33.0#
-34.0#
-52.0@Did you notice that the display flashed before ?
-57.0@It will flash whenever something is gonna change in the beat
-60.0#
-61.0#
-62.0@Just kidding,
-63.5@You will lose the combo by staying still,
-69.0@You will lose score by going off-beat
-70.0#
-71.0#
-72.0#
-90.0#
-91.0#
-92.0#
-97.0#
-98.0#
-100.0#
-103.0@Ok, the last part was hard
-107.0@Since you're sooooooo good let's introduce obstacles
-111.0@Hitting them will result in heavy score loss
-115.0@Good Luck
-115.0#
-116.0#
-117.0#
+29.0@The markers are those you see coming at a regular pace
+31.651065952#
+32.127294224#
+32.603522496#
+33.079750768#
+33.55597904#
+42.0@Did you notice that the display flashed before ?
+47.0@It will flash whenever something is gonna change in the beat
+52.0@Regarding your movements:
+54.0@You will lose the combo by staying still,
+59.0@You will lose score by going off-beat
+59.748534#
+60.224762272#
+60.700990544#
+61.177218816#
+63.558360176#
+64.03458844800001#
+64.51081672#
+64.987044992#
+69.749327712#
+70.225555984#
+70.701784256#
+75.0@Ok, the last part was hard
+80.0@Now we will introduce introduce obstacles
+85.0@Hitting them will result in heavy score loss
+90.0@Focus on the battleground 
+92.5@remember what we said about the flash
+91.655828224#
+92.132056496#
+92.608284768#
+93.08451304#
+93.560741312#
+104.99021984#
+105.466448112#
+105.942676384#
+106.418904656#
+116.0@Now the tricky part
+118.5@If a barrier of obstacle is approaching you can leap through
+122.0@The secret lies in two steps
+126.0@Step one: ride close to the barrier
+130.0@Step two: go against it, you'll pass through
+131.659003072#
+132.135231344#
+132.611459616#
+133.087687888#
+133.56391616#
+161.0@Thats all I have to say to you
+164.0@You'll find things that are not enemies
+168.0@Like green Extra points and golden Invincibility
+172.0@Blue Combo boosts and Shields
+176.0@The tutorial is over but...
+179.0@If you want to try those powerups, go on
+182@You can go to the main menu whenever you want
+182@(pressing the sbacebar)
+190.7113088#
+191.187537072#
+191.663765344#
+192.139993616#
+192.616221888#
+201.18833078400002#
+201.664559056#
+202.14078732800002#
+202.6170156#
+203.09324387200002#
+213.094037584#
+214.046494128#
+214.998950672#
+215.475178944#
+215.951407216#
