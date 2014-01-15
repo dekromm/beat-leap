@@ -25,7 +25,6 @@ public class Cube : MonoBehaviour
 		}
 	}
 	public void Jump(){
-		Debug.Log("miss jump starting!");
 		jumpTime = 0;
 		jumping = true;
 	}
