@@ -98,7 +98,7 @@ public class LevelMap
 			case 'd':								//DOUBLE MOVEMENT
 				cube = itemPrefab.Spawn();
 				Item itemD = (Item) cube;
-				itemD.LoadRule( new DoubleMovement());
+				itemD.LoadRule( new Detonation());
 				break;
 			case 's':								//SHIELD  - protezione contro gli ostacoli
 				cube = itemPrefab.Spawn();

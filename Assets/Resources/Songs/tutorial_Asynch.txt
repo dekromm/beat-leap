@@ -27,7 +27,7 @@
 70.225555984#
 70.701784256#
 75.0@Ok, the last part was hard
-80.0@Now we will introduce introduce obstacles
+80.0@Now we will introduce obstacles
 85.0@Hitting them will result in heavy score loss
 90.0@Focus on the battleground 
 92.5@remember what we said about the flash

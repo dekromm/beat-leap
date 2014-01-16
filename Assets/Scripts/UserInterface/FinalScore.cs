@@ -18,8 +18,8 @@ public class FinalScore : MonoBehaviour {
 	void Start () {
 		
 		//these 2 lines have to be removed (they're for debug)
-		Game.Current().SetLevel("zarro");
-		Game.Current().setScore(1000);
+		//Game.Current().SetLevel("zarro");
+		//Game.Current().setScore(1000);
 
 		titoloTraccia = GameObject.Find("Titolo Traccia").GetComponent("TextMesh") as TextMesh;
 		titoloTraccia.text = Game.Current().Level();
@@ -34,7 +34,7 @@ public class FinalScore : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (signingEnabledEnabled) {
+		if (signingEnabled) {
 
 		}
 	}

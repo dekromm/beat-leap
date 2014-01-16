@@ -1,15 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-/*
- * Invincibility: in this state if you hit an obstacle you destroy it!
- * This power only lasts for a @duration numer of beats
- */
-public class Invincibility : Rule{
-	
-	private int duration = 15;
-	private Rule nextRule;
 
+/*
+ * When enabled, the beat detonates all the enemy in the scene
+ */
+
+public class Detonation : Rule
+{
+	
+	private int duration = 1;
+	private Rule nextRule;
+	
 	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
 	{
 		if (duration > 0) {
@@ -27,18 +29,15 @@ public class Invincibility : Rule{
 			
 			if (beat.Collided(c)) {
 				if (IsEnemy(c)) {
-					SoundEffectManager.main.PlayDestrucion();
-					c.Recycle();
-					toDestroy = c;
-					beat.PushCommand(Config.Command.ATTACK,0,false);
+					SoundEffectManager.main.PlayHit();
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
-						//put a sound for the explosion!!!!
+						//put a sound for the explosion!!!!not here...
 					}
 					nextRule = ((Item)c).rule;
-					c.Recycle();
 					toDestroy = c;
+					c.Recycle();
 				} else if (IsMoney(c)) {
 					GetPointsFromMoney(c,beat);
 					toDestroy = c;
@@ -48,7 +47,7 @@ public class Invincibility : Rule{
 		}
 
 		if (haveToDestroyAll) {
-			field = DestroyThemAll(field);
+			field = DestroyThemAll(field);//...but here
 		}
 
 		if (toDestroy != null) {
@@ -56,7 +55,7 @@ public class Invincibility : Rule{
 		}
 		
 		AddRows(map, field);
-		//beat.UnPauseInput();
+				
 		return nextRule;
 	}
 
@@ -66,5 +65,6 @@ public class Invincibility : Rule{
 		beat.setScore (num);
 		beat.FlyPoints (num);
 	}
+
 
 }

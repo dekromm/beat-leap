@@ -24,7 +24,7 @@ public class Item : Cube
 				renderer.material = config.combo;
 			} else if (rule is Shield) {
 				renderer.material = config.shield;
-			} else if (rule is DoubleMovement) {
+			} else if (rule is Detonation) {
 				renderer.material = config.doubleJump;
 			} else if(rule is DefaultRule){
 				renderer.material = config.empty;

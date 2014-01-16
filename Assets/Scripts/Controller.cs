@@ -9,6 +9,7 @@ public class Controller : MonoBehaviour
 		const KeyCode RIGHT = KeyCode.D;
 		const KeyCode LEFT = KeyCode.A;
 		const KeyCode PAUSE = KeyCode.Space;
+		private bool isNotDown;
 
 //	const KeyCode UP = KeyCode.UpArrow;
 //	const KeyCode DOWN = KeyCode.DownArrow;
@@ -22,7 +23,9 @@ public class Controller : MonoBehaviour
 		{
 				string levelName = Game.Current ().Level ();
 				gameMechanics = new GameMechanics (levelName);
-				this.SwitchPauseResume();
+				this.SwitchPauseResume ();
+				Input.GetAxis ("Horizontal");
+				isNotDown = true;
 		}
         
 		// Update is called once per frame
@@ -35,31 +38,40 @@ public class Controller : MonoBehaviour
 		// where to put the input capture. Maybe.
 		void OnGUI ()
 		{
-				if (Event.current.type.Equals (EventType.KeyDown)) {
+				if (Event.current.type.Equals (EventType.KeyDown) && isNotDown) {
 
+						isNotDown = false;
+
+						float vertical = Input.GetAxis ("Vertical");
+						float horizontal = Input.GetAxis ("Horizontal");
+						float pause = Input.GetAxis ("Pause");
+						
 						if (gameMechanics.isGamePlaying) {
-								if (Event.current.keyCode.CompareTo (UP) == 0) {
+								//	if (Event.current.keyCode.CompareTo (UP) == 0) {
+								if (vertical < 0) {
                 
 										gameMechanics.MoveUp ();
                         
-								} else if (Event.current.keyCode.CompareTo (DOWN) == 0) {
+								} else if (vertical > 0) {
                 
 										gameMechanics.MoveDown ();
                         
-								} else if (Event.current.keyCode.CompareTo (LEFT) == 0) {
+								} else if (horizontal < 0) {
                 
 										gameMechanics.MoveLeft ();
                         
-								} else if (Event.current.keyCode.CompareTo (RIGHT) == 0) {
+								} else if (horizontal > 0) {
                                 
 										gameMechanics.MoveRight ();
                                         
 								}
 						}
-						if (Event.current.keyCode.CompareTo (PAUSE) == 0)                
+						if (pause == 1)                
 								SwitchPauseResume ();                                        
 
 				}
+				if (Event.current.type.Equals (EventType.KeyUp))
+						isNotDown = true;
 		}
 
 		public void SwitchPauseResume ()

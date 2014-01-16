@@ -8,9 +8,10 @@ public class DefaultRule: Rule {
 
 	#region GameField aimed Methods
 
-	public override Rule Step(List<Cube> field, LevelMap map, Beat beat){
+	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat){
 		Rule nextRule = this;
 		Cube toDestroy = null;
+		bool haveToDestroyAll=false;
 		beat.CommitCommand();
 		//	beat.PauseInput();
 		foreach (Cube c in field) {
@@ -23,19 +24,25 @@ public class DefaultRule: Rule {
 					c.Recycle();
 					toDestroy = c;
 				} else if (IsItem(c)) {
+					if(IsDetonation(( (Item) c ).rule)){
+						haveToDestroyAll=true;
+						//put a sound for the explosion!!!!
+					}
 					nextRule = ( (Item) c ).rule;
 					toDestroy = c;
 					c.Recycle();
 				} else if (IsMoney(c)) {
-					int num = ((Money) c).amount;
-					beat.setScore(num);
-					beat.FlyPoints(num);
+					GetPointsFromMoney(c,beat);
 					toDestroy = c;
 					c.Recycle();
-				}
+				} 
 			}
 		}
 		
+		if (haveToDestroyAll) {
+			field = DestroyThemAll(field);
+		}
+
 		if (toDestroy != null) {
 			field.Remove(toDestroy);
 		}
@@ -45,5 +52,12 @@ public class DefaultRule: Rule {
 	}
 		
 #endregion
+
+	public override void GetPointsFromMoney (Cube c, Beat beat)
+	{
+		int num = ((Money)c).amount;
+		beat.setScore (num);
+		beat.FlyPoints (num);
+	}
 
 }

@@ -12,7 +12,7 @@ public class PauseButton : MonoBehaviour {
 	void OnMouseDown(){
 
 		if (gameObject.name == "RestartButton")
-			Application.LoadLevel("Game");
+			Application.LoadLevel(Config.config.gameScene);
 		else if (gameObject.name == "MenuButton")
 			Application.LoadLevel ("Main");
 	
