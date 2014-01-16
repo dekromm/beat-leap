@@ -103,8 +103,21 @@ public class GameField
 		beat.PushCommand(command, score, maxPrecision);
 	}
 
-	public int currentScore(){
-		return beat.getScore ();	
+//	public int currentScore(){
+//		return beat.getScore ();	
+//	}
+
+	public void SendStatistics ()
+	{
+		Game game = Game.Current ();
+
+		game.setScore (beat.getScore());
+		game.setMaxCombo (beat.getMaxCombo ());
+		game.setCatchedBeats (beat.getCatchedBeats());
+
+		Debug.Log ("SCORE:" + beat.getScore());
+		Debug.Log ("combo:" + beat.getMaxCombo());
+		Debug.Log ("%beats:" + beat.getCatchedBeats());
 	}
 
 	#region private methods

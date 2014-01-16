@@ -35,6 +35,8 @@ public class BeatTimings
 		Debug.Log(extension);
 
 		SetTimestamps(src);
+		Game.Current ().setLength (timeStamps.Count);
+
 		deltaTime = 0.12f;
  
 		audioSrc = GameObject.FindGameObjectWithTag("Speaker").GetComponent<AudioSource>();

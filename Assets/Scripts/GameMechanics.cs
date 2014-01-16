@@ -125,7 +125,7 @@ public class GameMechanics
 	public void GameOver()
 	{
 		SetState("Game Over");
-		Game.Current().setScore(gameField.currentScore());
+		gameField.SendStatistics ();
 	}
 
 	private void SetState(string state)
