@@ -37,7 +37,10 @@ public class GameMechanics
 				isGamePlaying = false;
 
 				state = (TextMesh)GameObject.Find ("State").GetComponent<TextMesh> ();
-				beatLight = GameObject.Find("BeatLight").GetComponent<BeatLight>()as BeatLight;
+				if(GameObject.Find("BeatLight")){
+					beatLight = GameObject.Find("BeatLight").GetComponent<BeatLight>()as BeatLight;
+				}
+				
 		}
 
 		public void StartPlaying ()
@@ -69,11 +72,13 @@ public class GameMechanics
 
 				if (beatManager.HasBeatPassed ()) {							
 						gameField.StepUpdate ();
-						beatLight.Flash();
+						if (beatLight!=null) {
+							beatLight.Flash();	
+						}
 				}
-
-				if (beatManager.IsOver ())
-						GameOver ();
+//
+//				if (beatManager.IsOver ())
+//						GameOver ();
 
 				timeLine.FireSticks (beatManager.GetTime ());
 		}
@@ -137,12 +142,10 @@ public class GameMechanics
 
 		}
 
-		private void GameOver ()
+		public void GameOver ()
 		{
 				SetState ("Game Over");
 				Game.Current().setScore (gameField.currentScore ());
-				System.Threading.Thread.Sleep(2000);
-				Application.LoadLevel("GameOver");
 		}
 
 		private void SetState (string state)

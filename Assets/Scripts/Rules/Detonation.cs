@@ -12,7 +12,7 @@ public class Detonation : Rule
 	private int duration = 1;
 	private Rule nextRule;
 	
-	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
+	public override Rule Step(List<Cube> field, ref LevelMap map, ref Beat beat)
 	{
 		if (duration > 0) {
 			nextRule = this;
@@ -48,6 +48,7 @@ public class Detonation : Rule
 
 		if (haveToDestroyAll) {
 			field = DestroyThemAll(field);//...but here
+			SoundEffectManager.main.PlayExplosion();
 		}
 
 		if (toDestroy != null) {

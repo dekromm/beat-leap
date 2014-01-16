@@ -78,7 +78,7 @@ public class Controller : MonoBehaviour
 		{
 
 				if (!gameMechanics.isGamePlaying) {
-						startTimer ();
+						StartTimer ();
 				} else
 						stopTimer ();
 		
@@ -88,11 +88,21 @@ public class Controller : MonoBehaviour
 
 		}
 
-		private void startTimer ()
+		private void StartTimer ()
 		{
 
 				InvokeRepeating ("CheckBeat", 0, 0.001f);
 
+		}
+
+		public void GameOver(){
+			stopTimer();
+			gameMechanics.GameOver();
+			Invoke("GameOverScene",4.0f);
+		}
+
+		public void GameOverScene(){
+			Application.LoadLevel("GameOver");
 		}
 
 		public void stopTimer ()

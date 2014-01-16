@@ -89,7 +89,7 @@ public class BeatTimings
 				return false;
 		}
 		Controller c = (Controller) GameObject.Find("Board").GetComponent("Controller");
-		c.stopTimer();
+		c.GameOver();
 
 		return false;
 	}

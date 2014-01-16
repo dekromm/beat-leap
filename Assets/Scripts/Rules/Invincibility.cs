@@ -10,7 +10,7 @@ public class Invincibility : Rule{
 	private int duration = 15;
 	private Rule nextRule;
 
-	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
+	public override Rule Step(List<Cube> field, ref LevelMap map, ref Beat beat)
 	{
 		if (duration > 0) {
 			nextRule = this;

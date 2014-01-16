@@ -55,7 +55,7 @@ public class GameField
 	{
 		Rule oldRule = currentRule;
 		// Debug.Log(currentRule.GetType().ToString());
-		currentRule = currentRule.Step(field, ref RtoLmap, beat);
+		currentRule = currentRule.Step(field, ref RtoLmap, ref beat);
 		powerUp.LoadRule(currentRule);
 
 		bool ruleChangedType = oldRule.GetType() != currentRule.GetType();
