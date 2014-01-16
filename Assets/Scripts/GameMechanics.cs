@@ -44,29 +44,6 @@ public class GameMechanics
 				
 	}
 
-	public void StartPlaying()
-	{
-		
-		timer = new Timer(interval);
-		timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-		timer.Enabled = true;
-	}
-
-	private static void OnTimedEvent(object source, ElapsedEventArgs e)
-	{
-		Debug.Log("check");
-		/* Attenzione: non si può usare un oggetto non statico in un metodo statico
-					if( beatManager.HasBeatPassed () ){
-			
-							Debug.Log("BEAT");
-
-							if(isBeatAlreadyMoved)
-									beat.Move(direction);
-
-							isBeatAlreadyMoved = false;
-                }*/
-	}
-
 	public void CheckBeat()
 	{
 		//accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);

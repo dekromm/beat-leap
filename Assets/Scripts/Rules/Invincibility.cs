@@ -34,7 +34,6 @@ public class Invincibility : Rule{
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
-						//put a sound for the explosion!!!!
 					}
 					nextRule = ((Item)c).rule;
 					c.Recycle();
@@ -49,6 +48,7 @@ public class Invincibility : Rule{
 
 		if (haveToDestroyAll) {
 			field = DestroyThemAll(field);
+			SoundEffectManager.main.PlayExplosion();
 		}
 
 		if (toDestroy != null) {

@@ -26,7 +26,6 @@ public class DefaultRule: Rule {
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
-						//put a sound for the explosion!!!!
 					}
 					nextRule = ( (Item) c ).rule;
 					toDestroy = c;
@@ -41,6 +40,7 @@ public class DefaultRule: Rule {
 		
 		if (haveToDestroyAll) {
 			field = DestroyThemAll(field);
+			SoundEffectManager.main.PlayExplosion();
 		}
 
 		if (toDestroy != null) {

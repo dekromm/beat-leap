@@ -30,7 +30,6 @@ public class Shield : Rule
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
-						SoundEffectManager.main.PlayExplosion();
 					}
 					nextRule = ((Item)c).rule;
 					c.Recycle();
@@ -45,6 +44,7 @@ public class Shield : Rule
 
 		if (haveToDestroyAll) {
 			field = DestroyThemAll(field);
+			SoundEffectManager.main.PlayExplosion();
 		}
 
 		if (toDestroy != null) {
