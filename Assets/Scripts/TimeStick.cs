@@ -21,7 +21,8 @@ public class TimeStick : MonoBehaviour
 		transform.parent = parent;
 		transform.rotation = parent.rotation;
 		transform.localPosition = new Vector3(TimeStick.distanceToRun/2, 0, 0);
-		transform.localScale = new Vector3(1.5f, 8.5f, 0.1f);
+//		transform.localScale = new Vector3(1.5f, 8.5f, 0.1f);
+		transform.localScale = Config.config.timeStickPrefab.transform.localScale;
 		scaleIncrement = 0.5f;
 	}
 

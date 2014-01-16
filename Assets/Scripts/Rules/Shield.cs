@@ -8,7 +8,7 @@ public class Shield : Rule
 	private int duration=3;
 	private Rule nextRule;
 	
-	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
+	public override Rule Step(List<Cube> field, ref LevelMap map, ref Beat beat)
 	{
 		Debug.Log("Shielded!");
 		if (duration > 0) {
@@ -26,11 +26,10 @@ public class Shield : Rule
 			if (beat.Collided(c)) {
 				if (IsEnemy(c)) {
 					duration--;
-					//mettere un suono di uno scudo!           <--- IVAN
+					SoundEffectManager.main.PlayShield();
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
-						//put a sound for the explosion!!!!
 					}
 					nextRule = ((Item)c).rule;
 					c.Recycle();
@@ -45,6 +44,7 @@ public class Shield : Rule
 
 		if (haveToDestroyAll) {
 			field = DestroyThemAll(field);
+			SoundEffectManager.main.PlayExplosion();
 		}
 
 		if (toDestroy != null) {

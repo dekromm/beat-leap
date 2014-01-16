@@ -12,7 +12,7 @@ public class ComboBoost : Rule
 	private int duration = 15;
 	private Rule nextRule;
 	
-	public override Rule Step(List<Cube> field, ref LevelMap map, Beat beat)
+	public override Rule Step(List<Cube> field, ref LevelMap map, ref Beat beat)
 	{
 		if (duration > 0) {
 			if (duration == 15) {
@@ -41,7 +41,6 @@ public class ComboBoost : Rule
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
-						//put a sound for the explosion!!!!
 					}
 					nextRule = ( (Item) c ).rule;
 					toDestroy = c;
@@ -56,6 +55,7 @@ public class ComboBoost : Rule
 		
 		if (haveToDestroyAll) {
 			field = DestroyThemAll(field);
+			SoundEffectManager.main.PlayExplosion();
 		}
 
 		if (toDestroy != null) {

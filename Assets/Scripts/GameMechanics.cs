@@ -4,84 +4,64 @@ using System.Timers;
 
 public class GameMechanics
 {
-		private BeatTimings beatManager;
-		private GameField gameField;
-		public bool isGamePlaying;
-		public bool isGameStarted;
-		public bool stepped;
+	private BeatTimings beatManager;
+	private GameField gameField;
+	public bool isGamePlaying;
+	public bool isGameStarted;
+	public bool stepped;
 
-		// Giusto per stare col culo nel burro
-		private Timer timer;
-		private double interval;
-		private const int scoreLow = 10;
-		private const int scoreHigh = 50;
-		GameObject accuracyCube;
-		TimeLine timeLine;
-		private GameObject pauseScreen;
-		//private GameObject mainCamera;
-		private TextMesh state;
-		private BeatLight beatLight;
+	// Giusto per stare col culo nel burro
+	private Timer timer;
+	private double interval;
+	private const int scoreLow = 10;
+	private const int scoreHigh = 50;
+	GameObject accuracyCube;
+	TimeLine timeLine;
+	private GameObject pauseScreen;
+	//private GameObject mainCamera;
+	private TextMesh state;
+	private BeatLight beatLight;
 
-		public GameMechanics (string src)
-		{
-				accuracyCube = GameObject.Find ("AccuracyCube");
+	public GameMechanics(string src)
+	{
+		accuracyCube = GameObject.Find("AccuracyCube");
 
-				gameField = new GameField (src);
-				beatManager = new BeatTimings (src);
-				timeLine = new TimeLine (beatManager.GetTimings ());
-				TimeLine.isActive = false;
+		gameField = new GameField(src);
+		beatManager = new BeatTimings(src);
+		timeLine = new TimeLine(beatManager.GetTimings());
+		TimeLine.isActive = false;
 		
 		//	mainCamera = GameObject.Find("Main Camera");
 
-				pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
-				isGameStarted = false;
-				isGamePlaying = false;
+		pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
+		isGameStarted = false;
+		isGamePlaying = false;
 			
-				state = (TextMesh)GameObject.Find ("State").GetComponent<TextMesh> ();
-				beatLight = GameObject.Find("BeatLight").GetComponent<BeatLight>()as BeatLight;
+		state = (TextMesh)GameObject.Find("State").GetComponent<TextMesh>();
+		if (GameObject.Find("BeatLight")) {
+			beatLight = GameObject.Find("BeatLight").GetComponent<BeatLight>()as BeatLight;
 		}
-
-	public void StartPlaying()
-	{
-		
-		timer = new Timer(interval);
-		timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-		timer.Enabled = true;
+				
 	}
 
-	private static void OnTimedEvent(object source, ElapsedEventArgs e)
+	public void CheckBeat()
 	{
-		Debug.Log("check");
-		/* Attenzione: non si può usare un oggetto non statico in un metodo statico
-					if( beatManager.HasBeatPassed () ){
-			
-							Debug.Log("BEAT");
+		//accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
 
-							if(isBeatAlreadyMoved)
-									beat.Move(direction);
-
-							isBeatAlreadyMoved = false;
-                }*/
-	}
-
-		public void CheckBeat ()
-		{
-				//accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
-
-				if (beatManager.HasBeatPassed ()) {
-					if (stepped) {
-						stepped = false;
-					} else {
-						gameField.StepUpdate();
-						beatLight.Flash();
-					}
-				}
-
-				if (beatManager.IsOver ())
-						GameOver ();
-
-				timeLine.FireSticks (beatManager.GetTime ());
+		if (beatManager.HasBeatPassed()) {
+			if (stepped) {
+				stepped = false;
+			} else {
+				gameField.StepUpdate();
+				beatLight.Flash();
+			}
 		}
+//
+//				if (beatManager.IsOver ())
+//						GameOver ();
+
+		timeLine.FireSticks(beatManager.GetTime());
+	}
 
 	#region userInput
 	public void MoveUp()
@@ -104,21 +84,21 @@ public class GameMechanics
 		Move(Config.Command.RIGHT);
 	}
 
-		public void SwitchPauseResume ()
-		{
-			isGamePlaying = beatManager.SwitchAudioPlayStop ();
-			TimeLine.isActive = isGamePlaying;
-			if(isGameStarted){
-				SoundEffectManager.main.PauseResume(isGamePlaying);
-			}
+	public void SwitchPauseResume()
+	{
+		isGamePlaying = beatManager.SwitchAudioPlayStop();
+		TimeLine.isActive = isGamePlaying;
+		if (isGameStarted) {
+			SoundEffectManager.main.PauseResume(isGamePlaying);
+		}
 
-			if (!isGamePlaying) {
-					SetState ("Paused");
-					WatchScoreboard ();
-			} else {
-					SetState ("Playing");
-					WatchGame ();
-			}
+		if (!isGamePlaying) {
+			SetState("Paused");
+			WatchScoreboard();
+		} else {
+			SetState("Playing");
+			WatchGame();
+		}
 	}
 	#endregion
 
@@ -140,15 +120,12 @@ public class GameMechanics
 		} else {
 			gameField.CommandToBeat(Config.Command.MISS, 0, false); // passo 0, in quanto l'argomento è irrilevante
 		}
-
 	}
 
-	private void GameOver()
+	public void GameOver()
 	{
 		SetState("Game Over");
 		Game.Current().setScore(gameField.currentScore());
-		System.Threading.Thread.Sleep(2000);
-		Application.LoadLevel("GameOver");
 	}
 
 	private void SetState(string state)
@@ -167,8 +144,7 @@ public class GameMechanics
 		//mainCamera.transform.localEulerAngles = new Vector3(55.0f,0,0);
 		if (isGameStarted)
 			pauseScreen.transform.position += new Vector3(0, 1000, 0);
-		isGameStarted = true;
-			
+		isGameStarted = true;			
 	}
 
 }

@@ -4,27 +4,25 @@ using System.Collections;
 public class Lampeggiante : MonoBehaviour
 {
 	
-	public float blinkTime = 0.075f;
+	public float blinkTime = 4.0f;
 	private bool hasToBlink;
 	private float blinkCount;
-	// Use this for initialization
+
 	void Start()
 	{
 		hasToBlink = false;
 	}
 
 
-	// Update is called once per frame
 	void Update()
 	{
+		Color newColor = gameObject.renderer.material.color;
 		if (hasToBlink) {
-			this.renderer.enabled = true;
 			blinkCount -= Time.deltaTime;
-			Color newColor = gameObject.renderer.material.color;
 			if(blinkCount > blinkTime/2){
-				newColor.a = 2-2*blinkCount/blinkCount;
+				newColor.a = 2-2*blinkCount/blinkTime;
 			}else{
-				newColor.a = 2*blinkCount/blinkCount;
+				newColor.a = 2*blinkCount/blinkTime;
 			}
 
 			gameObject.renderer.material.color = newColor;
@@ -33,17 +31,15 @@ public class Lampeggiante : MonoBehaviour
 		if (hasToBlink && blinkCount < 0) {
 			hasToBlink = false;
 			renderer.enabled = false;
-			Color newColor = gameObject.renderer.material.color;
 			newColor.a = 0;
 			gameObject.renderer.material.color = newColor;
-			//Debug.Log(Time.deltaTime);
 		}
 	}
 
 	public void Blink()
 	{
+		this.renderer.enabled = true;
 		hasToBlink = true;
 		blinkCount = blinkTime;
-		Debug.Log("blink!");
 	}
 }
