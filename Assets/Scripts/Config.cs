@@ -133,6 +133,7 @@ public class Config : MonoBehaviour
 		LEFT,
 		RIGHT,
 		DAMAGE,
+		ATTACK,
 		MISS,
 		NULL}
 	;

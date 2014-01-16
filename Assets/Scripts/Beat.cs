@@ -45,21 +45,21 @@ public class Beat : Cube
 		int nextScore;
 		int deltaScore = 0;
 		if (command == Config.Command.MISS) {
-			
 			ResetStat();
 			deltaScore = - 50 * multiplier * baseMultiplier;
 			this.score -= 50 * multiplier * baseMultiplier;
 			message = Config.Messages.Async();
-			
-			emitter.PlayBad();
+			SoundEffectManager.main.PlayError();
 		} else if (command == Config.Command.DAMAGE) {
-			
 			ResetStat();
 			deltaScore = -300 * multiplier * baseMultiplier; 
 			this.score -= 300 * multiplier * baseMultiplier;
+			ResetStat();
 			message = Config.Messages.Bad();
-			
-			emitter.PlayBad();
+		} else if (command == Config.Command.ATTACK) {
+			deltaScore = +300 * multiplier * baseMultiplier; 
+			this.score += 300 * multiplier * baseMultiplier;
+			message = Config.Messages.Bad();
 		} else {
 			currentCommand = command;
 			UpgradeStat();
@@ -78,9 +78,6 @@ public class Beat : Cube
 		}
 
 		if(deltaScore !=0){
-			if(score < 0){
-				SoundEffectManager.main.PlayError();
-			}
 			FlyPoints (deltaScore);
 		}
 
@@ -158,9 +155,7 @@ public class Beat : Cube
 					ResetStat();		
 					//score -= 10;
 					message = Config.Messages.Miss();
-					emitter.PlayBad();
-
-					SoundEffectManager.main.PlaySnap();
+					Jump();
 				}
 				break;
 		}

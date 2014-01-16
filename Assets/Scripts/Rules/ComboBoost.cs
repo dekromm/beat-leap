@@ -32,8 +32,12 @@ public class ComboBoost : Rule
 			c.Move();
 			
 			if (beat.Collided(c)) {
-				if (IsEnemy(c)) {
+				if(IsEnemy(c)){
 					SoundEffectManager.main.PlayHit();
+					beat.PushCommand(Config.Command.DAMAGE, 0, false);
+					c.Recycle();
+					toDestroy = c;
+					nextRule = new DefaultRule();
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;

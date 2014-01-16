@@ -82,7 +82,7 @@ public class BeatTimings
 	//controlliamo (ad ogni frame!) che il beat non sia già passato 
 	public bool HasBeatPassed()
 	{
-		if (!IsOver()){
+		while (!IsOver()){
 			if (audioSrc.time >= timeStamps [index] + deltaTime) 
 				return Step();
 			else

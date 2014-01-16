@@ -22,7 +22,7 @@ public abstract class Rule
 			
 	public static bool IsEnemy(Cube c)
 	{
-		//controlla se il cubo passato è un powerup
+		//controlla se il cubo passato è un ostacolo
 		return c is Enemy;
 	}
 

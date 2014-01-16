@@ -13,15 +13,40 @@
     </ul>
     <h2>Music</h2>
         <audio controls id="asd" >
-            <source src="zarro.ogg" type="audio/ogg">
+            <source src="tutorial.mp3" type="audio/ogg">
         </audio>
+    <h2>Average</h2>
+    <pre id="media"></pre>
     <h2>Timestamps</h2>
     <pre id="timestamps"></pre>
 </body>
 <script>
     var asd = document.getElementById("asd");
     var list = document.getElementById("timestamps");
+    var stampsArray = [];
+    var sum = 0.0;
+    var avg= 0.0;
+    var i=0.0;
+    //for(i=0;i*0.476228272<482;i++){
+    //  document.getElementById("media").textContent += 0.220 + i*0.476228272 + "\n";
+    //}
     function placeTimestamp(){
-        list.textContent += "\n" + asd.played.end(0);
+      list.textContent += "\n" + asd.played.end(0);
+      stampsArray[i] = asd.played.end(0);
+      if(i>10){
+        sum = 0.0;
+        console.log(stampsArray[i]);
+        for(j=i-10;j<i;j++){
+          sum += stampsArray[j] - stampsArray[j - 1];
+        }
+        avg = sum/10.0;
+      }
+      /*if(i>0){
+        console.log(sum);
+        sum += stampsArray[i] - stampsArray[i - 1];
+        console.log(sum);
+      }*/
+      document.getElementById("media").textContent = avg; //sum / i;
+      i++;
     }
 </script>

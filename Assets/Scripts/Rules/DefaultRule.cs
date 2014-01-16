@@ -20,7 +20,9 @@ public class DefaultRule: Rule {
 			if (beat.Collided(c)) {
 				if(IsEnemy(c)){
 					SoundEffectManager.main.PlayHit();
-					// beat.score - 100 ???
+					beat.PushCommand(Config.Command.DAMAGE, 0, false);
+					c.Recycle();
+					toDestroy = c;
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
 						haveToDestroyAll=true;
@@ -33,7 +35,7 @@ public class DefaultRule: Rule {
 					GetPointsFromMoney(c,beat);
 					toDestroy = c;
 					c.Recycle();
-				}  
+				} 
 			}
 		}
 		

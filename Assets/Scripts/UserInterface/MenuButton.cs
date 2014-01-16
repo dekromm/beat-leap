@@ -12,8 +12,8 @@ public class MenuButton : MonoBehaviour {
 	{
 		if (gameObject.name == "play")
 						Application.LoadLevel ("title");
-				else if (gameObject.name == "credits")
-						Application.LoadLevel ("credits");
+		else if (gameObject.name == "credits")
+			Application.LoadLevel ("credits");
 				else if (gameObject.name == "exit")
 						Application.Quit();
 
