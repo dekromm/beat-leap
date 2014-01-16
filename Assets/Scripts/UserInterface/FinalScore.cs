@@ -39,8 +39,9 @@ public class FinalScore : MonoBehaviour {
 
 	void LoadScores(){
 		string level = Game.Current().Level();
-		TextAsset txt = (TextAsset)Resources.Load("Songs/"+level+"_Classifica" , typeof(TextAsset));	
-		string content = txt.text;
+		//TextAsset txt = (TextAsset)Resources.Load("Songs/"+level+"_Classifica" , typeof(TextAsset));	
+		//string content = txt.text;
+		string content = (new WWW("http://beatleap.altervista.org/" + level + ".txt")).text;
 		WriteScores(content);
 	}
 
@@ -80,10 +81,15 @@ public class FinalScore : MonoBehaviour {
 	public void SignScore(string sign){
 		players [yourPosition].text = sign;
 		int i = 0;
+		string classifica = "";
 		while (i<10 && i < intScores.Count-1) { //puzza parecchio
-			Debug.Log(players[i].text + "@" + scores[i].text);
+			classifica += players[i].text + "@" + scores[i].text + "\n";
 			i++;
 		}
+		WWWForm postData = new WWWForm();
+		postData.AddField("level",Game.Current().Level());
+		postData.AddField("classifica",classifica);
+		WWW scriviClassifica = new WWW("http://beatleap.altervista.org/classifica.php", postData);
 	}
 
 }
