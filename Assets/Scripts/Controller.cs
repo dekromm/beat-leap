@@ -10,6 +10,8 @@ public class Controller : MonoBehaviour
 		const KeyCode LEFT = KeyCode.A;
 		const KeyCode PAUSE = KeyCode.Space;
 		private bool isNotDown;
+		private bool isJoyPadNotDown;
+		private bool isPause;
 
 //	const KeyCode UP = KeyCode.UpArrow;
 //	const KeyCode DOWN = KeyCode.DownArrow;
@@ -26,16 +28,58 @@ public class Controller : MonoBehaviour
 				this.SwitchPauseResume ();
 				Input.GetAxis ("Horizontal");
 				isNotDown = true;
+				isPause = false;
 		}
         
 		// Update is called once per frame
 		void Update ()
 		{
+				bool x = Input.GetButton ("X");
+				bool a = Input.GetButtonDown ("A");
+				bool y = Input.GetButtonDown ("Y");
+				bool b = Input.GetButtonDown ("B");
+				bool pause = Input.GetButtonDown ("JPause");
+			
+				if (gameMechanics.isGamePlaying) {
+
+						if (x) {
+								if (isJoyPadNotDown) 
+										gameMechanics.MoveLeft ();								
+								isJoyPadNotDown = false;
+											                      
+						} else if (b) {
+								if (isJoyPadNotDown) 
+										gameMechanics.MoveRight ();
+								isJoyPadNotDown = false;
+								
+			
+						} else if (a) {
+								if (isJoyPadNotDown) 
+										gameMechanics.MoveDown ();
+								isJoyPadNotDown = false;
+								
+			
+						} else if (y) {
+								if (isJoyPadNotDown) 
+										gameMechanics.MoveUp ();
+								isJoyPadNotDown = false;
+								
+						} else
+								isJoyPadNotDown = true;
+				}
+				if (pause) {
+						if (!isPause) {
+								gameMechanics.SwitchPauseResume ();
+								isPause = true;		
+						}
+				} else
+						isPause = false;
+
 		}
         
-		// OnGUI is called once for every event in unity
-		// this means it is frame-indepent, making it the right place
-		// where to put the input capture. Maybe.
+//		 OnGUI is called once for every event in unity
+//		 this means it is frame-indepent, making it the right place
+//		 where to put the input capture. Maybe.
 		void OnGUI ()
 		{
 				if (Event.current.type.Equals (EventType.KeyDown) && isNotDown) {
@@ -45,14 +89,14 @@ public class Controller : MonoBehaviour
 						float vertical = Input.GetAxis ("Vertical");
 						float horizontal = Input.GetAxis ("Horizontal");
 						float pause = Input.GetAxis ("Pause");
-						
+												
 						if (gameMechanics.isGamePlaying) {
-								//	if (Event.current.keyCode.CompareTo (UP) == 0) {
-								if (vertical < 0) {
+									
+								if (vertical > 0) {
                 
 										gameMechanics.MoveUp ();
                         
-								} else if (vertical > 0) {
+								} else if (vertical < 0) {
                 
 										gameMechanics.MoveDown ();
                         
@@ -95,14 +139,20 @@ public class Controller : MonoBehaviour
 
 		}
 
-		public void GameOver(){
-			stopTimer();
-			gameMechanics.GameOver();
-			Invoke("GameOverScene",4.0f);
+		public void GameOver ()
+		{
+				stopTimer ();
+				gameMechanics.GameOver ();
+				Invoke ("GameOverScene", 4.0f);
 		}
 
+
 		public void GameOverScene(){
-			Application.LoadLevel("GameOver");
+			if(Game.Current().isMobile){
+				Application.LoadLevel("GameOver_ScoreSolo");
+			}else{
+				Application.LoadLevel("GameOver");
+			}
 		}
 
 		public void stopTimer ()
