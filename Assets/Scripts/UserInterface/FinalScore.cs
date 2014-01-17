@@ -22,6 +22,11 @@ public class FinalScore : MonoBehaviour {
 		//these 2 lines have to be removed (they're for debug)
 		//Game.Current().SetLevel("zarro");
 		//Game.Current().setScore(1000);
+		
+		TextMesh combo = GameObject.Find("Max Combo").GetComponent("TextMesh") as TextMesh;
+		TextMesh accuracy = GameObject.Find("Accuracy").GetComponent("TextMesh") as TextMesh;
+		combo.text = "Max Combo: " + Game.Current().MaxCombo();
+		accuracy.text = "Accuracy : " + (100f * Game.Current().CatchedBeats() / Game.Current().Length()).ToString("F2");
 
 		titoloTraccia = GameObject.Find("Titolo Traccia").GetComponent("TextMesh") as TextMesh;
 		titoloTraccia.text = Game.Current().Level();
@@ -76,8 +81,8 @@ public class FinalScore : MonoBehaviour {
 			}
 			line = reader.ReadLine();
 		}
-		if (yourPosition == 12) {	// sei il primo a settare lo score
-			yourPosition = 0;
+		if (yourPosition == 12) {	// sei il primo a settare lo score o sei l'ultimo della classifica
+			yourPosition = i;
 			players [yourPosition].text = ("YOU");
 			scores [yourPosition].text = (Game.Current().Score().ToString());
 			intScores.Add(Game.Current().Score());
