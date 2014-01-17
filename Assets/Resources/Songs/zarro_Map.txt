@@ -77,7 +77,7 @@ EEEEEEEE
 ________
 ________
 ________
-EEEEEEEE
+E_E_E_E_
 EEEEEEEE
 ________
 ___M____
@@ -96,7 +96,7 @@ ________
 EEEEEIEE
 EEEEEIEE
 ________
-________
+_S______
 ________
 EEEEEEEE
 EEEEEEEE
