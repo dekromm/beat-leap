@@ -58,6 +58,7 @@ public class DefaultRule: Rule {
 		int num = ((Money)c).amount;
 		beat.setScore (num);
 		beat.FlyPoints (num);
+		SoundEffectManager.main.PlayMoney();
 	}
 
 }

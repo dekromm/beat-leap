@@ -16,6 +16,7 @@ public class SoundEffectManager : MonoBehaviour {
 	public AudioSource clap;
 	public AudioSource explosion;
 	public AudioSource shield;
+	public AudioSource money;
 
 	private bool powerupWasPlaying;
 	
@@ -64,6 +65,10 @@ public class SoundEffectManager : MonoBehaviour {
 
 	public void PlayExplosion(){
 		explosion.Play();
+	}
+
+	public void PlayMoney(){
+		money.Play();
 	}
 
 	public void PauseResume(bool isGamePlaying){
