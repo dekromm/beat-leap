@@ -102,7 +102,11 @@ public class Controller : MonoBehaviour
 		}
 
 		public void GameOverScene(){
+		if(Game.Current().isMobile){
+			Application.LoadLevel("GameOver_ScoreSolo");
+		}else{
 			Application.LoadLevel("GameOver");
+		}
 		}
 
 		public void stopTimer ()
