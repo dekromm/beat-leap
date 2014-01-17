@@ -46,7 +46,6 @@ public class BeatTimings
 
 
 		audioSrc.clip = Resources.Load("Songs/" + src, typeof(AudioClip)) as AudioClip;
-		audioSrc.time = 75f;
 		//audioSrc.Play();
 	}
 
