@@ -53,7 +53,9 @@ public class GameMechanics
 				stepped = false;
 			} else {
 				gameField.StepUpdate();
-				beatLight.Flash();
+				if(beatLight!=null){
+					beatLight.Flash();
+				}
 			}
 		}
 //
