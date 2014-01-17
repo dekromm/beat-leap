@@ -44,8 +44,10 @@ public class BeatTimings
 
 
 		audioSrc.clip = Resources.Load("Songs/" + src, typeof(AudioClip)) as AudioClip;
+		audioSrc.time = 75f;
 		//audioSrc.Play();
 	}
+
 
 	//legge da file i timestamp e li sistema nell'array
 	private void SetTimestamps(string id)

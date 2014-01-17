@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using System.Globalization;
 using System.IO;
 using System;
@@ -24,11 +25,13 @@ public class FinalScore : MonoBehaviour {
 
 		titoloTraccia = GameObject.Find("Titolo Traccia").GetComponent("TextMesh") as TextMesh;
 		titoloTraccia.text = Game.Current().Level();
-
+		
+		Debug.Log("compilo la lista dei giocatori");
 		for (int i=1; i<12; i++) {
 			scores.Add( GameObject.Find("Score " + i).GetComponent("TextMesh") as TextMesh );
 			players.Add( GameObject.Find("G" + i).GetComponent("TextMesh") as TextMesh );
 		}
+		Debug.Log("Arrivati a loadscore()");
 		LoadScores();
 
 	}
@@ -41,7 +44,11 @@ public class FinalScore : MonoBehaviour {
 		string level = Game.Current().Level();
 		//TextAsset txt = (TextAsset)Resources.Load("Songs/"+level+"_Classifica" , typeof(TextAsset));	
 		//string content = txt.text;
-		string content = (new WWW("http://beatleap.altervista.org/" + level + ".txt")).text;
+		WWW www = new WWW("http://beatleap.altervista.org/" + level + ".txt");
+		while (!www.isDone) {
+		}
+		Debug.Log("Contacted: " + www.text);
+		string content = www.text;
 		WriteScores(content);
 	}
 
@@ -54,21 +61,28 @@ public class FinalScore : MonoBehaviour {
 		while (line != null && i < 11) {
 			if(line.Contains("@")){
 				string[] slices = line.Split('@');
-				scores[i].text = (slices[1]);
-				players[i].text = (slices[0]);
-				intScores.Add(int.Parse(slices[1]));
 				//Debug.Log("pos." + i + " " + slices[0] + " " + slices[1]);
-				if(intScores[i]<Game.Current().Score() && yourPosition>i){
+				if(int.Parse(slices[1])<Game.Current().Score() && yourPosition>i){
 					yourPosition = i;
 					players[i].text = ("YOU");
 					scores[i].text = (Game.Current().Score().ToString());
 					intScores.Add(Game.Current().Score());
-				} else {
-					line = reader.ReadLine();
+					i++;
 				}
+				scores[i].text = (slices[1]);
+				players[i].text = (slices[0]);
+				intScores.Add(int.Parse(slices[1]));
 				i++;
 			}
+			line = reader.ReadLine();
 		}
+		if (yourPosition == 12) {	// sei il primo a settare lo score
+			yourPosition = 0;
+			players [yourPosition].text = ("YOU");
+			scores [yourPosition].text = (Game.Current().Score().ToString());
+			intScores.Add(Game.Current().Score());
+		}
+
 		if (yourPosition < 10) { //yourposition = 10 -> undicesima posizione
 			EnableSigning();
 		}
@@ -82,14 +96,20 @@ public class FinalScore : MonoBehaviour {
 		players [yourPosition].text = sign;
 		int i = 0;
 		string classifica = "";
-		while (i<10 && i < intScores.Count-1) { //puzza parecchio
+		while (i<10 && i < intScores.Count) { //puzza parecchio
 			classifica += players[i].text + "@" + scores[i].text + "\n";
 			i++;
 		}
+		Debug.Log(classifica);
 		WWWForm postData = new WWWForm();
 		postData.AddField("level",Game.Current().Level());
 		postData.AddField("classifica",classifica);
+		Debug.Log(postData.headers["level"]);
+		Debug.Log(postData.headers["classifica"]);
 		WWW scriviClassifica = new WWW("http://beatleap.altervista.org/classifica.php", postData);
+		while (!scriviClassifica.isDone) {
+		}
+		Debug.Log(scriviClassifica.text);
 	}
 
 }
