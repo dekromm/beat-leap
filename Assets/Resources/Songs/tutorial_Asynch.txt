@@ -73,3 +73,9 @@
 214.998950672#
 215.475178944#
 215.951407216#
+230.0@Now you have 4 minutes to improve your skills
+234.0@If you get tired pause to go to the main menu
+294.0@If you get tired pause to go to the main menu
+354.0@If you get tired pause to go to the main menu
+414.0@If you get tired pause to go to the main menu
+474.0@If you get tired pause to go to the main menu
