@@ -2,9 +2,8 @@
 1.0@two
 2.0@one
 2.0#
-3.0#
-3.0@ 
+3.0@GO
 26.0#
-26.5@5 sec relax
+26.5@few seconds relax
 52#
 59.5@final rush

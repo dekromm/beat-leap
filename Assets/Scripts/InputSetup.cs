@@ -15,18 +15,12 @@ public class InputSetup : MonoBehaviour {
 
 			if(Game.Current().swipeInput){
 				swipe.SetActive(true);
-
-				center.SetActive(true);
-
 				up.SetActive(false);
 				right.SetActive(false);
 				left.SetActive(false);
 				down.SetActive(false);
 			}else{
 				swipe.SetActive(false);
-				
-				center.SetActive(true);
-				
 				up.SetActive(true);
 				right.SetActive(true);
 				left.SetActive(true);
