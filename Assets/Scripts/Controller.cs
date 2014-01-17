@@ -152,6 +152,7 @@ public class Controller : MonoBehaviour
 				Application.LoadLevel("GameOver_ScoreSolo");
 			}else{
 				Application.LoadLevel("GameOver");
+			}
 		}
 
 		public void stopTimer ()
