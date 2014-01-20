@@ -108,17 +108,19 @@ public class GameMechanics
 	{
 		float accuracy = beatManager.GetAccuracy();
 		if (accuracy >= 0) {
-			if (!gameField.alreadyGetIt) {
 
-				gameField.alreadyGetIt = true; 
+			if (!stepped) {
+
+				stepped = true; 
 
 				if (accuracy < beatManager.deltaTime / 2)
 					gameField.CommandToBeat(command, scoreHigh, true);
 				else 
 					gameField.CommandToBeat(command, scoreLow, false);
+				
+				gameField.StepUpdate();
 			}
-			gameField.StepUpdate();
-			stepped = true;
+
 		} else {
 			gameField.CommandToBeat(Config.Command.MISS, 0, false); // passo 0, in quanto l'argomento è irrilevante
 		}

@@ -31,7 +31,6 @@ public class Beat : Cube
 		public Vector2 Move (Vector2 direction)
 		{
 				Vector2 next = logicPosition + direction;
-
 				if (!isOutOfRange (next)) {
 						SetDirection (direction.x, direction.y);
 						next = Move ();

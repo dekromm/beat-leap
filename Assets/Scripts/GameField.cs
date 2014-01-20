@@ -11,7 +11,6 @@ public class GameField
 	private List<Cube> field;
 	private Beat beat;
 	private Rule currentRule;
-	public bool alreadyGetIt = false;
 
 	public Item powerUp;
 
@@ -69,8 +68,6 @@ public class GameField
 		}else if(!oldIsDefault && currentIsDefault){ // è scaduto il powerup
 			SoundEffectManager.main.PlayPoweupOFF(); 
 		}
-
-		alreadyGetIt = false;
 		//Controllo se i cubi sono usciti dai margini
 		List<Cube> deleteList = new List<Cube>();
 
