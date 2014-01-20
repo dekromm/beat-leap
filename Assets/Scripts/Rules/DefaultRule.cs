@@ -25,6 +25,7 @@ public class DefaultRule: Rule {
 					toDestroy = c;
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
+						beat.PushCommand(Config.Command.DESTROY,GetPointsOverDestruction(field),false);
 						haveToDestroyAll=true;
 					}
 					nextRule = ( (Item) c ).rule;

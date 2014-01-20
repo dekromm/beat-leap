@@ -32,6 +32,7 @@ public class Detonation : Rule
 					SoundEffectManager.main.PlayHit();
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
+						beat.PushCommand(Config.Command.DESTROY,GetPointsOverDestruction(field),false);
 						haveToDestroyAll=true;
 					}
 					nextRule = ((Item)c).rule;

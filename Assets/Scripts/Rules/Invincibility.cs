@@ -33,6 +33,7 @@ public class Invincibility : Rule{
 					beat.PushCommand(Config.Command.ATTACK,0,false);
 				} else if (IsItem(c)) {
 					if(IsDetonation(( (Item) c ).rule)){
+						beat.PushCommand(Config.Command.DESTROY,GetPointsOverDestruction(field),false);
 						haveToDestroyAll=true;
 					}
 					nextRule = ((Item)c).rule;

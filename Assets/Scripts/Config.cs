@@ -134,6 +134,7 @@ public class Config : MonoBehaviour
 		RIGHT,
 		DAMAGE,
 		ATTACK,
+		DESTROY,
 		MISS,
 		NULL}
 	;
