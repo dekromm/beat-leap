@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SignLetter : MonoBehaviour {
+public class LetterButton : MonoBehaviour {
 
 	private char letter= 'A';
 	private TextMesh text;

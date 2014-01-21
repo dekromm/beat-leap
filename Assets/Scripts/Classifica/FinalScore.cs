@@ -12,9 +12,11 @@ public class FinalScore : MonoBehaviour {
 	private List<TextMesh> scores = new List<TextMesh>();
 	private List<TextMesh> players = new List<TextMesh>();
 	private TextMesh titoloTraccia;
-	private int yourPosition = 12;
-	private int selectedLetter = 0;
+	private int yourPosition;
 	public GameObject form;
+	public GameObject classifica;
+	public GameObject bigScore;
+
 	// Use this for initialization
 	void Start () {
 
@@ -36,7 +38,6 @@ public class FinalScore : MonoBehaviour {
 			scores.Add( GameObject.Find("Score " + i).GetComponent("TextMesh") as TextMesh );
 			players.Add( GameObject.Find("G" + i).GetComponent("TextMesh") as TextMesh );
 		}
-		Debug.Log("Arrivati a loadscore()");
 		LoadScores();
 
 	}
@@ -49,17 +50,33 @@ public class FinalScore : MonoBehaviour {
 		string level = Game.Current().Level();
 		//TextAsset txt = (TextAsset)Resources.Load("Songs/"+level+"_Classifica" , typeof(TextAsset));	
 		//string content = txt.text;
-		WWW www = new WWW("http://beatleap.altervista.org/" + level + ".txt");
-		while (!www.isDone) {
+
+		WWW www;
+		try{
+			www = new WWW("http://beatleap.altervista.org/" + level + ".txt");
+			while (!www.isDone) {
+				}
+			if(www.error == ""){
+				Debug.Log("Contacted: " + www.text);
+				string content = www.text;
+				WriteScores(content);
+			} else{
+				classifica.SetActive(false);
+				bigScore.SetActive(true);
+				(bigScore.GetComponent("TextMesh") as TextMesh).text = Game.Current().Score().ToString();
+			}
+		} catch (Exception e) {
+			Debug.LogError(e);
+			classifica.SetActive(false);
+			bigScore.SetActive(true);
+			(bigScore.GetComponent("TextMesh") as TextMesh).text = Game.Current().Score().ToString();
 		}
-		Debug.Log("Contacted: " + www.text);
-		string content = www.text;
-		WriteScores(content);
 	}
 
 	void WriteScores(string content){
 		string line;
 		int i = 0;
+		yourPosition = 10;
 		TextReader reader;
 		reader = new StringReader(content);
 		line = reader.ReadLine();
@@ -81,8 +98,9 @@ public class FinalScore : MonoBehaviour {
 			}
 			line = reader.ReadLine();
 		}
-		if (yourPosition == 12) {	// sei il primo a settare lo score o sei l'ultimo della classifica
+		if (yourPosition == 10) {	// sei il primo a settare lo score o sei l'ultimo della classifica
 			yourPosition = i;
+			Debug.Log("you're: " + yourPosition);
 			players [yourPosition].text = ("YOU");
 			scores [yourPosition].text = (Game.Current().Score().ToString());
 			intScores.Add(Game.Current().Score());
