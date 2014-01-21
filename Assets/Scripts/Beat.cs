@@ -43,9 +43,6 @@ public class Beat : Cube
 
 		public void PushCommand (Config.Command command, int score, bool maxPrecision)
 		{
-
-
-				int nextScore;
 				int deltaScore = 0;
 				if (command == Config.Command.MISS) {
 						ResetStat ();
@@ -186,7 +183,6 @@ public class Beat : Cube
 				} else {
 						return false;
 				}
-				return false;
 		}
 
 	#region getters

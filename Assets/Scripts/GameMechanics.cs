@@ -15,7 +15,6 @@ public class GameMechanics
 	private double interval;
 	private const int scoreLow = 10;
 	private const int scoreHigh = 50;
-	GameObject accuracyCube;
 	TimeLine timeLine;
 	private GameObject pauseScreen;
 	//private GameObject mainCamera;
@@ -24,8 +23,6 @@ public class GameMechanics
 
 	public GameMechanics(string src)
 	{
-		accuracyCube = GameObject.Find("AccuracyCube");
-
 		gameField = new GameField(src);
 		beatManager = new BeatTimings(src);
 		timeLine = new TimeLine(beatManager.GetTimings());
@@ -46,8 +43,6 @@ public class GameMechanics
 
 	public void CheckBeat()
 	{
-		//accuracyCube.gameObject.transform.position = new Vector3(-75 + 75 * 2 * beatManager.GetAccuracy(), 0, 45);
-
 		if (beatManager.HasBeatPassed()) {
 			if (stepped) {
 				stepped = false;
@@ -58,10 +53,6 @@ public class GameMechanics
 				}
 			}
 		}
-//
-//				if (beatManager.IsOver ())
-//						GameOver ();
-
 		timeLine.FireSticks(beatManager.GetTime());
 	}
 
@@ -139,13 +130,11 @@ public class GameMechanics
 
 	private void WatchScoreboard()
 	{
-		//	mainCamera.transform.localEulerAngles = new Vector3(-3.0f,0,0);
 		pauseScreen.transform.position += new Vector3(0, -1000, 0);
 	}
 
 	private void WatchGame()
 	{
-		//mainCamera.transform.localEulerAngles = new Vector3(55.0f,0,0);
 		if (isGameStarted)
 			pauseScreen.transform.position += new Vector3(0, 1000, 0);
 		isGameStarted = true;			

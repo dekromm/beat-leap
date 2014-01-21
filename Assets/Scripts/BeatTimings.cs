@@ -102,13 +102,13 @@ public class BeatTimings
 	//restituisco -1 se sono completamente fuori tempo
 	public float GetAccuracy()
 	{
+		if(index< timeStamps.Count){
+			float accuracy = audioSrc.time - timeStamps [index];
+			accuracy = Math.Abs(accuracy);
 
-		float accuracy = audioSrc.time - timeStamps [index];
-		accuracy = Math.Abs(accuracy);
-
-		if (accuracy < deltaTime)
-			return accuracy;
-
+			if (accuracy < deltaTime)
+				return accuracy;
+		}
 		return -1;
 
 	}
