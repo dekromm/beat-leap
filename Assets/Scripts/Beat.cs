@@ -60,10 +60,14 @@ public class Beat : Cube
 						deltaScore = +300 * multiplier * baseMultiplier; 
 						this.score += 300 * multiplier * baseMultiplier;
 						message = Config.Messages.Bad ();
+				} else if (command == Config.Command.DESTROY) {
+						deltaScore = 75 * score;
+						this.score += deltaScore;
+						message = Config.Messages.Bad ();
 				} else {
 						currentCommand = command;
 						UpgradeStat ();
-					    catchedBeats++;
+						catchedBeats++;
 						deltaScore = score * multiplier * baseMultiplier;
 						this.score += score * multiplier * baseMultiplier;
 //						if (maxPrecision) {

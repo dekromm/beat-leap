@@ -55,6 +55,18 @@ public abstract class Rule
 		}
 	}
 
+	protected int GetPointsOverDestruction(List<Cube> field){
+		int count = 0 ;
+		foreach (Cube c in field) {
+			if (IsEnemy(c)) {
+				count++;
+			}
+		}
+
+		return count;
+	
+	}
+
 	protected List<Cube> DestroyThemAll (List<Cube> field)
 	{
 		List<Cube> deleteList = new List<Cube>();
