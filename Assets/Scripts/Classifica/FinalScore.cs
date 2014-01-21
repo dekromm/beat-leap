@@ -54,16 +54,18 @@ public class FinalScore : MonoBehaviour {
 		WWW www;
 		try{
 			www = new WWW("http://beatleap.altervista.org/" + level + ".txt");
+			//www = new WWW("file://" + Application.dataPath + "/Resources/Songs/asd.txt");
 			while (!www.isDone) {
 				}
-			if(www.error == ""){
-				Debug.Log("Contacted: " + www.text);
-				string content = www.text;
-				WriteScores(content);
-			} else{
+			Debug.Log("error: " + www.error);
+			if(www.error != null){
 				classifica.SetActive(false);
 				bigScore.SetActive(true);
 				(bigScore.GetComponent("TextMesh") as TextMesh).text = Game.Current().Score().ToString();
+			} else{
+				Debug.Log("Contacted: " + www.text);
+				string content = www.text;
+				WriteScores(content);
 			}
 		} catch (Exception e) {
 			Debug.LogError(e);
