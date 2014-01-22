@@ -25,10 +25,10 @@ public class Beat : Cube
 		Config config = GameObject.Find("Config").GetComponent("Config") as Config;
 		pointPrefab = config.pointPrefab;
 		roll = this.GetComponentInChildren<Animation>();
-		roll ["C4D Animation Take"].speed = 3;
+		roll ["C4D Animation Take"].speed = 3f;
 		maxCombo = 0;
 		catchedBeats = 0;
-		transitionTotalTime = 0.15f;
+		transitionTotalTime = 0.10f;
 	}
 
 	public Vector2 Move(Vector2 direction)
@@ -137,7 +137,7 @@ public class Beat : Cube
 					for (int i=0; i< moveMagnitude; i++) {
 						Move(Config.Direction.Down());
 					}
-					transform.eulerAngles = new Vector3(0, 90, 0);
+					transform.eulerAngles = new Vector3(0, 270, 0);
 					roll.Play("C4D Animation Take");
 				}
 				break;
@@ -146,7 +146,7 @@ public class Beat : Cube
 					for (int i=0; i< moveMagnitude; i++) {
 						Move(Config.Direction.Up());
 					}
-					transform.eulerAngles = new Vector3(0, 270, 0);
+					transform.eulerAngles = new Vector3(0, 90, 0);
 					roll.Play("C4D Animation Take");
 				}
 				break;
