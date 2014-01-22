@@ -5,22 +5,37 @@ public class Cube : MonoBehaviour
 {
 	public Vector2 logicPosition;
 	public Vector2 direction;
+	
+	private Vector3 direction3D;
+	public Vector3  target;
+	private float transitionTime;
+	public float transitionTotalTime = 0.0f;
+	
 	private bool jumping;
 	private float jumpTime;
 	private float jumpSpeedFactor = 20f;
-
+	
 	// Makes the cube advance according to its policy
 	// Returns its new position
-
+	
 	void Update(){
 		if (jumping) {
 			jumpTime += Time.deltaTime;
-			transform.position = new Vector3(transform.position.x,
+			transform.localPosition = new Vector3(transform.localPosition.x,
 			                                 Config.View.CubeScale()*Mathf.Sin(jumpTime*jumpSpeedFactor)/2f + Config.View.CubeScale()/2,
-			                                 transform.position.z);
+			                                 transform.localPosition.z);
 			if(jumpTime>Mathf.PI/jumpSpeedFactor){
 				jumping = false;
-				transform.position = new Vector3(transform.position.x,Config.View.CubeScale()/2,transform.position.z);
+				transform.localPosition = new Vector3(transform.localPosition.x,Config.View.CubeScale()/2,transform.localPosition.z);
+			}
+		}
+		if(target.x != transform.localPosition.x ||
+		   target.z!= transform.localPosition.z){
+			transitionTime += Time.deltaTime;
+			if(transitionTime>=transitionTotalTime){
+				transform.localPosition = target;
+			} else {
+				transform.localPosition += (Time.deltaTime / transitionTotalTime ) * direction3D;
 			}
 		}
 	}
@@ -34,7 +49,7 @@ public class Cube : MonoBehaviour
 		UpdatePosition();
 		return new Vector2(logicPosition.x, logicPosition.y);
 	}
-
+	
 	public Vector2 Move(Vector2 direction)
 	{
 		logicPosition += direction;
@@ -49,7 +64,7 @@ public class Cube : MonoBehaviour
 		logicPosition = new Vector2(x, y);
 		UpdatePosition();
 	}
-
+	
 	// TO-DO
 	public void SetDirection(float x, float y)
 	{
@@ -61,9 +76,9 @@ public class Cube : MonoBehaviour
 		}
 		return;
 	}
-
+	
 	#region Monobehaviour implementation
-		
+	
 	/*
  	* This region manages to translate logic state into visual state
 	*/
@@ -77,16 +92,20 @@ public class Cube : MonoBehaviour
 		scale = Config.View.CubeScale();
 		halvedLength = Config.View.GridLength() / 2;
 		halvedDepth = Config.View.GridDepth() / 2;
-			
+		
 	}
-
+	
 	void UpdatePosition()
 	{
 		float x, y, z;
 		x = logicPosition.x * scale - halvedLength + scale / 2;
-		y = scale / 2;
+		//y = transform.localPosition.y;
+		y = scale / 2f;
 		z = logicPosition.y * scale - halvedDepth + scale / 2;
-		transform.position = new Vector3(x, y, z);
+		direction3D = Config.View.CubeScale() * (new Vector3(direction.x, 0, direction.y) );
+		//transform.localPosition = new Vector3(x, y, z);
+		transitionTime = 0f;
+		target = new Vector3(x, y, z);
 	}
 	#endregion
 }
