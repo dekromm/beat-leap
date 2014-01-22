@@ -22,8 +22,10 @@ public class ProgressBar : MonoBehaviour {
 	void Update () {
 
 		currentTime = song.time;
-		Vector3 old = gameObject.transform.position;
-		gameObject.transform.position = new Vector3(GetX (),old.y,old.z);
+		if (currentTime != 0) {
+						Vector3 old = gameObject.transform.position;
+						gameObject.transform.position = new Vector3 (GetX (), old.y, old.z);
+				}
 	}
 
 	private float GetX(){
