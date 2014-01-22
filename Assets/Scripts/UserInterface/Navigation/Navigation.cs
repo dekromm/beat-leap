@@ -11,7 +11,7 @@ public class Navigation : MonoBehaviour {
 	private bool verticalToggle;
 	private bool enterToggle;
 
-	private bool debug = true;
+	private bool debug = false;
 
 	void Start () {
 		List<GameObject> navigableGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Navigable"));
