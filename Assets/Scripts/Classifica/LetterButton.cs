@@ -3,14 +3,12 @@ using System.Collections;
 
 public class LetterButton : MonoBehaviour {
 
-	private char letter= 'A';
+	private char letter;
 	private TextMesh text;
 	// Use this for initialization
 	void Start () {
+		letter= 'A';
 		text = this.GetComponent("TextMesh") as TextMesh;
-		Debug.Log((int) letter);
-		letter = 'Z';
-		Debug.Log((int) letter);
 	}
 	
 	// Update is called once per frame

@@ -1,12 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
+
 public class Navigation : MonoBehaviour {
 
 	private List<Navigable> navigableItems;
 	private Navigable selected;
 
 	private bool verticalToggle;
+	private bool enterToggle;
+
+	private bool debug = true;
 
 	void Start () {
 		List<GameObject> navigableGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Navigable"));
@@ -20,6 +25,11 @@ public class Navigation : MonoBehaviour {
 		for(int i=0; i<navigableGameObjects.Count; i++){
 			tmp = navigableGameObjects[i].GetComponent<Navigable>();
 			navigableItems.Add(tmp);
+		}
+
+		if(debug){
+			Debug.Log(navigableGameObjects.Count);
+			Debug.Log(navigableItems.Count);
 		}
 
 		if(navigableItems.Count > 0){
@@ -36,6 +46,9 @@ public class Navigation : MonoBehaviour {
 		if(Input.GetAxis("Vertical") == 0){
 			verticalToggle = false;
 		}
+		if(Input.GetAxisRaw("Pause")==0){
+			enterToggle = false;
+		}
 
 		if(!verticalToggle && Input.GetAxis("Vertical")!=0){
 			verticalToggle = true;
@@ -46,9 +59,13 @@ public class Navigation : MonoBehaviour {
 			}
 		}
 
-		if(Input.GetAxis ("Pause")==1){
+		if(!enterToggle && Input.GetAxisRaw("Pause")!=0){
+			enterToggle = true;
 			selected.Action();
 		}
+
+			
+	
 	}
 
 	private void Next(){
