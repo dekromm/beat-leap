@@ -12,15 +12,19 @@ public class Game : MonoBehaviour {
 	public bool isMobile;
 	public bool swipeInput;
 
+	public string gameScene;
+
 	void Start(){
 		isMobile = false;
+		gameScene = "Game";
 		#if UNITY_IOS
 		isMobile = true;
+		gameScene = "Game_4_3";
 		#endif
 		swipeInput = false;
 		if(current == null){
-		current = this;
-		DontDestroyOnLoad(current);
+			current = this;
+			DontDestroyOnLoad(current);
 		}
 
 		score = 0;

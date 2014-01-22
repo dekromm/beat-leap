@@ -10,12 +10,21 @@ public class MenuButton : MonoBehaviour {
 	
 	void OnMouseDown()
 	{
-		if (gameObject.name == "play")
+		if (gameObject.name == "play"){
 						Application.LoadLevel ("title");
-		else if (gameObject.name == "credits")
+		}else{
+			if (gameObject.name == "credits"){
 			Application.LoadLevel ("credits");
-				else if (gameObject.name == "exit")
+			}else{
+				if (gameObject.name == "exit"){
 						Application.Quit();
+				}else{
+					if (gameObject.name == "instructions"){
+						Application.LoadLevel("Instructions");
+					}
+				}
+			}
+		}
 
 	}
 }
