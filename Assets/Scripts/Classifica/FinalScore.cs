@@ -19,6 +19,7 @@ public class FinalScore : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Screen.showCursor = true;
 
 
 		//these 2 lines have to be removed (they're for debug)
