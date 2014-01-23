@@ -49,7 +49,7 @@ public class Navigation : MonoBehaviour {
 		if(Input.GetAxis("Vertical") == 0){
 			verticalToggle = false;
 		}
-		if(Input.GetAxisRaw("Pause")==0){
+		if((Input.GetAxisRaw("Pause")==0 || Input.GetAxisRaw("JPause")==0)){
 			enterToggle = false;
 		}
 
@@ -62,7 +62,7 @@ public class Navigation : MonoBehaviour {
 			}
 		}
 
-		if(!enterToggle && Input.GetAxisRaw("Pause")!=0){
+		if(!enterToggle && (Input.GetAxisRaw("Pause")!=0 || Input.GetAxisRaw("JPause")!=0)){
 			enterToggle = true;
 			selected.Action();
 		}
