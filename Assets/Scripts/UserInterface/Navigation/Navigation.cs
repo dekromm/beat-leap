@@ -12,34 +12,43 @@ public class Navigation : MonoBehaviour {
 	private bool enterToggle;
 
 	private bool debug = false;
+	private bool isMobile = false;
 
 	void Start () {
-		List<GameObject> navigableGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Navigable"));
-		navigableGameObjects.Sort(
-			delegate(GameObject i1, GameObject i2){ 
-				return i1.name.CompareTo(i2.name);
+		#if UNITY_IOS
+		isMobile = true;
+		#endif
+		if(isMobile){
+			gameObject.SetActive(false);
+		}else{
+
+			List<GameObject> navigableGameObjects = new List<GameObject>(GameObject.FindGameObjectsWithTag("Navigable"));
+			navigableGameObjects.Sort(
+				delegate(GameObject i1, GameObject i2){ 
+					return i1.name.CompareTo(i2.name);
+				}
+			);
+			Navigable tmp;
+			navigableItems = new List<Navigable>();
+			for(int i=0; i<navigableGameObjects.Count; i++){
+				tmp = navigableGameObjects[i].GetComponent<Navigable>();
+				navigableItems.Add(tmp);
 			}
-		);
-		Navigable tmp;
-		navigableItems = new List<Navigable>();
-		for(int i=0; i<navigableGameObjects.Count; i++){
-			tmp = navigableGameObjects[i].GetComponent<Navigable>();
-			navigableItems.Add(tmp);
-		}
 
-		if(debug){
-			Debug.Log(navigableGameObjects.Count);
-			Debug.Log(navigableItems.Count);
-		}
+			if(debug){
+				Debug.Log(navigableGameObjects.Count);
+				Debug.Log(navigableItems.Count);
+			}
 
-		if(navigableItems.Count > 0){
-			selected = navigableItems[0];
-			selected.Init();
-			selected.Select();
+			if(navigableItems.Count > 0){
+				selected = navigableItems[0];
+				selected.Init();
+				selected.Select();
+			}
+		
+			verticalToggle = false;
+			enterToggle = true;
 		}
-	
-		verticalToggle = false;
-		enterToggle = true;
 	}
 
 	
