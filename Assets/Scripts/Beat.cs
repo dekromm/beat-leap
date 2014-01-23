@@ -18,7 +18,7 @@ public class Beat : Cube
 	private FlyingPoint pointPrefab;
 	private Animation roll;
 	
-	void Start()
+	protected override void Start()
 	{
 		emitter = GameObject.Find("BeatEmitter").GetComponent("Emitter") as Emitter;
 		emitter.FollowBeat(gameObject.transform.position);

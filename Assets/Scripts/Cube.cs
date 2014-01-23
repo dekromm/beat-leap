@@ -17,7 +17,12 @@ public class Cube : MonoBehaviour
 	
 	// Makes the cube advance according to its policy
 	// Returns its new position
-	
+
+	protected virtual void Start(){
+		target = transform.localPosition;
+		Debug.Log(target + " vs " + transform.localPosition);
+	}
+
 	void Update(){
 		if (jumping) {
 			jumpTime += Time.deltaTime;
