@@ -1,7 +1,7 @@
 0.4@THE CHALLENGE BY EARTHQUAKE
 0.8#
 4.4@
-17@are you ready
+17@are you ready?
 21@
 22.7368421052632#
 23.0526315789474#
