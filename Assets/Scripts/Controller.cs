@@ -69,8 +69,10 @@ public class Controller : MonoBehaviour
 				}
 				if (pause) {
 						if (!isPause) {
+							if(gameMechanics.isGamePlaying){
 								gameMechanics.SwitchPauseResume ();
-								isPause = true;		
+								isPause = true;	
+							}
 						}
 				} else
 						isPause = false;
