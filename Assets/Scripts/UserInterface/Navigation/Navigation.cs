@@ -39,7 +39,10 @@ public class Navigation : MonoBehaviour {
 		}
 	
 		verticalToggle = false;
+		enterToggle = true;
 	}
+
+	
 	
 	void Update () {
 
@@ -63,9 +66,10 @@ public class Navigation : MonoBehaviour {
 			enterToggle = true;
 			selected.Action();
 		}
+	}
 
-			
-	
+	void OnEnable(){
+		enterToggle = true;
 	}
 
 	private void Next(){

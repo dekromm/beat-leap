@@ -110,7 +110,7 @@ public class Controller : MonoBehaviour
                                         
 								}
 						}
-						if (pause == 1)                
+						if (pause == 1 && gameMechanics.isGamePlaying)                
 								SwitchPauseResume ();                                        
 
 				}

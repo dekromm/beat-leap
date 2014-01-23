@@ -13,7 +13,7 @@ public class Navigable : MonoBehaviour {
 		}
 	}
 
-	public void Select(){
+	virtual public void Select(){
 		if(select!=null){
 			select.SetActive(true);
 		}else{
@@ -21,7 +21,7 @@ public class Navigable : MonoBehaviour {
 		}
 	}
 
-	public void Deselect(){
+	virtual public void Deselect(){
 		select.SetActive(false);
 	}
 

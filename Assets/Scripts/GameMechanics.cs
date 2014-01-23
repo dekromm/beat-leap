@@ -16,7 +16,8 @@ public class GameMechanics
 	private const int scoreLow = 10;
 	private const int scoreHigh = 50;
 	TimeLine timeLine;
-	private GameObject pauseScreen;
+	private PauseScriptEnable pauseScreen;
+	private Navigation navigation;
 	//private GameObject mainCamera;
 	private TextMesh state;
 	private BeatLight beatLight;
@@ -30,7 +31,6 @@ public class GameMechanics
 		
 		//	mainCamera = GameObject.Find("Main Camera");
 
-		pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen");
 		isGameStarted = false;
 		isGamePlaying = false;
 			
@@ -38,7 +38,10 @@ public class GameMechanics
 		if (GameObject.Find("BeatLight")) {
 			beatLight = GameObject.Find("BeatLight").GetComponent<BeatLight>()as BeatLight;
 		}
-				
+		pauseScreen = GameObject.FindGameObjectWithTag("PauseScreen").GetComponent<PauseScriptEnable>();
+		pauseScreen.Init();
+		navigation = GameObject.Find("_Navigation").GetComponent<Navigation>();
+		navigation.enabled = false;
 	}
 
 	public void CheckBeat()
@@ -79,18 +82,20 @@ public class GameMechanics
 
 	public void SwitchPauseResume()
 	{
-		isGamePlaying = beatManager.SwitchAudioPlayStop();
-		TimeLine.isActive = isGamePlaying;
-		if (isGameStarted) {
-			SoundEffectManager.main.PauseResume(isGamePlaying);
-		}
+		if(!beatManager.IsOver()){
+			isGamePlaying = beatManager.SwitchAudioPlayStop();
+			TimeLine.isActive = isGamePlaying;
+			if (isGameStarted) {
+				SoundEffectManager.main.PauseResume(isGamePlaying);
+			}
 
-		if (!isGamePlaying) {
-			SetState("Paused");
-			WatchScoreboard();
-		} else {
-			SetState("Playing");
-			WatchGame();
+			if (!isGamePlaying) {
+				SetState("Paused");
+				WatchScoreboard();
+			} else {
+				SetState("Playing");
+				WatchGame();
+			}
 		}
 	}
 	#endregion
@@ -130,13 +135,16 @@ public class GameMechanics
 
 	private void WatchScoreboard()
 	{
-		pauseScreen.transform.position += new Vector3(0, -1000, 0);
+		pauseScreen.Show();
+		navigation.enabled = true;
 	}
 
 	private void WatchGame()
 	{
-		if (isGameStarted)
-			pauseScreen.transform.position += new Vector3(0, 1000, 0);
+		if (isGameStarted){
+			pauseScreen.Hide();
+			navigation.enabled = false;
+		}
 		isGameStarted = true;			
 	}
 
