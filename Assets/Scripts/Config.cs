@@ -22,6 +22,7 @@ public class Config : MonoBehaviour
 	public static Config config;
 
 	void Start(){
+		Screen.showCursor = false;
 		if(config==null){
 			config = this;
 		}

@@ -57,8 +57,10 @@ public class LevelMap
 
 		for (int i=0; i<lineSize; i++) {
 			cube = CubeForChar(currentLine [i]);
-			if (cube != null)
+			if (cube != null){
 				cube.SetDirection(direction.x, direction.y);
+				cube.gameObject.renderer.enabled = false;
+			}
 			cubeList.Add(cube);
 		}
 

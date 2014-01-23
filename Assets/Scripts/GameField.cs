@@ -72,10 +72,10 @@ public class GameField
 		List<Cube> deleteList = new List<Cube>();
 
 		foreach (Cube c in field) {
-			if (c.gameObject.activeSelf && IsOutOfVisibleField(c.logicPosition)) {
-				c.gameObject.SetActive(false);
-			} else if (!c.gameObject.activeSelf && !IsOutOfVisibleField(c.logicPosition)) {
-				c.gameObject.SetActive(true);
+			if ( (c.gameObject.renderer.enabled) && IsOutOfVisibleField(c.logicPosition)) {
+				c.gameObject.renderer.enabled = false;
+			} else if ( !(c.gameObject.renderer.enabled) && !IsOutOfVisibleField(c.logicPosition)) {
+				c.gameObject.renderer.enabled = true;
 			} else if (IsOutOfExternalField(c.logicPosition)) {
 				deleteList.Add(c);
 				c.Recycle();

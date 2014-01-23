@@ -20,7 +20,6 @@ public class Cube : MonoBehaviour
 
 	protected virtual void Start(){
 		target = transform.localPosition;
-		Debug.Log(target + " vs " + transform.localPosition);
 	}
 
 	void Update(){

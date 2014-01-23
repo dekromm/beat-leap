@@ -46,7 +46,7 @@ public abstract class Rule
 				cube = tmpLine [y];
 				if (cube != null) {
 					cube.SetPosition(x, y);
-					cube.gameObject.SetActive(false);
+					cube.gameObject.renderer.enabled = false;
 					field.Add(cube);
 							
 				}
