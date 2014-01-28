@@ -6,34 +6,46 @@ public class Splash : MonoBehaviour {
 	
 	public GameObject collectiveLogo;
 	public GameObject waveLogo;
+	public GameObject mentezeroLogo;
 	public GameObject sfondo;
 
 	private bool sfuma;
 	private float sfumaTime; 
 
 	void Start () {
-		Invoke("Collective",0.5f);
+		Invoke("Wave",0.5f);
 		sfuma = false;
 		sfumaTime = 0.75f;
 	}
 
 	void Collective(){
+		Blank();
 		collectiveLogo.renderer.enabled = true;
-		Invoke("Wave",2.0f);
+		Invoke("Zero",2.0f);
 	}
-
+	
 	void Wave(){
+		Blank();
 		waveLogo.renderer.enabled = true;
-		collectiveLogo.renderer.enabled = false;
+		Invoke("Collective",2.0f);
+	}
+	
+	void Zero(){
+		Blank();
+		mentezeroLogo.renderer.enabled = true;
 		Invoke("Sfuma",2.0f);
 	}
 
 	void Sfuma(){
-		waveLogo.renderer.enabled = false;
-		collectiveLogo.renderer.enabled = false;
+		Blank();
 		sfuma = true;
 	}
 
+	void Blank(){
+		collectiveLogo.renderer.enabled = false;
+		waveLogo.renderer.enabled = false;
+		mentezeroLogo.renderer.enabled = false;
+	}
 
 	void Update(){
 		if(sfuma){
