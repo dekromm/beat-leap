@@ -1,81 +1,69 @@
-0.0@Alice Francis - Gangsterlove (Alle Farben Remix)
-6.0@Move the beat around by pressing the usual WASD
-10.0@You can always press the spacebar to pause.
-14.0@Those are the only commands you need.
-19.0@I don't remember saying you could move...
-24.0@In fact, you can only move on the marked beats:
-29.0@The markers are those you see coming at a regular pace
-31.651065952#
-32.127294224#
-32.603522496#
-33.079750768#
-33.55597904#
-42.0@Did you notice that the display flashed before ?
-47.0@It will flash whenever something is gonna change in the beat
-52.0@Regarding your movements:
-54.0@You will lose the combo by staying still,
-59.0@You will lose score by going off-beat
-59.748534#
-60.224762272#
-60.700990544#
-61.177218816#
-63.558360176#
-64.03458844800001#
-64.51081672#
-64.987044992#
-69.749327712#
-70.225555984#
-70.701784256#
-75.0@Ok, the last part was hard
-80.0@Now we will introduce obstacles
-85.0@Hitting them will result in heavy score loss
-90.0@Focus on the battleground 
-92.5@remember what we said about the flash
-91.655828224#
-92.132056496#
-92.608284768#
-93.08451304#
-93.560741312#
-104.99021984#
-105.466448112#
-105.942676384#
-106.418904656#
-116.0@Now the tricky part
-118.5@If a barrier of obstacle is approaching you can leap through
-122.0@The secret lies in two steps
-126.0@Step one: ride close to the barrier
-130.0@Step two: go against it, you'll pass through
-131.659003072#
-132.135231344#
-132.611459616#
-133.087687888#
-133.56391616#
-161.0@Thats all I have to say to you
-164.0@You'll find things that are not enemies
-168.0@Like green Extra points and golden Invincibility
-172.0@Blue Combo boosts and Shields
-176.0@The tutorial is over but...
-179.0@If you want to try those powerups, go on
-182@You can go to the main menu whenever you want
-182@(pressing the sbacebar)
-190.7113088#
-191.187537072#
-191.663765344#
-192.139993616#
-192.616221888#
-201.18833078400002#
-201.664559056#
-202.14078732800002#
-202.6170156#
-203.09324387200002#
-213.094037584#
-214.046494128#
-214.998950672#
-215.475178944#
-215.951407216#
-230.0@Now you have 4 minutes to improve your skills
-234.0@If you get tired pause to go to the main menu
-294.0@If you get tired pause to go to the main menu
-354.0@If you get tired pause to go to the main menu
-414.0@If you get tired pause to go to the main menu
-474.0@If you get tired pause to go to the main menu
+
+0.968@move around only on the marked beats!
+3.781@with arrows, wasd or pad buttons
+7.063@Avoid grey stuff. take everything else
+9.876@The sticks mark the beat! Now move!
+20.660@The flash means a change of pace!
+21.129#
+21.597#
+22.066#
+22.535#
+28.630@You don't have to stare at the blue tags
+30.975@Just learn the pattern!
+33.319@And focus on the grid
+36.132@The flash means "New pattern comin'!"
+38.476@It'll save your Combo!
+38.945#
+39.414#
+39.883#
+40.352#
+40.821#
+43.634#
+44.103#
+44.571#
+45.040#
+49.260@Ok. now the tricky part
+51.135@You can LEAP through blocks
+53.949@Just get near them and then...
+56.762@Go AGAINST them! You'll get through!
+59.575@Give it a Try!
+60.044#
+60.513#
+60.981#
+61.450#
+61.919#
+80.673#
+81.142#
+81.611#
+82.080#
+82.549#
+90.051#
+90.519#
+90.988#
+91.457#
+92.395@A note about your score!
+94.739@If you try to move off beat
+97.552@You'll lose your combo AND some points
+100.365@If you don't press anything
+103.179@You'll lose the combo only
+103.647#
+104.116#
+104.585#
+105.054#
+109.743@The tutorial is over!
+112.087@You can now move around on the beat!
+114.431@But to spice up the game...
+116.775@learn about the powerups on the main menu
+119.120@Have Fun!! :)
+120.526#
+120.995#
+121.464#
+121.933#
+126.153#
+126.621#
+127.090#
+127.559#
+135.530#
+135.999#
+136.467#
+136.936#
